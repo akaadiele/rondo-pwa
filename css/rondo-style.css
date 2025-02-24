@@ -1,0 +1,74 @@
+/* fonts */
+@import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&family=Roboto+Slab:wght@100..900&display=swap');
+
+
+/* colours */
+:root {
+    --color1: #d9fff5;
+    --color2: #B9F5D8;
+    --color3: #AAD2BA;
+    --color4: #6B8F71;
+    --color5: #1D1E18;
+}
+
+#body {
+    font-family: "Overpass", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    /* font-size: large; */
+    color: #1D1E18;
+}
+
+.navigArea {
+    background-color: var(--color5);
+    font-size: large;
+    color: var(--color1);
+}
+
+.darkBg {
+    background-color: var(--color5);
+}
+
+.lightBg {
+    background-color: var(--color1);
+}
+
+.bgColor4 {
+    background-color: var(--color4);
+}
+
+.fontColor1 {
+    color: var(--color1);
+}
+.fontColor1:hover {
+    color: var(--color1);
+    text-decoration: none;
+}
+
+.buttons {
+    background-color: var(--color5);
+    color: var(--color1);
+    font-size: xx-large;
+    border-radius: 20px;
+    padding: 0px;
+}
+
+a{
+    color: var(--color1);
+    background-color: var(--color5);
+    text-decoration: underline;
+    padding: 0px;
+}
+
+a:hover{
+    color: var(--color1);
+    background-color: var(--color5);
+    text-decoration: underline;
+}
+
+.links {
+    background-color: var(--color5);
+    color: var(--color1);
+    font-size: xx-large;
+}
