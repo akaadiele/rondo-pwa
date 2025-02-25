@@ -18,6 +18,8 @@
     font-style: normal;
     font-size: large;
     color: #1D1E18;
+    margin: 0;
+    padding: 0;
 }
 
 .navigArea {
@@ -41,6 +43,7 @@
 .fontColor1 {
     color: var(--color1);
 }
+
 .fontColor1:hover {
     color: var(--color1);
     text-decoration: none;
@@ -54,14 +57,14 @@
     padding: 0px;
 }
 
-a{
+a {
     color: var(--color1);
     background-color: var(--color5);
     text-decoration: underline;
     padding: 0px;
 }
 
-a:hover{
+a:hover {
     color: var(--color1);
     background-color: var(--color5);
     text-decoration: underline;
@@ -76,4 +79,15 @@ a:hover{
 
 .cardP {
     font-size: medium;
+}
+
+#map {
+    height: 30rem;
+    width: 100%;
+    /* background-color: var(--color5); */
+}
+
+#pitchInfo{
+    height: 10rem;
+    /* width: 10rem; */
 }
