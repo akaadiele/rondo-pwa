@@ -68,38 +68,52 @@
 
         <div class="row justify-content-center">
             <form class="d-flex mt-3 w-50" role="search">
-                <input class="form-control me-2" type="search" placeholder="Location" aria-label="Search">
+                <input class="form-control me-2" type="search" placeholder="Location" aria-label="Search"
+                    id="searchBox">
                 <button class="btn btn-dark" type="submit" id="searchButton">
                     <i class="fa-solid fa-magnifying-glass-location"></i></button>
             </form>
         </div>
-        
-        <p id="demo"></p>
+
+        <!-- <p id="demo"></p> -->
 
         <div class="row align-items-center mx-auto px-3 mt-3 w-100">
-            <ol class="list-group list-group-numbered" id="pitchSearchResults">
+            <ul class="list-group list-group-flush container-fluid" id="pitchSearchResults">
+                <!-- <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="me-auto fw-bold">
+                        <i class="fa-solid fa-map-pin"></i> Claypotts Park
+                    </div>
+
+                    <span class="badge text-bg-dark rounded-pill"><a
+                            href="pitch-details.html?place=ChIJSzlcmi5chkgRM4JhwBB2U_M"><i
+                                class="fa-solid fa-eye"></i></a></span>
+
+                </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Subheading</div>
-                        Content for list item
+                    <div class="me-auto fw-bold">
+                        <i class="fa-solid fa-map-pin"></i> Craigie Community Sports Arena (3G)
                     </div>
                     <span class="badge text-bg-dark rounded-pill"><i class="fa-solid fa-eye"></i></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Subheading</div>
-                        Content for list item
+                    <div class="me-auto fw-bold">
+                        <i class="fa-solid fa-map-pin"></i> Craigie Community Sports Arena (3G)
                     </div>
                     <span class="badge text-bg-dark rounded-pill"><i class="fa-solid fa-eye"></i></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Subheading</div>
-                        Content for list item
+                    <div class="me-auto fw-bold">
+                        <i class="fa-solid fa-map-pin"></i> Dundee East Community Sports Club
                     </div>
                     <span class="badge text-bg-dark rounded-pill"><i class="fa-solid fa-eye"></i></span>
                 </li>
-            </ol>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="me-auto fw-bold">
+                        <i class="fa-solid fa-map-pin"></i> Dundee East Community Sports Club
+                    </div>
+                    <span class="badge text-bg-dark rounded-pill"><i class="fa-solid fa-eye"></i></span>
+                </li> -->
+            </ul>
         </div>
 
     </main>
@@ -136,6 +150,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
+    <script src="../js/rondo-ui.js"></script>
     <script src="../js/pitch-finder.js"></script>
 </body>
 
