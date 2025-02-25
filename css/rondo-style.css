@@ -70,5 +70,10 @@ a:hover{
 .links {
     background-color: var(--color5);
     color: var(--color1);
-    font-size: xx-large;
+    font-size: x-large;
+}
+
+
+.cardP {
+    font-size: medium;
 }
