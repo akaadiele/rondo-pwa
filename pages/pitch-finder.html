@@ -29,7 +29,7 @@
     <!-- <nav class="navbar navbar-dark bg-dark fixed-top"> -->
     <nav class="container-fluid navbar mb-5 navigArea">
         <div class="container-fluid">
-            <a class="navbar-brand fontColor1" href="#">RONDO</a>
+            <a class="navbar-brand fontColor1" href="home.html">RONDO</a>
             <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
                 aria-label="Toggle navigation">
@@ -66,16 +66,18 @@
             <h2>Choose an option to begin.</h2>
         </div> -->
 
-        <div class="row align-items-center mx-auto px-2 mb-3 w-50">
-            <form class="d-flex mt-3" role="search">
+        <div class="row justify-content-center">
+            <form class="d-flex mt-3 w-50" role="search">
                 <input class="form-control me-2" type="search" placeholder="Location" aria-label="Search">
-                <button class="btn btn-dark" type="submit"><i
-                        class="fa-solid fa-magnifying-glass-location"></i></button>
+                <button class="btn btn-dark" type="submit" id="searchButton">
+                    <i class="fa-solid fa-magnifying-glass-location"></i></button>
             </form>
         </div>
+        
+        <p id="demo"></p>
 
-        <div class="row align-items-center mx-5 px-5 mt-3">
-            <ol class="list-group list-group-numbered mx-5">
+        <div class="row align-items-center mx-auto px-3 mt-3 w-100">
+            <ol class="list-group list-group-numbered" id="pitchSearchResults">
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold">Subheading</div>
@@ -102,25 +104,27 @@
 
     </main>
 
-    <footer class="container-fluid row align-items-center text-center navigArea">
-        <div class="col">
-            <div class="p-3">
-                <i class="fa-solid fa-house-chimney row"></i>
-                <a class="nav-link" href="home.html">Home</a>
+    <footer class="container-fluid align-items-center text-center navigArea">
+        <div class="row">
+            <div class="col">
+                <div class="p-3">
+                    <i class="fa-solid fa-house-chimney row"></i>
+                    <a class="nav-link" href="home.html">Home</a>
+                </div>
             </div>
-        </div>
-        <div class="vr"></div>
-        <div class="col">
-            <div class="p-3">
-                <i class="fa-solid fa-user-tie row"></i>
-                <a class="nav-link" href="football-profiler.html">Profile</a>
+            <div class="vr"></div>
+            <div class="col">
+                <div class="p-3">
+                    <i class="fa-solid fa-user-tie row"></i>
+                    <a class="nav-link" href="football-profiler.html">Profile</a>
+                </div>
             </div>
-        </div>
-        <div class="vr"></div>
-        <div class="col">
-            <div class="p-3">
-                <i class="fa-solid fa-gears row"></i>
-                <a class="nav-link" href="settings.html">Settings</a>
+            <div class="vr"></div>
+            <div class="col">
+                <div class="p-3">
+                    <i class="fa-solid fa-gears row"></i>
+                    <a class="nav-link" href="settings.html">Settings</a>
+                </div>
             </div>
         </div>
     </footer>
@@ -132,6 +136,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
+    <script src="../js/pitch-finder.js"></script>
 </body>
 
 </html>
