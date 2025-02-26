@@ -56,6 +56,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="settings.html">Settings</a>
                         </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -65,14 +66,37 @@
     <!-- Main content -->
     <main class="container-fluid text-center py-5 my-5">
         <div class="row justify-content-center">
-            <form class="d-flex mt-3 w-50" role="search">
-                <input class="form-control me-2" type="text" placeholder="Your Location" aria-label="Search"
-                    id="searchBox">
+            <div class="d-flex mt-3 w-70">
+                <span class="input-group-text text-bg-dark" id="locationIcon">
+                    <i class="fa-solid fa-magnifying-glass-location"></i>
+                </span>
 
-                <button class="btn btn-dark" type="submit" id="searchButton">
-                    <i class="fa-solid fa-magnifying-glass-location"></i></button>
-            </form>
+                <input class="form-control me-2" type="text" placeholder="" aria-label="Search" id="searchBox">
+                
+                <span class="input-group-text text-bg-dark" id="refreshIcon">
+                    <i class="fa-solid fa-arrows-rotate"></i>
+                </span>
+            </div>
         </div>
+
+
+        <div class="m-2">
+            <h6 class="form-check form-check-inline pe-3">Search Radius (miles):</h6>
+            <div class="form-check form-check-inline px-2">
+                <input class="form-check-input btn-secondary" type="radio" name="radiusOptions" id="radius1" value="1"
+                    checked>
+                <label class="form-check-label" for="radius1">1</label>
+            </div>
+            <div class="form-check form-check-inline px-2">
+                <input class="form-check-input" type="radio" name="radiusOptions" id="radius3" value="3">
+                <label class="form-check-label" for="radius3">3</label>
+            </div>
+            <div class="form-check form-check-inline px-2">
+                <input class="form-check-input" type="radio" name="radiusOptions" id="radius5" value="5">
+                <label class="form-check-label" for="radius5">5</label>
+            </div>
+        </div>
+
 
         <div class="row align-items-center mx-auto px-3 mt-3 w-100">
             <ul class="list-group list-group-flush container" id="pitchSearchResults">
@@ -116,9 +140,7 @@
         crossorigin="anonymous"></script>
 
     <!-- Google Map API JS -->
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbvT_-aAvCZGD1uR70C5CUVHCEh3UK4Yo&libraries=places&callback=initAutocomplete"
-        async defer></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbvT_-aAvCZGD1uR70C5CUVHCEh3UK4Yo&libraries=maps,places&loading=async&callback=initAutocomplete"></script>
 
     <!-- Rondo JS -->
     <script src="../js/rondo-ui.js"></script>
