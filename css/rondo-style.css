@@ -87,7 +87,14 @@ a:hover {
     /* background-color: var(--color5); */
 }
 
-#pitchInfo{
+#pitchInfo {
     height: 10rem;
     /* width: 10rem; */
+}
+
+
+input[type="radio"]:checked {
+    accent-color: var(--color3);
+    background-color: var(--color5);
+    border-color: var(--color4);
 }

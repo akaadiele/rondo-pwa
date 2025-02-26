@@ -1,10 +1,10 @@
-// Initiate 'viewPlace' function
-document.addEventListener("DOMContentLoaded", viewPlace);
+// // Initiate 'viewPlace' function
+// document.addEventListener("DOMContentLoaded", viewPlace);
 
 // Get place_id from url
 const urlSplit = document.URL.split('?pitch='); const place_id = urlSplit[1];
 
-
+// HTML element for pitch info
 const pitchInfoDiv = document.getElementById("pitchInfo");
 
 
@@ -13,7 +13,7 @@ function viewPlace() {
     const apiURL = "https://places.googleapis.com/v1/places/";
     const apiFields = "id,displayName,formattedAddress,internationalPhoneNumber,location,googleMapsLinks,rating";
     const fullURL = apiURL + place_id + "?fields=" + apiFields + "&key=" + apiKey;
-    
+
     // Fetch contents from the API response and format contents to display as HTML elements
     fetch(fullURL)
         .then(response => response.text())
@@ -21,15 +21,13 @@ function viewPlace() {
 
             const resultJson = JSON.parse(result) || [];
             if (!resultJson) {
-                console.log("res - ", resultJson)
-
+                // console.log("res - ", resultJson)
                 console.warn(`No result found`);
                 return;
             }
 
 
             // Creating HTML elements
-
 
             // Building card and card contents
             const contentDiv = createNode('div');
@@ -41,18 +39,15 @@ function viewPlace() {
 
             const contentP1 = createNode('p');
             contentP1.setAttribute('class', 'card-text cardP');
-            contentP1.innerHTML = `<hr><i class="fa-solid fa-map-pin"></i>:&nbsp;&nbsp;` + resultJson.formattedAddress;
+            contentP1.innerHTML = `<hr><i class="fa-solid fa-location-crosshairs"></i>: &nbsp;&nbsp;` + resultJson.formattedAddress;
 
             const contentP2 = createNode('p');
             contentP2.setAttribute('class', 'card-text cardP');
             if (resultJson.internationalPhoneNumber) {
-                contentP2.innerHTML = `<i class="fa-solid fa-phone"></i>:&nbsp;&nbsp;` + resultJson.internationalPhoneNumber;
+                contentP2.innerHTML = `<i class="fa-solid fa-phone"></i>: &nbsp;&nbsp;` + resultJson.internationalPhoneNumber + `&nbsp;&nbsp&nbsp;&nbsp <i class="fa-solid fa-grip-lines-vertical"></i> &nbsp;&nbsp&nbsp;&nbsp` + `<i class="fa-solid fa-star"></i>: &nbsp;&nbsp;` + resultJson.rating + `<hr>`;
+            } else {
+                contentP2.innerHTML = `<i class="fa-solid fa-phone"></i>: &nbsp;&nbsp;` + resultJson.internationalPhoneNumber + `<hr>`;
             }
-
-            const contentP3 = createNode('p');
-            contentP3.setAttribute('class', 'card-text cardP');
-            contentP3.innerHTML = `<i class="fa-solid fa-star"></i>:&nbsp;&nbsp;` + resultJson.rating + `<hr>`;
-
 
             const contentA = createNode('a');
             contentA.setAttribute('href', resultJson.googleMapsLinks.placeUri);
@@ -63,7 +58,6 @@ function viewPlace() {
             append(contentDiv, contentH5);
             append(contentDiv, contentP1);
             append(contentDiv, contentP2);
-            append(contentDiv, contentP3);
             append(contentDiv, contentA);
             append(pitchInfoDiv, contentDiv);
 
@@ -71,12 +65,13 @@ function viewPlace() {
             let pitchLng = resultJson.location.longitude;
             initMap(pitchLat, pitchLng)
 
-            // console.log("result: " + resultJson);
         })
         .catch(error => {
             // Custom error response
             // console.error("Search Error:", error);
             // console.log("Search Error: ", error);
+
+            pitchInfoDiv.innerHTML = `! ERROR: Unable to load info.`;
         });
 }
 // >>>
@@ -84,20 +79,24 @@ function viewPlace() {
 
 
 // Define Map with center and pin at the selected pitch
-let map;
 async function initMap(pitchLatitude, pitchLongitude) {
-    const { Map } = await google.maps.importLibrary("maps");
+    // The location of selected pitch
+    const position = { lat: pitchLatitude, lng: pitchLongitude };
 
-    map = new Map(document.getElementById("map"), {
-        center: { lat: pitchLatitude, lng: pitchLongitude },
+    const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 12,
+        center: position,
+        mapId: "PITCH_ID", // Map ID is required for advanced markers.
         gestureHandling: "cooperative",
     });
 
-    let currentMarker = new google.maps.Marker({
-        position: { lat: pitchLatitude, lng: pitchLongitude }
-    })
-    currentMarker.setMap(map);
+    // The advanced marker, positioned at selected pitch
+    const currentMarker = new google.maps.marker.AdvancedMarkerElement({
+        map,
+        position: position,
+        title: 'Selected Pitch',
+    });
 }
 // >>>
+
 

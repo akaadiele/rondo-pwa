@@ -1,16 +1,9 @@
+// Initial search with current location
+// document.addEventListener("DOMContentLoaded", getCurrentLocation);  // trigger at point of loading page
 
-// HTML List group for search results
-const searchResultsList = document.getElementById('pitchSearchResults');
-
-// Conversion value 
 const mileToMeterConv = 1600;
 
 
-// Initial search with current location
-document.addEventListener("DOMContentLoaded", getCurrentLocation);  // trigger at point of loading page
-
-
-// Get user's current location coordinates
 function getCurrentLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(searchFromCurrentLocation);
@@ -18,40 +11,44 @@ function getCurrentLocation() {
         throwFormattedError(`! ERROR: Geolocation is not supported by this browser.`)
     }
 }
-
-// Search with user's current location coordinates
 function searchFromCurrentLocation(position) {
     defaultLocation = position.coords.latitude + ", " + position.coords.longitude;
-
     searchResultsList.innerHTML = '';
     googleNearbySearch(defaultLocation);
 }
 // >>>
 
 
-// Clear Search box
-document.getElementById('refreshIcon').addEventListener('click', evt => {
-    // evt.preventDefault();
-    searchResultsList.innerHTML = '';
-    document.getElementById('searchBox').placeholder = '';
-    document.getElementById('searchBox').value = '';
-    getCurrentLocation();
+// List group for search results
+const searchResultsList = document.getElementById('pitchSearchResults');
+
+// Function to call when searching with search box
+// document.getElementById('searchButton').addEventListener('click', searchPitch)
+document.getElementById('searchButton').addEventListener('click', evt => {
+    evt.preventDefault();
+    searchPitch();
 })
 
 // search by using the enter button on search box
 document.getElementById('searchBox').addEventListener('keydown', (clicked) => {
-    // clicked.preventDefault();
     if (clicked.key === 'Enter') {
-        searchResultsList.innerHTML = '';
-        
-        // Search with address input 
-        if (document.getElementById('searchBox').value == "") {
-            getCurrentLocation();
-        } else {
-            throwFormattedError(`! Select from dropdown... or click refresh icon`);
-        }
+        searchPitch();
     }
 })
+
+
+
+// Search with address input 
+function searchPitch() {
+    // Content of search box
+    searchText = document.getElementById('searchBox').value;
+    console.log(searchText);
+    if (searchText == "") {
+        getCurrentLocation();
+    } else {
+        geocodeAddress(searchText);
+    }
+}
 // >>>
 
 
@@ -59,7 +56,7 @@ document.getElementById('searchBox').addEventListener('keydown', (clicked) => {
 
 // Autocomplete feature on search box
 let autocomplete;
-function initAutocomplete() {
+async function initAutocomplete() {
     autocomplete = new google.maps.places.Autocomplete(document.getElementById('searchBox'),
         {
             types: ['establishment'],
@@ -73,36 +70,40 @@ function onPlaceChanged() {
     var place = autocomplete.getPlace();
 
     if (!place.formatted_address) {
-        throwFormattedError(`! Select from dropdown... or click refresh icon`);
+        document.getElementById('searchBox').placeholder = '';
+        document.getElementById('searchBox').value = '';
     } else {
         document.getElementById('searchBox').placeholder = '';
         document.getElementById('searchBox').value = place.name + ", " + place.formatted_address;
-        getCoordinatesForPlaceID(place.place_id);
+        geocodeAddress(place.formatted_address);
     }
 }
 // >>>
 
 
-// Get coordinates for the place selected 
-function getCoordinatesForPlaceID(placeId) {
-    const apiURL_places = "https://places.googleapis.com/v1/places/" + placeId + "?fields=location" + "&key=" + apiKey;
+// Geocoding: address to get latitud and longitude
+function geocodeAddress(altAddress) {
+    searchResultsList.innerHTML = '';
+    altAddress = encodeURI(altAddress);
+
+    let geocodeURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + altAddress + "&key=" + apiKey;
+    // console.log("geocodeURL: " + geocodeURL);
 
     // Fetch contents from the API response and format contents to display as HTML elements
-    fetch(apiURL_places)
+    fetch(geocodeURL)
         .then(response => response.text())
-        .then(result => {
+        .then(results => {
+            const obj = JSON.parse(results);
             const resultJson = JSON.parse(result) || [];
-            if (!resultJson) {
-                // console.warn(`No result found`);
-                throwFormattedError(`No result found`)
-                return;
-            }
 
-            let pitchLat = resultJson.location.latitude;
-            let pitchLng = resultJson.location.longitude;
-            altLocation = pitchLat + ", " + pitchLng;
+            console.log("results - " + results);
+            console.log("results.geo: " + results.geometry.location.lng);
 
-            searchResultsList.innerHTML = '';
+
+            altLocation = resultJson.geometry.location.lat + ", " + resultJson.geometry.location.lng;
+
+            console.log("altLocation: " + altLocation);
+
             googleNearbySearch(altLocation);
 
         })
@@ -112,15 +113,15 @@ function getCoordinatesForPlaceID(placeId) {
             // console.log("Search Error: ", error);
             throwFormattedError(`! ERROR: Invalid Address.`)
         });
+
 }
+// >>>
 
 
 
 
-// Formatting possible errors
+// formatting possible errors
 function throwFormattedError(errorMessage) {
-    searchResultsList.innerHTML = '';
-
     const pitchLi = createNode('li');
     pitchLi.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-start');
 
@@ -157,10 +158,8 @@ function googleNearbySearch(startLocation) {
 
     let fullURL = baseURL + "&location=" + startLocation + "&radius=" + searchRadius;
 
-    // console.log('startLocation: ', startLocation)
-    // console.log('searchRadius: ', searchRadius)
-    // // console.log('search url: ', fullURL)
-    
+    console.log('url- ', fullURL)
+
     // Fetch contents from the API response and format contents to display as HTML elements
     fetch(fullURL)
         .then(resp => {
