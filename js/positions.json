@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Goalkeeper",
+        "code": "GK"
+    },
+    {
+        "name": "Centre-back",
+        "code": "CB"
+    },
+    {
+        "name": "Left Full-back",
+        "code": "LB"
+    },
+    {
+        "name": "Right Full-back",
+        "code": "RB"
+    },
+    {
+        "name": "Left Wing-back",
+        "code": "LWB"
+    },
+    {
+        "name": "Right Wing-back",
+        "code": "RWB"
+    },
+    {
+        "name": "Defensive midfielder",
+        "code": "DM"
+    },
+    {
+        "name": "Central midfielder",
+        "code": "CM"
+    },
+    {
+        "name": "Attacking midfielder",
+        "code": "AM"
+    },
+    {
+        "name": "Left Wide midfielder",
+        "code": "LM"
+    },
+    {
+        "name": "Right Wide midfielder",
+        "code": "RM"
+    },
+    {
+        "name": "Left Winger",
+        "code": "LW"
+    },
+    {
+        "name": "Right Winger",
+        "code": "RW"
+    },
+    {
+        "name": "Second striker",
+        "code": "SS"
+    },
+    {
+        "name": "Centre forward",
+        "code": "CF"
+    }
+]

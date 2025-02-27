@@ -64,9 +64,31 @@
 
 
     <!-- Main content -->
-    <main class="container-fluid text-center py-5 my-5">
+    <main class="container-fluid text-center pt-3 pb-5 mb-5">
         <div class="row justify-content-center">
-            <div class="d-flex mt-3 w-70">
+            <h1>Pitch Finder</h1>
+            <hr class="border border-dark border-3 opacity-30 w-50">
+        </div>
+
+        <div class="mt-3">
+            <h6 class="form-check form-check-inline pe-3">Search Radius (miles):</h6>
+            <div class="form-check form-check-inline px-2">
+                <input class="form-check-input btn-secondary" type="radio" name="radiusOptions" id="radius1" value="1"
+                    onclick="refreshSearch()" checked>
+                <label class="form-check-label" for="radius1">1</label>
+            </div>
+            <div class="form-check form-check-inline px-2">
+                <input class="form-check-input" type="radio" name="radiusOptions" id="radius3" value="3" onclick="refreshSearch()">
+                <label class="form-check-label" for="radius3">3</label>
+            </div>
+            <div class="form-check form-check-inline px-2">
+                <input class="form-check-input" type="radio" name="radiusOptions" id="radius5" value="5" onclick="refreshSearch()">
+                <label class="form-check-label" for="radius5">5</label>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="d-flex mt-1 w-70">
                 <span class="input-group-text text-bg-dark" id="locationIcon">
                     <i class="fa-solid fa-magnifying-glass-location"></i>
                 </span>
@@ -76,24 +98,6 @@
                 <span class="input-group-text text-bg-dark" id="refreshIcon">
                     <i class="fa-solid fa-arrows-rotate"></i>
                 </span>
-            </div>
-        </div>
-
-
-        <div class="m-2">
-            <h6 class="form-check form-check-inline pe-3">Search Radius (miles):</h6>
-            <div class="form-check form-check-inline px-2">
-                <input class="form-check-input btn-secondary" type="radio" name="radiusOptions" id="radius1" value="1"
-                    checked>
-                <label class="form-check-label" for="radius1">1</label>
-            </div>
-            <div class="form-check form-check-inline px-2">
-                <input class="form-check-input" type="radio" name="radiusOptions" id="radius3" value="3">
-                <label class="form-check-label" for="radius3">3</label>
-            </div>
-            <div class="form-check form-check-inline px-2">
-                <input class="form-check-input" type="radio" name="radiusOptions" id="radius5" value="5">
-                <label class="form-check-label" for="radius5">5</label>
             </div>
         </div>
 
