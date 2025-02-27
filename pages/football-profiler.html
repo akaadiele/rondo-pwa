@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Profiler - RONDO</title>
+
+    <!-- Browser tab icon -->
+    <link rel="icon" href="../img/Rondo-icon.ico">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- CSS files -->
+    <link rel="stylesheet" href="../css/rondo-style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+</head>
+
+<body class="lightBg" id="body">
+
+    <!-- Navigation bar and side bar menu -->
+    <nav class="container-fluid navbar mb-5 navigArea">
+        <div class="container-fluid">
+            <button class="btn btn-dark" onclick="history.back()">
+                <i class="fa-duotone fa-solid fa-left-long"></i>
+            </button>
+            <a class="navbar-brand fontColor1" href="home.html">RONDO</a>
+            <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+                aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header navigArea">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body lightBg">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="football-profiler.html">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="settings.html">Settings</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Main content -->
+    <main class="container-fluid text-center pt-5 pb-5">
+        <div class="row justify-content-center">
+            <h1>Football Profiler</h1>
+            <hr class="border border-dark border-3 opacity-30 w-50">
+        </div>
+
+        <div class="row justify-content-center mt-3">
+            <!-- <div class="d-flex mt-1 w-70">
+                <span class="input-group-text text-bg-dark" id="locationIcon">
+                    <i class="fa-solid fa-magnifying-glass-location"></i>
+                </span>
+
+                <input class="form-control me-2" type="text" placeholder="" aria-label="Search" id="searchBox">
+                
+                <span class="input-group-text text-bg-dark" id="refreshIcon">
+                    <i class="fa-solid fa-arrows-rotate"></i>
+                </span>
+            </div> -->
+            <i class="fa-solid fa-user-tie"></i>
+        </div>
+
+
+        <div class="row align-items-center mx-auto px-3 mt-3 w-100">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default">
+            </div>
+
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">Position</label>
+                <select class="form-select" id="positionSelect">
+                    <option value="" selected>...</option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">Nationality</label>
+                <select class="form-select" id="nationalitySelect">
+                    <option value="" selected>...</option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Age</span>
+                <input type="number" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default" value="15">
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Height (cm)</span>
+                <input type="number" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default" value="3">
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Weight (kg)</span>
+                <input type="number" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default" value="150">
+            </div>
+
+            <hr class="my-3">
+        </div>
+
+        <div class="row align-items-center mx-3 px-2 mb-3">
+            <a class="btn links border border-dark border-2" href="" role="button">Edit Profile</a>
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="container-fluid align-items-center text-center navigArea">
+        <div class="row">
+            <div class="col">
+                <div class="p-3">
+                    <i class="fa-solid fa-house-chimney row"></i>
+                    <a class="nav-link" href="home.html">Home</a>
+                </div>
+            </div>
+            <div class="vr"></div>
+            <div class="col">
+                <div class="p-3">
+                    <i class="fa-solid fa-user-tie row"></i>
+                    <a class="nav-link" href="football-profiler.html">Profile</a>
+                </div>
+            </div>
+            <div class="vr"></div>
+            <div class="col">
+                <div class="p-3">
+                    <i class="fa-solid fa-gears row"></i>
+                    <a class="nav-link" href="settings.html">Settings</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- Bootstrap Javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <!-- Rondo JS -->
+    <script src="../js/rondo-ui.js"></script>
+    <script src="../js/football-profiler.js"></script>
+
+</body>
+
+</html>

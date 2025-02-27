@@ -2,12 +2,16 @@
 // HTML List group for search results
 const searchResultsList = document.getElementById('pitchSearchResults');
 
+// HTML radio buttons for search radius
+const radioButtons = document.querySelectorAll('input[name="radiusOptions"]');
+radioButtons
+
 // Conversion value 
 const mileToMeterConv = 1600;
 
 
 // Initial search with current location
-document.addEventListener("DOMContentLoaded", getCurrentLocation);  // trigger at point of loading page
+document.addEventListener("DOMContentLoaded", refreshSearch);  // trigger at point of loading page
 
 
 // Get user's current location coordinates
@@ -30,13 +34,18 @@ function searchFromCurrentLocation(position) {
 
 
 // Clear Search box
-document.getElementById('refreshIcon').addEventListener('click', evt => {
+document.getElementById('refreshIcon').addEventListener('click', refreshSearch);
+
+
+// Function to refresh search
+function refreshSearch() {
     // evt.preventDefault();
     searchResultsList.innerHTML = '';
     document.getElementById('searchBox').placeholder = '';
     document.getElementById('searchBox').value = '';
     getCurrentLocation();
-})
+}
+
 
 // search by using the enter button on search box
 document.getElementById('searchBox').addEventListener('keydown', (clicked) => {
@@ -141,7 +150,6 @@ function throwFormattedError(errorMessage) {
 function googleNearbySearch(startLocation) {
 
     // Get radius in miles and convert to meters
-    const radioButtons = document.querySelectorAll('input[name="radiusOptions"]');
     for (const radioButton of radioButtons) {
         if (radioButton.checked) {
             let milesRadius = radioButton.value;

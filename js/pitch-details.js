@@ -46,7 +46,7 @@ function viewPlace() {
             if (resultJson.internationalPhoneNumber) {
                 contentP2.innerHTML = `<i class="fa-solid fa-phone"></i>: &nbsp;&nbsp;` + resultJson.internationalPhoneNumber + `&nbsp;&nbsp&nbsp;&nbsp <i class="fa-solid fa-grip-lines-vertical"></i> &nbsp;&nbsp&nbsp;&nbsp` + `<i class="fa-solid fa-star"></i>: &nbsp;&nbsp;` + resultJson.rating + `<hr>`;
             } else {
-                contentP2.innerHTML = `<i class="fa-solid fa-phone"></i>: &nbsp;&nbsp;` + resultJson.internationalPhoneNumber + `<hr>`;
+                contentP2.innerHTML = `<i class="fa-solid fa-star"></i>: &nbsp;&nbsp;` + resultJson.rating + `<hr>`;
             }
 
             const contentA = createNode('a');
