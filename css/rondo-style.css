@@ -17,7 +17,7 @@
     font-weight: 500;
     font-style: normal;
     font-size: large;
-    color: #1D1E18;
+    color: var(--color5);
     margin: 0;
     padding: 0;
 }
@@ -34,6 +34,10 @@
 
 .lightBg {
     background-color: var(--color1);
+}
+
+.bgColor3 {
+    background-color: var(--color3);
 }
 
 .bgColor4 {
@@ -73,6 +77,12 @@ a:hover {
 .links {
     background-color: var(--color5);
     color: var(--color1);
+    font-size: x-large;
+}
+
+.altLinks {
+    background-color: var(--color1);
+    color: var(--color5);
     font-size: x-large;
 }
 

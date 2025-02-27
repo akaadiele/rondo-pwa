@@ -187,10 +187,10 @@ function googleNearbySearch(startLocation) {
                 // Creating HTML elements
                 // Building list and list contents
                 const pitchLi = createNode('li');
-                pitchLi.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-start');
+                pitchLi.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-start gap-3');
 
                 const contentDiv = createNode('div');
-                contentDiv.setAttribute('class', 'ms-2 me-auto fw-bold');
+                contentDiv.setAttribute('class', 'ms-2 me-auto fw-bold text-truncate');
                 contentDiv.innerHTML = `<i class="fa-solid fa-map-pin"></i> ${result.name}`;
 
                 const viewSpan = createNode('span');
