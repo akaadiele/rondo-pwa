@@ -43,10 +43,19 @@ function viewPlace() {
 
             const contentP2 = createNode('p');
             contentP2.setAttribute('class', 'card-text cardP');
+            
+            contentP2.innerHTML = '';
             if (resultJson.internationalPhoneNumber) {
-                contentP2.innerHTML = `<i class="fa-solid fa-phone"></i>: &nbsp;&nbsp;` + resultJson.internationalPhoneNumber + `&nbsp;&nbsp&nbsp;&nbsp <i class="fa-solid fa-grip-lines-vertical"></i> &nbsp;&nbsp&nbsp;&nbsp` + `<i class="fa-solid fa-star"></i>: &nbsp;&nbsp;` + resultJson.rating + `<hr>`;
-            } else {
-                contentP2.innerHTML = `<i class="fa-solid fa-star"></i>: &nbsp;&nbsp;` + resultJson.rating + `<hr>`;
+                // Include phone number if available
+                contentP2.innerHTML += `<i class="fa-solid fa-phone"></i>: &nbsp;&nbsp;` + resultJson.internationalPhoneNumber;
+            }
+            if ( (resultJson.internationalPhoneNumber) && (resultJson.rating) ) {
+                // Include demarcation bar if both phone number and rating exist
+                contentP2.innerHTML += `&nbsp;&nbsp&nbsp;&nbsp <i class="fa-solid fa-grip-lines-vertical"></i> &nbsp;&nbsp&nbsp;&nbsp`
+            }
+            if (resultJson.rating) {
+                // Include rating if available
+                contentP2.innerHTML += `<i class="fa-solid fa-star"></i>: &nbsp;&nbsp;` + resultJson.rating + `<hr>`;
             }
 
             const contentA = createNode('a');

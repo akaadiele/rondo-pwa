@@ -48,10 +48,13 @@
                 <div class="offcanvas-body lightBg">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                            <a class="nav-link" aria-current="page" href="home.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="football-profiler.html">Profile</a>
+                            <a class="nav-link" href="pitch-finder.html">Pitch Finder</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="football-profiler.html">Football Profiler</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="settings.html">Settings</a>
@@ -64,72 +67,62 @@
 
 
     <!-- Main content -->
-    <main class="container-fluid text-center pt-5 pb-5">
+    <main class="container-fluid text-center my-2">
         <div class="row justify-content-center">
             <h1>Football Profiler</h1>
             <hr class="border border-dark border-3 opacity-30 w-50">
         </div>
 
-        <div class="row justify-content-center mt-3">
-            <!-- <div class="d-flex mt-1 w-70">
-                <span class="input-group-text text-bg-dark" id="locationIcon">
-                    <i class="fa-solid fa-magnifying-glass-location"></i>
-                </span>
-
-                <input class="form-control me-2" type="text" placeholder="" aria-label="Search" id="searchBox">
-                
-                <span class="input-group-text text-bg-dark" id="refreshIcon">
-                    <i class="fa-solid fa-arrows-rotate"></i>
-                </span>
-            </div> -->
-            <i class="fa-solid fa-user-tie"></i>
+        <div class="row justify-content-center align-items-center text-center mx-auto my-auto w-50">
+            <img src="../img/kick-ball.jpg" alt="..." class="rounded d-block">
+            <!-- <i class="fa-solid fa-user-tie"></i> -->
         </div>
 
+        <hr class="border border-dark border-3 opacity-30 w-100 my-3">
 
         <div class="row align-items-center mx-auto px-3 mt-3 w-100">
             <div class="input-group mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+                <span class="input-group-text" id="profileNameLabel">Name</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-default">
+                    aria-describedby="profileNameLabel" value="" id="profileName" disabled>
             </div>
 
             <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupSelect01">Position</label>
-                <select class="form-select" id="positionSelect">
-                    <option value="" selected>...</option>
-                </select>
+                <label class="input-group-text" for="positionLabel">Position</label>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="profileNameLabel" value="" id="profilePosition" disabled>
             </div>
 
             <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupSelect01">Nationality</label>
-                <select class="form-select" id="nationalitySelect">
-                    <option value="" selected>...</option>
-                </select>
+                <label class="input-group-text" for="nationalityLabel">Nationality</label>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="profileNameLabel" value="" id="profileNationality" disabled>
             </div>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-default">Age</span>
+                <span class="input-group-text" id="profileAgeLabel">Age</span>
                 <input type="number" class="form-control" aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-default" value="15">
+                    aria-describedby="profileAgeLabel" value="" id="profileAge" disabled>
             </div>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-default">Height (cm)</span>
+                <span class="input-group-text" id="profileHeightLabel">Height (cm)</span>
                 <input type="number" class="form-control" aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-default" value="3">
+                    aria-describedby="profileHeightLabel" value="" id="profileHeight" disabled>
             </div>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-default">Weight (kg)</span>
+                <span class="input-group-text" id="profileWeightLabel">Weight (kg)</span>
                 <input type="number" class="form-control" aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-default" value="150">
+                    aria-describedby="profileWeightLabel" value="" id="profileWeight" disabled>
             </div>
-
-            <hr class="my-3">
         </div>
 
+        <hr class="border border-dark border-2 opacity-30 w-100">
+        
         <div class="row align-items-center mx-3 px-2 mb-3">
-            <a class="btn links border border-dark border-2" href="" role="button">Edit Profile</a>
+            <a class="btn links border border-dark border-2" href="" role="button" data-bs-toggle="modal"
+                data-bs-target="#editProfileModal" id="editProfile">Edit Profile</a>
         </div>
 
     </main>
@@ -137,30 +130,71 @@
 
     <!-- Footer -->
     <footer class="container-fluid align-items-center text-center navigArea">
-        <div class="row">
-            <div class="col">
-                <div class="p-3">
-                    <i class="fa-solid fa-house-chimney row"></i>
-                    <a class="nav-link" href="home.html">Home</a>
+        <hr class="border border-dark border-2 opacity-30 w-100">
+    </footer>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel"
+        aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content text-bg-dark">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 fontColor1" id="editProfileModalLabel">Edit Profile</h1>
+                    <button type="button" class="btn-close lightBg" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-            </div>
-            <div class="vr"></div>
-            <div class="col">
-                <div class="p-3">
-                    <i class="fa-solid fa-user-tie row"></i>
-                    <a class="nav-link" href="football-profiler.html">Profile</a>
+                <div class="modal-body">
+
+                    <form>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="profileNameEditLabel">Name</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input"
+                                aria-describedby="profileNameEditLabel" value="" id="profileNameEdit">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="positionEditLabel">Position</label>
+                            <select class="form-select" id="positionSelectEdit">
+                                <option value="" id="defaultPosition" selected>...</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="nationalityEditLabel">Nationality</label>
+                            <select class="form-select" id="nationalitySelectEdit">
+                                <option value="" id="defaultNationality" selected>...</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="profileAgeEditLabel">Age</span>
+                            <input type="number" class="form-control" aria-label="Sizing example input"
+                                aria-describedby="profileAgeEditLabel" value="" id="profileAgeEdit" min="0" max="99">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="profileHeightEditLabel">Height (cm)</span>
+                            <input type="number" class="form-control" aria-label="Sizing example input"
+                                aria-describedby="profileHeightEditLabel" value="" id="profileHeightEdit" min="50"
+                                max="300">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="profileWeightEditLabel">Weight (kg)</span>
+                            <input type="number" class="form-control" aria-label="Sizing example input"
+                                aria-describedby="profileWeightEditLabel" value="" id="profileWeightEdit" min="10"
+                                max="200">
+                        </div>
+                    </form>
+
                 </div>
-            </div>
-            <div class="vr"></div>
-            <div class="col">
-                <div class="p-3">
-                    <i class="fa-solid fa-gears row"></i>
-                    <a class="nav-link" href="settings.html">Settings</a>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn lightBg">Save changes</button>
                 </div>
             </div>
         </div>
-    </footer>
-
+    </div>
 
 
     <!-- Bootstrap Javascript -->
