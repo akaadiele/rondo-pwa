@@ -91,5 +91,5 @@
             ]
         }
     ],
-    "display_override": ["window-control-overlay", "minimal-ui"]
+    "display_override": ["window-control-overlay"]
 }
