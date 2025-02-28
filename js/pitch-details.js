@@ -12,10 +12,10 @@ const pitchInfoDiv = document.getElementById("pitchInfo");
 function viewPlace() {
     const apiURL = "https://places.googleapis.com/v1/places/";
     const apiFields = "id,displayName,formattedAddress,internationalPhoneNumber,location,googleMapsLinks,rating";
-    const fullURL = apiURL + place_id + "?fields=" + apiFields + "&key=" + apiKey;
-
+    const apiURL_placesDetail = encodeURI(apiURL + place_id + "?fields=" + apiFields + "&key=" + apiKey);
+    
     // Fetch contents from the API response and format contents to display as HTML elements
-    fetch(fullURL)
+    fetch(apiURL_placesDetail)
         .then(response => response.text())
         .then(result => {
 
@@ -59,8 +59,9 @@ function viewPlace() {
             }
 
             const contentA = createNode('a');
-            contentA.setAttribute('href', resultJson.googleMapsLinks.placeUri);
             contentA.setAttribute('class', 'btn btn-light links');
+            contentA.setAttribute('href', resultJson.googleMapsLinks.placeUri);
+            // contentA.setAttribute('target', '_blank');
             contentA.innerHTML = `<i class="fa-brands fa-google"></i>`;
 
 

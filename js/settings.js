@@ -51,3 +51,12 @@ async function getLanguages() {
 }
 
 
+
+
+// // Caching
+// const settingsCache = 'settings-v1';
+// caches.open(settingsCache).then(cache => {
+//     cache.put(userId, userId_value);
+//     cache.put(language, language_value);
+//     cache.put(theme, theme_value);
+// });

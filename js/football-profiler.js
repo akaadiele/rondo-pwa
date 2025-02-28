@@ -10,9 +10,9 @@ getPositions();     // Get list of positions
 
 // Fetch country info from API
 async function getNationalities() {
-    const restCountriesURL = "https://restcountries.com/v2/all?fields=demonym";     // API URL
+    const apiURL_restCountries = encodeURI("https://restcountries.com/v2/all?fields=demonym");     // API URL
 
-    fetch(restCountriesURL)
+    fetch(apiURL_restCountries)
         .then((response) => response.json())
         .then(function (data) {
             let countries = data;
@@ -54,3 +54,15 @@ async function getPositions() {
 }
 
 
+
+// // Caching
+// const userCache = 'user-v1';
+// caches.open(userCache).then(cache => {
+//     cache.put(userId, userId_value);
+//     cache.put(name, name_value);
+//     cache.put(position, position_value);
+//     cache.put(nationality, nationality_value);
+//     cache.put(age, age_value);
+//     cache.put(height, height_value);
+//     cache.put(weight, weight_value);    
+// });

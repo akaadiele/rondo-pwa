@@ -94,8 +94,8 @@ function onPlaceChanged() {
 
 // Get coordinates for the place selected 
 function getCoordinatesForPlaceID(placeId) {
-    const apiURL_places = "https://places.googleapis.com/v1/places/" + placeId + "?fields=location" + "&key=" + apiKey;
-
+    const apiURL_places = encodeURI("https://places.googleapis.com/v1/places/" + placeId + "?fields=location" + "&key=" + apiKey);
+    
     // Fetch contents from the API response and format contents to display as HTML elements
     fetch(apiURL_places)
         .then(response => response.text())
@@ -163,14 +163,10 @@ function googleNearbySearch(startLocation) {
     const apiKeyword = "football+field";
     const baseURL = apiURL + "?key=" + apiKey + "&keyword=" + apiKeyword;
 
-    let fullURL = baseURL + "&location=" + startLocation + "&radius=" + searchRadius;
-
-    // console.log('startLocation: ', startLocation)
-    // console.log('searchRadius: ', searchRadius)
-    // // console.log('search url: ', fullURL)
-    
+    const apiURL_nearbySearch = encodeURI(baseURL + "&location=" + startLocation + "&radius=" + searchRadius);
+    console.log(apiURL_nearbySearch);
     // Fetch contents from the API response and format contents to display as HTML elements
-    fetch(fullURL)
+    fetch(apiURL_nearbySearch)
         .then(resp => {
             if (!resp.ok) throw new Error(`Search Error: ${resp.statusText}`);
             return resp.json();
@@ -206,7 +202,7 @@ function googleNearbySearch(startLocation) {
         .catch(error => {
             // Custom error response
             // console.error("Search Error:", error);
-            // console.log("url: " + fullURL)
+            // console.log("url: " + apiURL_nearbySearch)
             throwFormattedError(`! ERROR: Search Failure.`);
         });
 }
