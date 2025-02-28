@@ -1,0 +1,95 @@
+{
+    "name": "Rondo",
+    "short_name": "Rondo",
+    "id": "./index.html",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#d9fff5",
+    "theme_color": "#AAD2BA",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "./img/icons/Rondo-icon-72.png",
+            "type": "image/png",
+            "sizes": "72x72"
+        },
+        {
+            "src": "./img/icons/Rondo-icon-96.png",
+            "type": "image/png",
+            "sizes": "96x96"
+        },
+        {
+            "src": "./img/icons/Rondo-icon-128.png",
+            "type": "image/png",
+            "sizes": "128x128"
+        },
+        {
+            "src": "./img/icons/Rondo-icon-144.png",
+            "type": "image/png",
+            "sizes": "144x144"
+        },
+        {
+            "src": "./img/icons/Rondo-icon-152.png",
+            "type": "image/png",
+            "sizes": "152x152"
+        },
+        {
+            "src": "./img/icons/Rondo-icon-192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "./img/icons/Rondo-icon-384.png",
+            "type": "image/png",
+            "sizes": "384x384"
+        },
+        {
+            "src": "./img/icons/Rondo-icon-512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "scope": "./",
+    "description": "Football pitch finder and football profiler",
+    "screenshots": [
+        {
+            "src": "./img/screenshot-narrow-540x720.png",
+            "type": "image/png",
+            "sizes": "540x720",
+            "form_factor": "narrow"
+        },
+        {
+            "src": "./img/screenshot-wide-720x540.jpg",
+            "type": "image/jpg",
+            "sizes": "720x540",
+            "form_factor": "wide"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Find a pitch near you?",
+            "short_name": "Nearby Pitches",
+            "description": "View football pitches near you",
+            "url": "./pages/pitch-finder.html",
+            "icons": [
+                {
+                    "src": "./img/icons/Rondo-icon-192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        },
+        {
+            "name": "View your football profile",
+            "short_name": "Football profile",
+            "description": "View your football profile",
+            "url": "./pages/football-profiler.html",
+            "icons": [
+                {
+                    "src": "./img/icons/Rondo-icon-192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        }
+    ],
+    "display_override": ["window-control-overlay", "minimal-ui"]
+}
