@@ -1,8 +1,8 @@
-const staticCache = 'static-v004';
-const dynamicCache = 'dynamic-v004';
-const userCache = 'userCache-v004';
-const settingsCache = 'settingsCache-v004';
-const googleMapsCache = 'googleMapsCache-v004';
+const staticCache = 'static-v01';
+const dynamicCache = 'dynamic-v01';
+const userCache = 'userCache-v01';
+const settingsCache = 'settingsCache-v01';
+const googleMapsCache = 'googleMapsCache-v01';
 
 
 const staticCacheAssets = [
@@ -96,7 +96,7 @@ self.addEventListener('fetch', eventParam => {
                         return caches.open(dynamicCache).then(cache => {
                             cache.put(eventParam.request.url, fetchRes.clone());
                             // check cached items size
-                            limitCacheSize(dynamicCache, 30);
+                            limitCacheSize(dynamicCache, 20);
                             return fetchRes;
                         })
                     }
