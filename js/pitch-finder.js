@@ -19,7 +19,7 @@ function getCurrentLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(searchFromCurrentLocation);
     } else {
-        throwFormattedError(`! ERROR: Geolocation is not supported by this browser.`)
+        tempDisplayMessage(`! ERROR: Geolocation is not supported by this browser.`)
     }
 }
 
@@ -40,7 +40,10 @@ document.getElementById('refreshIcon').addEventListener('click', refreshSearch);
 // Function to refresh search
 function refreshSearch() {
     // evt.preventDefault();
-    searchResultsList.innerHTML = '';
+    
+    // searchResultsList.innerHTML = '';
+    tempDisplayMessage(`Loading...`);
+
     document.getElementById('searchBox').placeholder = '';
     document.getElementById('searchBox').value = '';
     getCurrentLocation();
@@ -57,7 +60,7 @@ document.getElementById('searchBox').addEventListener('keydown', (clicked) => {
         if (document.getElementById('searchBox').value == "") {
             getCurrentLocation();
         } else {
-            throwFormattedError(`! Select from dropdown... or click refresh icon`);
+            tempDisplayMessage(`! Select from dropdown... or click refresh icon`);
         }
     }
 })
@@ -82,7 +85,7 @@ function onPlaceChanged() {
     var place = autocomplete.getPlace();
 
     if (!place.formatted_address) {
-        throwFormattedError(`! Select from dropdown... or click refresh icon`);
+        tempDisplayMessage(`! Select from dropdown... or click refresh icon`);
     } else {
         document.getElementById('searchBox').placeholder = '';
         document.getElementById('searchBox').value = place.name + ", " + place.formatted_address;
@@ -103,7 +106,7 @@ function getCoordinatesForPlaceID(placeId) {
             const resultJson = JSON.parse(result) || [];
             if (!resultJson) {
                 // console.warn(`No result found`);
-                throwFormattedError(`No result found`)
+                tempDisplayMessage(`No result found`)
                 return;
             }
 
@@ -119,7 +122,7 @@ function getCoordinatesForPlaceID(placeId) {
             // Custom error response
             // console.error("Search Error:", error);
             // console.log("Search Error: ", error);
-            throwFormattedError(`! ERROR: Invalid Address.`)
+            tempDisplayMessage(`! ERROR: Invalid Address.`)
         });
 }
 
@@ -127,7 +130,7 @@ function getCoordinatesForPlaceID(placeId) {
 
 
 // Formatting possible errors
-function throwFormattedError(errorMessage) {
+function tempDisplayMessage(errorMessage) {
     searchResultsList.innerHTML = '';
 
     const pitchLi = createNode('li');
@@ -148,7 +151,7 @@ function throwFormattedError(errorMessage) {
 
 // Nearby search for pitch with Google API
 function googleNearbySearch(startLocation) {
-
+    tempDisplayMessage(`Loading...`);
     // Get radius in miles and convert to meters
     for (const radioButton of radioButtons) {
         if (radioButton.checked) {
@@ -164,7 +167,7 @@ function googleNearbySearch(startLocation) {
     const baseURL = apiURL + "?key=" + apiKey + "&keyword=" + apiKeyword;
 
     const apiURL_nearbySearch = encodeURI(baseURL + "&location=" + startLocation + "&radius=" + searchRadius);
-    console.log(apiURL_nearbySearch);
+    // console.log(apiURL_nearbySearch);
     // Fetch contents from the API response and format contents to display as HTML elements
     fetch(apiURL_nearbySearch)
         .then(resp => {
@@ -175,10 +178,12 @@ function googleNearbySearch(startLocation) {
             const results = data.results || [];
             if (!results.length) {
                 // console.warn(`No results found`);
-                throwFormattedError(`! ERROR: No results found.`)
+                tempDisplayMessage(`! ERROR: No results found.`)
                 return;
             }
 
+            searchResultsList.innerHTML = '';
+            
             results.forEach(result => {
                 // Creating HTML elements
                 // Building list and list contents
@@ -203,7 +208,8 @@ function googleNearbySearch(startLocation) {
             // Custom error response
             // console.error("Search Error:", error);
             // console.log("url: " + apiURL_nearbySearch)
-            throwFormattedError(`! ERROR: Search Failure.`);
+            tempDisplayMessage(`! ERROR: Search Failure.`);
+            // tempDisplayMessage(`! ERROR: Search Failure. ${error} - ${apiURL_nearbySearch}`);
         });
 }
 // >>>
