@@ -6,6 +6,9 @@ const languageSelect = document.getElementById("languageSelect");
 getThemes();     // Get list of themes
 getLanguages();     // Get list of languages
 
+// Trigger function to cache settings from the sw.js
+document.getElementById('updateSettings').addEventListener('click', updateSettingsInfo);
+
 
 
 // Fetch theme info from json file
@@ -18,7 +21,7 @@ async function getThemes() {
             data.forEach(theme => {
                 let themeName = theme.name;
                 // let themeCode = theme.code;
-                
+
                 themeSelect.innerHTML += `<option value="${themeName}" id="${themeName}">${themeName}</option>`;
             })
         })
@@ -40,7 +43,7 @@ async function getLanguages() {
             data.forEach(language => {
                 let languageName = language.name;
                 // let languageCode = language.code;
-                
+
                 languageSelect.innerHTML += `<option value="${languageName}" id="${languageName}">${languageName}</option>`;
             })
         })
@@ -51,12 +54,10 @@ async function getLanguages() {
 }
 
 
+function updateSettingsInfo() {
+    const userId_value = '1';  // update to pick from firebase
+    const theme_value = themeSelect.value;
+    const language_value = languageSelect.value;
+    // userId_value, theme_value, language_value
 
-
-// // Caching
-// const settingsCache = 'settings-v1';
-// caches.open(settingsCache).then(cache => {
-//     cache.put(userId, userId_value);
-//     cache.put(language, language_value);
-//     cache.put(theme, theme_value);
-// });
+}

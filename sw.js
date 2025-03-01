@@ -1,26 +1,27 @@
-const staticCache = 'static-v1';
+const staticCache = 'static-v004';
+const dynamicCache = 'dynamic-v004';
+const userCache = 'userCache-v004';
+const settingsCache = 'settingsCache-v004';
+const googleMapsCache = 'googleMapsCache-v004';
+
+
 const staticCacheAssets = [
-    '/',
     './',
     './index.html',
+    './pages/home.html',
     './pages/fallback.html',
     './css/rondo-style.css',
-    './js/football-profiler.js',
-    './js/pitch-details.js',
-    './js/pitch-finder.js',
     './js/rondo-app.js',
-    './js/rondo-db.js',
     './js/rondo-ui.js',
-    './js/settings.js',
+    './img/Rondo-icon.ico',
     './img/kick-ball.jpg',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'
 ];
 
-const dynamicCache = 'dynamic-v1';
 
-// const userCache = 'user-v1';
+
 // caches.open(userCache).then(cache => {
 //     cache.put(userId, userId_value);
 //     cache.put(name, name_value);
@@ -31,12 +32,6 @@ const dynamicCache = 'dynamic-v1';
 //     cache.put(weight, weight_value);    
 // });
 
-// const settingsCache = 'settings-v1';
-// caches.open(settingsCache).then(cache => {
-//     cache.put(userId, userId_value);
-//     cache.put(language, language_value);
-//     cache.put(theme, theme_value);
-// });
 
 // cache size limit function
 const limitCacheSize = (name, size) => {
@@ -49,47 +44,68 @@ const limitCacheSize = (name, size) => {
     });
 };
 
-// install event
-self.addEventListener('install', evt => {
-    //console.log('service worker installed');
-    evt.waitUntil(
+
+
+// 'install' event
+self.addEventListener('install', eventParam => {
+    console.log('service worker installed');
+    eventParam.waitUntil(
         caches.open(staticCache).then((cache) => {
-            console.log('caching shell assets');
+            console.log('Caching static assets');
             cache.addAll(staticCacheAssets);
         })
     );
 });
 
-// activate event
-self.addEventListener('activate', evt => {
-    //console.log('service worker activated');
-    evt.waitUntil(
+
+// 'activate' event
+self.addEventListener('activate', eventParam => {
+    console.log('service worker activated');
+    eventParam.waitUntil(
         caches.keys().then(keys => {
             //console.log(keys);
             return Promise.all(keys
-                .filter(key => key !== staticCache && key !== dynamicCache)
+                .filter(key => (key !== staticCache) && (key !== dynamicCache) && (key !== userCache) && (key !== settingsCache))
+                // exclude needed caches from deleting
                 .map(key => caches.delete(key))
             );
         })
     );
 });
 
-// fetch events
-self.addEventListener('fetch', evt => {
-    if (evt.request.url.indexOf('firestore.googleapis.com') === -1) {
-        evt.respondWith(
-            caches.match(evt.request).then(cacheRes => {
-                return cacheRes || fetch(evt.request).then(fetchRes => {
-                    return caches.open(dynamicCache).then(cache => {
-                        cache.put(evt.request.url, fetchRes.clone());
-                        // check cached items size
-                        limitCacheSize(dynamicCache, 30);
-                        return fetchRes;
-                    })
+
+
+// 'fetch' events
+self.addEventListener('fetch', eventParam => {
+    // Exclude firestore apis
+    if ((eventParam.request.url.indexOf('firestore.googleapis.com') === -1) || (eventParam.request.url.indexOf('-extension') === -1)) {
+        eventParam.respondWith(
+            caches.match(eventParam.request).then(cacheRes => {
+                return cacheRes || fetch(eventParam.request).then(fetchRes => {
+
+                    if ((eventParam.request.url.indexOf('places.googleapis.com') > -1) || (eventParam.request.url.indexOf('maps.googleapis.com') > -1)) {
+                        // Cache google maps api requests
+                        return caches.open(googleMapsCache).then(cache => {
+                            cache.put(eventParam.request.url, fetchRes.clone());
+                            // check cached items size
+                            limitCacheSize(googleMapsCache, 5);
+                            return fetchRes;
+                        })
+                    } else {
+                        // Cache all other dynamic assets
+                        return caches.open(dynamicCache).then(cache => {
+                            cache.put(eventParam.request.url, fetchRes.clone());
+                            // check cached items size
+                            limitCacheSize(dynamicCache, 30);
+                            return fetchRes;
+                        })
+                    }
+
+
                 });
             }).catch(() => {
-                if (evt.request.url.indexOf('.html') > -1) {
-                    return caches.match('/pages/fallback.html');
+                if (eventParam.request.url.indexOf('.html') > -1) {
+                    return caches.match('./pages/fallback.html');
                 }
             })
         );
