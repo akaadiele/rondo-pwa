@@ -90,7 +90,6 @@ function initialSettingsData() {
             // console.log("Error getting document:", error);
             getThemes();     // Get list of themes
             getLanguages();     // Get list of languages
-
         });
     } else {
         // doc.data() will be undefined in this case
@@ -124,7 +123,8 @@ function updateSettingsInfo() {
                     height: rondoUserData.height,
                     weight: rondoUserData.weight,
                     theme: theme_value,
-                    language: language_value
+                    language: language_value,
+                    password: rondoUserData.password
                 };
 
                 rondoDb.collection(rondoUserInfoCollection).doc(storedUsername).set(userInfo)
@@ -140,7 +140,7 @@ function updateSettingsInfo() {
             }
         }).catch((error) => {
             // console.log("Error getting document:", error);
-            showSnackbar("Error in updating settings");
+            showSnackbar("Unable to update while offline");
         });
     } else {
         showSnackbar("Football profile setup required");

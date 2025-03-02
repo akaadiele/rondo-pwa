@@ -7,10 +7,16 @@ const staticCacheAssets = [
     './',
     './index.html',
     './pages/home.html',
+    './pages/settings.html',
     './pages/fallback.html',
     './css/rondo-style.css',
     './js/rondo-app.js',
     './js/rondo-ui.js',
+    './js/rondo-db.js',
+    './js/settings.js',
+    './js/json/languages.json',
+    './js/json/positions.json',
+    './js/json/themes.json',
     './img/Rondo-icon.ico',
     './img/kick-ball.jpg',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css',
@@ -37,10 +43,10 @@ const limitCacheSize = (name, size) => {
 
 // 'install' event
 self.addEventListener('install', eventParam => {
-    console.log('service worker installed');
+    // console.log('service worker installed');
     eventParam.waitUntil(
         caches.open(staticCache).then((cache) => {
-            console.log('Caching static assets');
+            // console.log('Caching static assets');
             cache.addAll(staticCacheAssets);
         })
     );
@@ -49,7 +55,7 @@ self.addEventListener('install', eventParam => {
 
 // 'activate' event
 self.addEventListener('activate', eventParam => {
-    console.log('service worker activated');
+    // console.log('service worker activated');
     eventParam.waitUntil(
         caches.keys().then(keys => {
             //console.log(keys);
@@ -67,7 +73,8 @@ self.addEventListener('activate', eventParam => {
 // 'fetch' events
 self.addEventListener('fetch', eventParam => {
     // Exclude firestore apis
-    if ((eventParam.request.url.indexOf('firestore.googleapis.com') === -1) || (eventParam.request.url.indexOf('-extension') === -1)) {
+    // if ((eventParam.request.url.indexOf('firestore.googleapis.com') === -1) || (eventParam.request.url.indexOf('-extension') === -1)) {
+    if ((eventParam.request.url.indexOf('firestore') < 0) || (eventParam.request.url.indexOf('firebase') < 0) || (eventParam.request.url.indexOf('chrome') < 0) || (eventParam.request.url.indexOf('invalid') < 0)) {
         eventParam.respondWith(
             caches.match(eventParam.request).then(cacheRes => {
                 return cacheRes || fetch(eventParam.request).then(fetchRes => {
@@ -93,7 +100,7 @@ self.addEventListener('fetch', eventParam => {
 
                 });
             }).catch(() => {
-                if (eventParam.request.url.indexOf('.html') > -1) { 
+                if (eventParam.request.url.indexOf('.html') > -1) {
                     return caches.match('./pages/fallback.html');
                 }
             })
