@@ -89,47 +89,62 @@
 
         <div class="row align-items-center mx-auto px-3 mt-3 w-100">
             <div class="input-group mb-3">
+                <span class="input-group-text" id="usernameLabel">Username</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="usernameLabel" value="" id="usernameView" disabled>
+            </div>
+
+            <div class="input-group mb-3">
                 <span class="input-group-text" id="profileNameLabel">Name</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                    aria-describedby="profileNameLabel" value="" id="profileName" disabled>
+                    aria-describedby="profileNameLabel" value="" id="profileNameView" disabled>
             </div>
 
             <div class="input-group mb-3">
-                <label class="input-group-text" for="profilePosition">Position</label>
+                <span class="input-group-text" id="profilePositionLabel">Position</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                    aria-describedby="profileNameLabel" value="" id="profilePosition" disabled>
+                    aria-describedby="profilePosition" value="" id="profilePositionView" disabled>
             </div>
 
             <div class="input-group mb-3">
-                <label class="input-group-text" for="profileNationality">Nationality</label>
+                <span class="input-group-text" id="profileNationalityLabel">Nationality</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                    aria-describedby="profileNameLabel" value="" id="profileNationality" disabled>
+                    aria-describedby="profileNationality" value="" id="profileNationalityView" disabled>
             </div>
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="profileAgeLabel">Age</span>
                 <input type="number" class="form-control" aria-label="Sizing example input"
-                    aria-describedby="profileAgeLabel" value="" id="profileAge" disabled>
+                    aria-describedby="profileAgeLabel" value="" id="profileAgeView" disabled>
             </div>
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="profileHeightLabel">Height (cm)</span>
                 <input type="number" class="form-control" aria-label="Sizing example input"
-                    aria-describedby="profileHeightLabel" value="" id="profileHeight" disabled>
+                    aria-describedby="profileHeightLabel" value="" id="profileHeightView" disabled>
             </div>
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="profileWeightLabel">Weight (kg)</span>
                 <input type="number" class="form-control" aria-label="Sizing example input"
-                    aria-describedby="profileWeightLabel" value="" id="profileWeight" disabled>
+                    aria-describedby="profileWeightLabel" value="" id="profileWeightView" disabled>
             </div>
         </div>
 
         <hr class="border border-dark border-2 opacity-30 w-100">
 
-        <div class="row align-items-center mx-3 px-2 mb-3">
-            <a class="btn links border border-dark border-2" href="#" role="button" data-bs-toggle="modal"
-                data-bs-target="#editProfileModal" id="editProfile">Edit Profile</a>
+        <div class="row align-items-center gap-2">
+            <div class="row gap-2 mx-auto">
+                <a class="col btn links border border-dark border-2" href="#" role="button" data-bs-toggle="modal"
+                    data-bs-target="#editProfileModal" id="editProfile">Edit Profile</a>
+
+                <a class="col btn links border border-dark border-2" href="#" role="button" data-bs-toggle="modal"
+                    data-bs-target="#loadProfileModal" id="loadProfile">Load Profile</a>
+            </div>
+            <div class="row mx-auto hide" id="clearDiv">
+                <a class="btn links border border-dark border-2" href="#" role="button" data-bs-toggle="modal"
+                    data-bs-target="#clearProfileModal" id="clearProfile">Clear Profile</a>
+            </div>
         </div>
 
     </main>
@@ -152,7 +167,13 @@
                 </div>
                 <div class="modal-body">
 
-                    <form>
+                    <!-- <form> -->
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="usernameLabel">Username</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input"
+                                aria-describedby="usernameLabel" value="" id="usernameEdit" disabled="true">
+                        </div>
+
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="profileNameEditLabel">Name</span>
                             <input type="text" class="form-control" aria-label="Sizing example input"
@@ -162,14 +183,14 @@
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="positionSelectEdit">Position</label>
                             <select class="form-select" id="positionSelectEdit">
-                                <option value="" id="defaultPosition" selected>...</option>
+                                <option value="" id="defaultPosition"></option>
                             </select>
                         </div>
 
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="nationalitySelectEdit">Nationality</label>
                             <select class="form-select" id="nationalitySelectEdit">
-                                <option value="" id="defaultNationality" selected>...</option>
+                                <option value="" id="defaultNationality"></option>
                             </select>
                         </div>
 
@@ -192,17 +213,67 @@
                                 aria-describedby="profileWeightEditLabel" value="" id="profileWeightEdit" min="10"
                                 max="200">
                         </div>
-                    </form>
+                    <!-- </form> -->
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn lightBg">Save changes</button>
+                    <button type="button" class="btn lightBg" id="createUpdateButton" data-bs-dismiss="modal">Done</button>
                 </div>
             </div>
         </div>
     </div>
 
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="loadProfileModal" tabindex="-1" aria-labelledby="loadProfileModalLabel"
+        aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content text-bg-dark">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 fontColor1" id="loadProfileModalLabel">Load Profile</h1>
+                    <button type="button" class="btn-close lightBg" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <!-- <form> -->
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="usernameLoadLabel">Username</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input"
+                                aria-describedby="usernameLoadLabel" value="" id="usernameLoad">
+                        </div>
+                    <!-- </form> -->
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn lightBg" id="loadProfileButton" data-bs-dismiss="modal">Load Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Firestore / Firebase Setups -->
+    <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-firestore.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyA9NgjaqaDAX8UIKVXTizis46MHdTqaoHo",
+            authDomain: "rondo-pwa.firebaseapp.com",
+            projectId: "rondo-pwa",
+            storageBucket: "rondo-pwa.firebasestorage.app",
+            messagingSenderId: "477745597074",
+            appId: "1:477745597074:web:92c10a4b4612976361744b",
+            measurementId: "G-M235R5L3YR"
+        };
+        firebase.initializeApp(config);
+        const rondoDb = firebase.firestore();
+    </script>
 
 
     <!-- Rondo JS -->

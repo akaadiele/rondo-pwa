@@ -1,10 +1,15 @@
+// Load profile data on page load
+document.addEventListener("DOMContentLoaded", initialSettingsData);
+
+
 // Getting HTML elements
 const themeSelect = document.getElementById("themeSelect");
 const languageSelect = document.getElementById("languageSelect");
 
+// Get username from local storage
+let storedUsername = localStorage.getItem(localStorageRondoUsername);
 
-getThemes();     // Get list of themes
-getLanguages();     // Get list of languages
+
 
 // Trigger function to cache settings from the sw.js
 document.getElementById('updateSettings').addEventListener('click', updateSettingsInfo);
@@ -27,7 +32,7 @@ async function getThemes() {
         })
         .catch(function (error) {
             // console.log('error: ', error);
-            themeSelect.innerHTML += `<option value="">Error loading options</option>`;
+            themeSelect.innerHTML = `<option value="">Error loading options</option>`;
         });
 }
 
@@ -49,15 +54,95 @@ async function getLanguages() {
         })
         .catch(function (error) {
             // console.log('error: ', error);
-            languageSelect.innerHTML += `<option value="">Error loading options</option>`;
+            languageSelect.innerHTML = `<option value="">Error loading options</option>`;
         });
 }
 
 
+
+
+
+function initialSettingsData() {
+    if (storedUsername) {
+        rondoDb.collection(rondoUserInfoCollection).doc(storedUsername).get().then((doc) => {
+            if (doc.exists) {
+                // console.log("Document data:", doc.data());
+                rondoUserData = doc.data();
+
+                themeSelect.innerHTML = `<option value="${rondoUserData.theme}" id="${rondoUserData.theme}">${rondoUserData.theme}</option>`;
+                themeSelect.innerHTML += `<option value="" id="">----------</option>`;
+                getThemes();     // Get list of themes
+                
+                languageSelect.innerHTML = `<option value="${rondoUserData.language}" id="${rondoUserData.language}">${rondoUserData.language}</option>`;
+                languageSelect.innerHTML += `<option value="" id="">----------</option>`;
+                getLanguages();     // Get list of languages
+
+            } else {
+                // doc.data() will be undefined in this case
+                // console.log("No such document!");
+
+                getThemes();     // Get list of themes
+                getLanguages();     // Get list of languages
+
+                showSnackbar("Football profile setup required");
+            }
+        }).catch((error) => {
+            // console.log("Error getting document:", error);
+            getThemes();     // Get list of themes
+            getLanguages();     // Get list of languages
+
+        });
+    } else {
+        // doc.data() will be undefined in this case
+        // console.log("No such document!");
+        getThemes();     // Get list of themes
+        getLanguages();     // Get list of languages
+
+        showSnackbar("Football profile setup required");
+    }
+}
+
+
+
+
 function updateSettingsInfo() {
-    const userId_value = '1';  // update to pick from firebase
     const theme_value = themeSelect.value;
     const language_value = languageSelect.value;
-    // userId_value, theme_value, language_value
 
+    // console.log('storedUsername', storedUsername);
+
+    if (storedUsername) {
+        // New profile
+        rondoDb.collection(rondoUserInfoCollection).doc(storedUsername).get().then((doc) => {
+            if (doc.exists) {
+                let rondoUserData = doc.data();
+                const userInfo = {
+                    name: rondoUserData.name,
+                    position: rondoUserData.position,
+                    nationality: rondoUserData.nationality,
+                    age: rondoUserData.age,
+                    height: rondoUserData.height,
+                    weight: rondoUserData.weight,
+                    theme: theme_value,
+                    language: language_value
+                };
+
+                rondoDb.collection(rondoUserInfoCollection).doc(storedUsername).set(userInfo)
+                    .catch(err => {
+                        // console.log(err);
+                        showSnackbar("Error in updating settings");
+                    });
+
+                showSnackbar("Settings updated");
+                initialSettingsData();
+            } else {
+                showSnackbar("Football profile setup required");
+            }
+        }).catch((error) => {
+            // console.log("Error getting document:", error);
+            showSnackbar("Error in updating settings");
+        });
+    } else {
+        showSnackbar("Football profile setup required");
+    }
 }
