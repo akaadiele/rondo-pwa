@@ -93,7 +93,7 @@ a:hover {
 
 #map {
     height: 30rem;
-    width: 100%;
+    /* width: 100%; */
     /* background-color: var(--color5); */
 }
 
@@ -107,6 +107,15 @@ input[type="radio"]:checked {
     accent-color: var(--color3);
     background-color: var(--color5);
     border-color: var(--color4);
+}
+
+
+.hide {
+    visibility: hidden;
+}
+
+.show {
+    visibility: visible;
 }
 
 

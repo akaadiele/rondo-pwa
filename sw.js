@@ -1,8 +1,6 @@
-const staticCache = 'static-v01';
-const dynamicCache = 'dynamic-v01';
-const userCache = 'userCache-v01';
-const settingsCache = 'settingsCache-v01';
-const googleMapsCache = 'googleMapsCache-v01';
+const staticCache = 'static-v000';
+const dynamicCache = 'dynamic-v000';
+const googleMapsCache = 'googleMapsCache-v000';
 
 
 const staticCacheAssets = [
@@ -22,15 +20,6 @@ const staticCacheAssets = [
 
 
 
-// caches.open(userCache).then(cache => {
-//     cache.put(userId, userId_value);
-//     cache.put(name, name_value);
-//     cache.put(position, position_value);
-//     cache.put(nationality, nationality_value);
-//     cache.put(age, age_value);
-//     cache.put(height, height_value);
-//     cache.put(weight, weight_value);    
-// });
 
 
 // cache size limit function
@@ -65,7 +54,7 @@ self.addEventListener('activate', eventParam => {
         caches.keys().then(keys => {
             //console.log(keys);
             return Promise.all(keys
-                .filter(key => (key !== staticCache) && (key !== dynamicCache) && (key !== userCache) && (key !== settingsCache))
+                .filter(key => (key !== staticCache) && (key !== dynamicCache))
                 // exclude needed caches from deleting
                 .map(key => caches.delete(key))
             );

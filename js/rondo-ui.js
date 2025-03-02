@@ -1,6 +1,7 @@
 // <-- Generic reusable codes, global variables, etc -->
 
 const apiKey = "AIzaSyCbvT_-aAvCZGD1uR70C5CUVHCEh3UK4Yo";
+const localStorageRondoUsername = "rondoUsername";
 
 
 function createNode(element) {
@@ -20,14 +21,14 @@ function showSnackbar(snackbarMessage) {
     const snackbarDiv = createNode('div');
     snackbarDiv.setAttribute('id', 'snackbar');
     snackbarDiv.innerHTML = snackbarMessage;
-    
+
     let bodyElement = document.getElementById("body");
     append(bodyElement, snackbarDiv);
     snackbarDiv.className = "show";
 
     // Add the "show" class to DIV
     snackbarDiv.setAttribute('class', 'show');
-    
+
     // After 3 seconds, remove the show class from DIV
     setTimeout(function () { snackbarDiv.className = snackbarDiv.className.replace("show", ""); }, 3000);
 }
