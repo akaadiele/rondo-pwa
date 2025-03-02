@@ -78,22 +78,6 @@ function getPositions() {
 
 
 
-// // Caching
-// const userCache = 'user-v1';
-// caches.open(userCache).then(cache => {
-//     cache.put(userId, userId_value);
-//     cache.put(name, name_value);
-//     cache.put(position, position_value);
-//     cache.put(nationality, nationality_value);
-//     cache.put(age, age_value);
-//     cache.put(height, height_value);
-//     cache.put(weight, weight_value);    
-// });
-
-
-
-
-
 // Get user data from firebase
 function initialProfilerData() {
     if (storedUsername) {
@@ -174,7 +158,7 @@ function getProfilerData() {
             }).catch((error) => {
                 // console.log("Error getting document:", error);
                 rondoUserData = "";
-                showSnackbar("Rondo User not valid");
+                showSnackbar("Unable to load data while offline");
             });
 
         }
@@ -246,7 +230,7 @@ function createUpdateInfo() {
     }
 
 
-    if ( (userDisabled == false) || (storedUsername == '') ) {
+    if ((userDisabled == false) || (storedUsername == '')) {
         // New profile
         rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).get().then((doc) => {
             if (doc.exists) {
@@ -266,7 +250,7 @@ function createUpdateInfo() {
                 rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).set(userInfo)
                     .catch(err => {
                         // console.log(err);
-                        showSnackbar("Error in updating info");
+                        showSnackbar("Unable to update while offline");
                         document.getElementById("clearDiv").setAttribute('class', 'row mx-auto hide');
                         clearProfileData();
                     });
@@ -279,7 +263,7 @@ function createUpdateInfo() {
             }
         }).catch((error) => {
             // console.log("Error getting document:", error);
-            showSnackbar("Error in updating info");
+            showSnackbar("Unable to update while offline");
         });
     } else {
         rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).get().then((doc) => {
@@ -296,11 +280,11 @@ function createUpdateInfo() {
                     theme: rondoUserData.theme,
                     language: rondoUserData.language
                 };
-                
+
                 rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).set(userInfo)
                     .catch(err => {
                         // console.log(err);
-                        showSnackbar("Error in updating info");
+                        showSnackbar("Unable to update while offline");
                         document.getElementById("clearDiv").setAttribute('class', 'row mx-auto hide');
                         clearProfileData();
                     });
@@ -311,18 +295,12 @@ function createUpdateInfo() {
                 // location.reload();
                 initialProfilerData();
             } else {
-                showSnackbar("Error in updating info");
+                showSnackbar("Unable to update while offline");
             }
         }).catch((error) => {
             // console.log("Error getting document:", error);
-            showSnackbar("Error in updating info");
+            showSnackbar("Unable to update while offline");
         });
     }
-
-    // document.getElementById("profileNameEdit").value = "";
-    // document.getElementById("positionSelectEdit").value = "";
-    // document.getElementById("nationalitySelectEdit").value = "";
-    // document.getElementById("profileAgeEdit").value = "";
-    // document.getElementById("profileHeightEdit").value = "";
-    // document.getElementById("profileWeightEdit").value = "";
 }
+

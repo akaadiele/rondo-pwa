@@ -1,7 +1,7 @@
 const rondoUserInfoCollection = 'rondo-user-info';  // Firestore DB Collection name
 
 
-// enable offline data
+// Enable offline data / persistence
 rondoDb.enablePersistence()
     .catch(function (err) {
         if (err.code == 'failed-precondition') {
