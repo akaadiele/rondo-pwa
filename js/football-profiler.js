@@ -9,11 +9,11 @@ let storedUsername = localStorage.getItem(localStorageRondoUsername);
 document.addEventListener("DOMContentLoaded", initialProfilerData);
 
 // Load profile data on request
-document.getElementById("loadProfileButton").addEventListener('click', getProfilerData);
-document.getElementById('usernameLoad').addEventListener('keydown', (clicked) => {
+document.getElementById("loadProfileButton").addEventListener('click', loadProfilerData);
+document.getElementById('passwordLoad').addEventListener('keydown', (clicked) => {
     // clicked.preventDefault();
     if (clicked.key === 'Enter') {
-        getProfilerData();
+        loadProfilerData();
     }
 })
 
@@ -119,45 +119,59 @@ function initialProfilerData() {
 }
 
 
-function getProfilerData() {
+function loadProfilerData() {
     if (storedUsername) {
-        showSnackbar("An existing User already loaded");
+        showSnackbar("An existing profile already loaded");
     } else {
         let username = document.getElementById("usernameLoad").value;
+        let passwordInput = document.getElementById("passwordLoad").value;
 
         if (username) {
-            document.getElementById("usernameView").value = username;
-
-
             rondoDb.collection(rondoUserInfoCollection).doc(username).get().then((doc) => {
                 if (doc.exists) {
                     // console.log("Document data:", doc.data());
                     let rondoUserData = doc.data();
 
-                    document.getElementById("usernameView").value = username;
-                    document.getElementById("profileNameView").value = rondoUserData.name;
-                    document.getElementById("profilePositionView").value = rondoUserData.position;
-                    document.getElementById("profileNationalityView").value = rondoUserData.nationality;
-                    document.getElementById("profileAgeView").value = rondoUserData.age;
-                    document.getElementById("profileHeightView").value = rondoUserData.height;
-                    document.getElementById("profileWeightView").value = rondoUserData.weight;
-                    // document.getElementById("themeSelect").value = rondoUserData.theme;
-                    // document.getElementById("languageSelect").value = rondoUserData.language;
+                    if (rondoUserData.password == passwordInput) {
+                        document.getElementById("usernameView").value = username;
+                        document.getElementById("profileNameView").value = rondoUserData.name;
+                        document.getElementById("profilePositionView").value = rondoUserData.position;
+                        document.getElementById("profileNationalityView").value = rondoUserData.nationality;
+                        document.getElementById("profileAgeView").value = rondoUserData.age;
+                        document.getElementById("profileHeightView").value = rondoUserData.height;
+                        document.getElementById("profileWeightView").value = rondoUserData.weight;
+                        // document.getElementById("themeSelect").value = rondoUserData.theme;
+                        // document.getElementById("languageSelect").value = rondoUserData.language;
 
-                    localStorage.setItem(localStorageRondoUsername, username);  // Set username on local storage
+                        localStorage.setItem(localStorageRondoUsername, username);  // Set username on local storage
 
-                    document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
-                    location.reload();
+                        document.getElementById("usernameLoad").value = "";
+                        document.getElementById("passwordLoad").value = "";
+
+                        document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
+                        // location.reload();
+                    } else {
+                        // doc.data() will be undefined in this case
+                        // console.log("No such document!");
+                        rondoUserData = "";
+                        document.getElementById("usernameLoad").value = "";
+                        document.getElementById("passwordLoad").value = "";
+                        showSnackbar("Incorrect profile password");
+                    }
 
                 } else {
                     // doc.data() will be undefined in this case
                     // console.log("No such document!");
                     rondoUserData = "";
+                    document.getElementById("usernameLoad").value = "";
+                    document.getElementById("passwordLoad").value = "";
                     showSnackbar("Rondo User not valid");
                 }
             }).catch((error) => {
                 // console.log("Error getting document:", error);
                 rondoUserData = "";
+                document.getElementById("usernameLoad").value = "";
+                document.getElementById("passwordLoad").value = "";
                 showSnackbar("Unable to load data while offline");
             });
 
@@ -189,6 +203,7 @@ function loadProfileDataForEdit() {
     } else {
         // New profile
         document.getElementById("usernameEdit").disabled = false;
+        // document.getElementById("passwordEdit").disabled = false;
     }
 
     // Get list of countries / nationality
@@ -196,7 +211,6 @@ function loadProfileDataForEdit() {
 
     // Get list of positions
     getPositions();
-
 }
 
 
@@ -245,6 +259,7 @@ function createUpdateInfo() {
                     age: document.getElementById("profileAgeEdit").value,
                     height: document.getElementById("profileHeightEdit").value,
                     weight: document.getElementById("profileWeightEdit").value,
+                    password: document.getElementById("passwordEdit").value,
                 };
 
                 rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).set(userInfo)
@@ -258,42 +273,55 @@ function createUpdateInfo() {
                 localStorage.setItem(localStorageRondoUsername, createUpdateUsername);  // Set username on local storage
                 document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
                 showSnackbar("Done...");
-                // location.reload();
                 initialProfilerData();
+                document.getElementById("passwordEdit").value = "";
             }
         }).catch((error) => {
             // console.log("Error getting document:", error);
             showSnackbar("Unable to update while offline");
         });
     } else {
+        // Existing profile
         rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).get().then((doc) => {
             if (doc.exists) {
                 let rondoUserData = doc.data();
 
-                const userInfo = {
-                    name: document.getElementById("profileNameEdit").value,
-                    position: newPosition,
-                    nationality: newNationality,
-                    age: document.getElementById("profileAgeEdit").value,
-                    height: document.getElementById("profileHeightEdit").value,
-                    weight: document.getElementById("profileWeightEdit").value,
-                    theme: rondoUserData.theme,
-                    language: rondoUserData.language
-                };
+                let passwordInput = document.getElementById("passwordEdit").value;
 
-                rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).set(userInfo)
-                    .catch(err => {
-                        // console.log(err);
-                        showSnackbar("Unable to update while offline");
-                        document.getElementById("clearDiv").setAttribute('class', 'row mx-auto hide');
-                        clearProfileData();
-                    });
+                if (rondoUserData.password == passwordInput) {
 
-                localStorage.setItem(localStorageRondoUsername, createUpdateUsername);  // Set username on local storage
-                document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
-                showSnackbar("Done...");
-                // location.reload();
-                initialProfilerData();
+                    const userInfo = {
+                        name: document.getElementById("profileNameEdit").value,
+                        position: newPosition,
+                        nationality: newNationality,
+                        age: document.getElementById("profileAgeEdit").value,
+                        height: document.getElementById("profileHeightEdit").value,
+                        weight: document.getElementById("profileWeightEdit").value,
+                        theme: rondoUserData.theme,
+                        language: rondoUserData.language,
+                        password: rondoUserData.password
+                    };
+
+                    rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).set(userInfo)
+                        .catch(err => {
+                            // console.log(err);
+                            showSnackbar("Unable to update while offline");
+                            document.getElementById("clearDiv").setAttribute('class', 'row mx-auto hide');
+                            clearProfileData();
+                        });
+
+                    localStorage.setItem(localStorageRondoUsername, createUpdateUsername);  // Set username on local storage
+                    document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
+                    showSnackbar("Done...");
+                    initialProfilerData();
+                    document.getElementById("passwordEdit").value = "";
+                } else {
+                    // doc.data() will be undefined in this case
+                    // console.log("No such document!");
+                    rondoUserData = "";
+                    document.getElementById("passwordEdit").value = "";
+                    showSnackbar("Incorrect password");
+                }
             } else {
                 showSnackbar("Unable to update while offline");
             }
