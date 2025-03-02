@@ -1,6 +1,6 @@
-const staticCache = 'static-v000';
-const dynamicCache = 'dynamic-v000';
-const googleMapsCache = 'googleMapsCache-v000';
+const staticCache = 'static-v00';
+const dynamicCache = 'dynamic-v00';
+const googleMapsCache = 'googleMapsCache-v00';
 
 
 const staticCacheAssets = [
@@ -93,7 +93,7 @@ self.addEventListener('fetch', eventParam => {
 
                 });
             }).catch(() => {
-                if (eventParam.request.url.indexOf('.html') > -1) {
+                if (eventParam.request.url.indexOf('.html') > -1) { 
                     return caches.match('./pages/fallback.html');
                 }
             })
