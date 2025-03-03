@@ -7,7 +7,6 @@ const searchResultsList = document.getElementById('pitchSearchResults');
 
 // HTML radio buttons for search radius
 const radioButtons = document.querySelectorAll('input[name="radiusOptions"]');
-radioButtons
 
 // Conversion value 
 const mileToMeterConv = 1609.34;
@@ -172,10 +171,8 @@ function googleNearbySearch(latitude, longitude, location) {
 
 
     // Using API library
-    let map;
-    let service;
-    let searchLocation;
-
+    let map, searchLocation, request, service;
+    
     if (location == "") {
         searchLocation = new google.maps.LatLng(latitude, longitude);
     } else {
@@ -187,7 +184,7 @@ function googleNearbySearch(latitude, longitude, location) {
         zoom: 15
     });
 
-    let request = {
+    request = {
         location: searchLocation,
         radius: searchRadius,
         keyword: apiKeyword

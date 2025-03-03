@@ -132,8 +132,8 @@ function updateSettingsInfo() {
                     });
 
                 showSnackbar("Settings updated");
-                // initialSettingsData();
-                location.reload();
+                initialSettingsData();
+                // location.reload();
             } else {
                 showSnackbar("Football profile setup required");
             }
