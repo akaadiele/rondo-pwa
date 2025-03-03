@@ -89,9 +89,9 @@
 
         <div class="row align-items-center mx-auto px-3 mt-3 w-100">
             <div class="input-group mb-3">
-                <span class="input-group-text" id="usernameLabel">Username</span>
+                <span class="input-group-text" id="usernameLabelView">Username</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                    aria-describedby="usernameLabel" value="" id="usernameView" disabled>
+                    aria-describedby="usernameLabelView" value="" id="usernameView" disabled>
             </div>
 
             <div class="input-group mb-3">
@@ -103,13 +103,13 @@
             <div class="input-group mb-3">
                 <span class="input-group-text" id="profilePositionLabel">Position</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                    aria-describedby="profilePosition" value="" id="profilePositionView" disabled>
+                    aria-describedby="profilePositionLabel" value="" id="profilePositionView" disabled>
             </div>
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="profileNationalityLabel">Nationality</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                    aria-describedby="profileNationality" value="" id="profileNationalityView" disabled>
+                    aria-describedby="profileNationalityLabel" value="" id="profileNationalityView" disabled>
             </div>
 
             <div class="input-group mb-3">
@@ -167,9 +167,9 @@
                 </div>
                 <div class="modal-body">
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="usernameLabel">Username*</span>
+                            <span class="input-group-text" id="usernameLabelEdit">Username*</span>
                             <input type="text" class="form-control" aria-label="Sizing example input"
-                                aria-describedby="usernameLabel" value="" id="usernameEdit" disabled="true" required>
+                                aria-describedby="usernameLabel" value="" id="usernameEdit" disabled required>
                         </div>
 
                         <div class="input-group mb-3">
@@ -181,14 +181,14 @@
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="positionSelectEdit">Position</label>
                             <select class="form-select" id="positionSelectEdit">
-                                <option value="" id="defaultPosition"></option>
+                                <!-- <option value="" id="defaultPosition"></option> -->
                             </select>
                         </div>
 
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="nationalitySelectEdit">Nationality</label>
                             <select class="form-select" id="nationalitySelectEdit">
-                                <option value="" id="defaultNationality"></option>
+                                <!-- <option value="" id="defaultNationality"></option> -->
                             </select>
                         </div>
 
@@ -211,7 +211,6 @@
                                 aria-describedby="profileWeightEditLabel" value="" id="profileWeightEdit" min="10"
                                 max="200">
                         </div>
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <div class="input-group mb-3">

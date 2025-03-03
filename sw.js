@@ -72,8 +72,8 @@ self.addEventListener('activate', eventParam => {
 
 // 'fetch' events
 self.addEventListener('fetch', eventParam => {
-    // Exclude firestore APIs
-    if ( (eventParam.request.url.indexOf('firestore') < 0) || (eventParam.request.url.indexOf('firebase') < 0) ) {
+    // Exclude firestore and google APIs
+    if ((eventParam.request.url.indexOf('firestore.googleapis.com') === -1) || (eventParam.request.url.indexOf('firestore') === -1) || (eventParam.request.url.indexOf('firebase') === -1) || (eventParam.request.url.indexOf('extension') === -1) || (eventParam.request.url.indexOf('google') === -1)) {
         eventParam.respondWith(
             caches.match(eventParam.request).then(cacheRes => {
                 return cacheRes || fetch(eventParam.request).then(fetchRes => {

@@ -268,7 +268,7 @@ function createUpdateInfo() {
                 rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).set(userInfo)
                     .catch(err => {
                         // console.log(err);
-                        showSnackbar("Error updating profile");
+                        showSnackbar("Error updating profile..");
                         document.getElementById("clearDiv").setAttribute('class', 'row mx-auto hide');
                         clearProfileData();
                     });
@@ -276,13 +276,13 @@ function createUpdateInfo() {
                 localStorage.setItem(localStorageRondoUsername, createUpdateUsername);  // Set username on local storage
                 document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
                 showSnackbar("Done...");
-                // initialProfilerData();
-                location.reload();
+                initialProfilerData();
+                // location.reload();
                 document.getElementById("passwordEdit").value = "";
             }
         }).catch((error) => {
             // console.log("Error getting document:", error);
-            showSnackbar("Error updating profile");
+            showSnackbar("Error updating profile.");
         });
     } else {
         // Existing profile
@@ -320,7 +320,7 @@ function createUpdateInfo() {
                     rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).set(userInfo)
                         .catch(err => {
                             // console.log(err);
-                            showSnackbar("Error updating profile");
+                            showSnackbar("Error updating profile...");
                             document.getElementById("clearDiv").setAttribute('class', 'row mx-auto hide');
                             clearProfileData();
                         });
@@ -328,8 +328,9 @@ function createUpdateInfo() {
                     localStorage.setItem(localStorageRondoUsername, createUpdateUsername);  // Set username on local storage
                     document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
                     showSnackbar("Done...");
-                    // initialProfilerData();
-                    location.reload();
+
+                    initialProfilerData();
+                    // location.reload();
                     document.getElementById("passwordEdit").value = "";
                 } else {
                     // doc.data() will be undefined in this case
@@ -339,11 +340,11 @@ function createUpdateInfo() {
                     showSnackbar("Incorrect password");
                 }
             } else {
-                showSnackbar("Error updating profile");
+                showSnackbar("Error updating profile..");
             }
         }).catch((error) => {
             // console.log("Error getting document:", error);
-            showSnackbar("Error updating profile");
+            showSnackbar("Error updating profile.");
         });
     }
 }
