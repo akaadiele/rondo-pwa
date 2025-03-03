@@ -1,6 +1,5 @@
 const staticCache = 'static-v00';
 const dynamicCache = 'dynamic-v00';
-const googleMapsCache = 'googleMapsCache-v00';
 
 
 const staticCacheAssets = [
@@ -14,6 +13,7 @@ const staticCacheAssets = [
     './js/rondo-ui.js',
     './js/rondo-db.js',
     './js/settings.js',
+    './js/json/countries.json',
     './js/json/languages.json',
     './js/json/positions.json',
     './js/json/themes.json',
@@ -72,32 +72,18 @@ self.addEventListener('activate', eventParam => {
 
 // 'fetch' events
 self.addEventListener('fetch', eventParam => {
-    // Exclude firestore apis
-    // if ((eventParam.request.url.indexOf('firestore.googleapis.com') === -1) || (eventParam.request.url.indexOf('-extension') === -1)) {
-    if ((eventParam.request.url.indexOf('firestore') < 0) || (eventParam.request.url.indexOf('firebase') < 0) || (eventParam.request.url.indexOf('chrome') < 0) || (eventParam.request.url.indexOf('invalid') < 0)) {
+    // Exclude firestore APIs
+    if ( (eventParam.request.url.indexOf('firestore') < 0) || (eventParam.request.url.indexOf('firebase') < 0) ) {
         eventParam.respondWith(
             caches.match(eventParam.request).then(cacheRes => {
                 return cacheRes || fetch(eventParam.request).then(fetchRes => {
-
-                    if ((eventParam.request.url.indexOf('places.googleapis.com') > -1) || (eventParam.request.url.indexOf('maps.googleapis.com') > -1)) {
-                        // Cache google maps api requests
-                        return caches.open(googleMapsCache).then(cache => {
-                            cache.put(eventParam.request.url, fetchRes.clone());
-                            // check cached items size
-                            limitCacheSize(googleMapsCache, 5);
-                            return fetchRes;
-                        })
-                    } else {
-                        // Cache all other dynamic assets
-                        return caches.open(dynamicCache).then(cache => {
-                            cache.put(eventParam.request.url, fetchRes.clone());
-                            // check cached items size
-                            limitCacheSize(dynamicCache, 20);
-                            return fetchRes;
-                        })
-                    }
-
-
+                    // Cache all other dynamic assets
+                    return caches.open(dynamicCache).then(cache => {
+                        cache.put(eventParam.request.url, fetchRes.clone());
+                        // check cached items size
+                        limitCacheSize(dynamicCache, 20);
+                        return fetchRes;
+                    })
                 });
             }).catch(() => {
                 if (eventParam.request.url.indexOf('.html') > -1) {

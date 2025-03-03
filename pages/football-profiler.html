@@ -166,20 +166,11 @@
                     <button type="button" class="btn-close lightBg" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
-                    <!-- <form> -->
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="usernameLabel">Username</span>
+                            <span class="input-group-text" id="usernameLabel">Username*</span>
                             <input type="text" class="form-control" aria-label="Sizing example input"
-                                aria-describedby="usernameLabel" value="" id="usernameEdit" disabled="true">
+                                aria-describedby="usernameLabel" value="" id="usernameEdit" disabled="true" required>
                         </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="passwordLabel">Password</span>
-                            <input type="password" class="form-control" aria-label="Sizing example input"
-                                aria-describedby="passwordLabel" value="" id="passwordEdit">
-                        </div>
-
 
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="profileNameEditLabel">Name</span>
@@ -220,12 +211,18 @@
                                 aria-describedby="profileWeightEditLabel" value="" id="profileWeightEdit" min="10"
                                 max="200">
                         </div>
-                    <!-- </form> -->
-
+                    </form>
                 </div>
                 <div class="modal-footer">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="passwordLabel">Enter Password*</span>
+                        <input type="password" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="passwordLabel" value="" id="passwordEdit" required>
+                    </div>
+
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn lightBg" id="createUpdateButton" data-bs-dismiss="modal">Done</button>
+                    <button type="button" class="btn lightBg" id="createUpdateButton"
+                        data-bs-dismiss="modal">Done</button>
                 </div>
             </div>
         </div>
@@ -245,23 +242,24 @@
                 <div class="modal-body">
 
                     <!-- <form> -->
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="usernameLoadLabel">Username</span>
-                            <input type="text" class="form-control" aria-label="Sizing example input"
-                                aria-describedby="usernameLoadLabel" value="" id="usernameLoad">
-                        </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="usernameLoadLabel">Username</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="usernameLoadLabel" value="" id="usernameLoad">
+                    </div>
 
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="passwordLoadLabel">Password</span>
-                            <input type="password" class="form-control" aria-label="Sizing example input"
-                                aria-describedby="passwordLoadLabel" value="" id="passwordLoad">
-                        </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="passwordLoadLabel">Password</span>
+                        <input type="password" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="passwordLoadLabel" value="" id="passwordLoad">
+                    </div>
                     <!-- </form> -->
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn lightBg" id="loadProfileButton" data-bs-dismiss="modal">Load Profile</button>
+                    <button type="button" class="btn lightBg" id="loadProfileButton" data-bs-dismiss="modal">Load
+                        Profile</button>
                 </div>
             </div>
         </div>

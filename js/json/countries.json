@@ -1,0 +1,1502 @@
+[
+    {
+        "name": "Afghanistan",
+        "alpha2Code": "AF",
+        "demonym": "Afghan",
+        "independent": false
+    },
+    {
+        "name": "Åland Islands",
+        "alpha2Code": "AX",
+        "demonym": "Ålandish",
+        "independent": false
+    },
+    {
+        "name": "Albania",
+        "alpha2Code": "AL",
+        "demonym": "Albanian",
+        "independent": false
+    },
+    {
+        "name": "Algeria",
+        "alpha2Code": "DZ",
+        "demonym": "Algerian",
+        "independent": false
+    },
+    {
+        "name": "American Samoa",
+        "alpha2Code": "AS",
+        "demonym": "American Samoan",
+        "independent": false
+    },
+    {
+        "name": "Andorra",
+        "alpha2Code": "AD",
+        "demonym": "Andorran",
+        "independent": false
+    },
+    {
+        "name": "Angola",
+        "alpha2Code": "AO",
+        "demonym": "Angolan",
+        "independent": false
+    },
+    {
+        "name": "Anguilla",
+        "alpha2Code": "AI",
+        "demonym": "Anguillian",
+        "independent": false
+    },
+    {
+        "name": "Antarctica",
+        "alpha2Code": "AQ",
+        "demonym": "Antarctic",
+        "independent": false
+    },
+    {
+        "name": "Antigua and Barbuda",
+        "alpha2Code": "AG",
+        "demonym": "Antiguan, Barbudan",
+        "independent": false
+    },
+    {
+        "name": "Argentina",
+        "alpha2Code": "AR",
+        "demonym": "Argentinean",
+        "independent": false
+    },
+    {
+        "name": "Armenia",
+        "alpha2Code": "AM",
+        "demonym": "Armenian",
+        "independent": false
+    },
+    {
+        "name": "Aruba",
+        "alpha2Code": "AW",
+        "demonym": "Aruban",
+        "independent": false
+    },
+    {
+        "name": "Australia",
+        "alpha2Code": "AU",
+        "demonym": "Australian",
+        "independent": false
+    },
+    {
+        "name": "Austria",
+        "alpha2Code": "AT",
+        "demonym": "Austrian",
+        "independent": false
+    },
+    {
+        "name": "Azerbaijan",
+        "alpha2Code": "AZ",
+        "demonym": "Azerbaijani",
+        "independent": false
+    },
+    {
+        "name": "Bahamas",
+        "alpha2Code": "BS",
+        "demonym": "Bahamian",
+        "independent": false
+    },
+    {
+        "name": "Bahrain",
+        "alpha2Code": "BH",
+        "demonym": "Bahraini",
+        "independent": false
+    },
+    {
+        "name": "Bangladesh",
+        "alpha2Code": "BD",
+        "demonym": "Bangladeshi",
+        "independent": false
+    },
+    {
+        "name": "Barbados",
+        "alpha2Code": "BB",
+        "demonym": "Barbadian",
+        "independent": false
+    },
+    {
+        "name": "Belarus",
+        "alpha2Code": "BY",
+        "demonym": "Belarusian",
+        "independent": false
+    },
+    {
+        "name": "Belgium",
+        "alpha2Code": "BE",
+        "demonym": "Belgian",
+        "independent": false
+    },
+    {
+        "name": "Belize",
+        "alpha2Code": "BZ",
+        "demonym": "Belizean",
+        "independent": false
+    },
+    {
+        "name": "Benin",
+        "alpha2Code": "BJ",
+        "demonym": "Beninese",
+        "independent": false
+    },
+    {
+        "name": "Bermuda",
+        "alpha2Code": "BM",
+        "demonym": "Bermudian",
+        "independent": false
+    },
+    {
+        "name": "Bhutan",
+        "alpha2Code": "BT",
+        "demonym": "Bhutanese",
+        "independent": false
+    },
+    {
+        "name": "Bolivia (Plurinational State of)",
+        "alpha2Code": "BO",
+        "demonym": "Bolivian",
+        "independent": false
+    },
+    {
+        "name": "Bonaire, Sint Eustatius and Saba",
+        "alpha2Code": "BQ",
+        "demonym": "Dutch",
+        "independent": false
+    },
+    {
+        "name": "Bosnia and Herzegovina",
+        "alpha2Code": "BA",
+        "demonym": "Bosnian, Herzegovinian",
+        "independent": false
+    },
+    {
+        "name": "Botswana",
+        "alpha2Code": "BW",
+        "demonym": "Motswana",
+        "independent": false
+    },
+    {
+        "name": "Bouvet Island",
+        "alpha2Code": "BV",
+        "demonym": "Norwegian",
+        "independent": false
+    },
+    {
+        "name": "Brazil",
+        "alpha2Code": "BR",
+        "demonym": "Brazilian",
+        "independent": false
+    },
+    {
+        "name": "British Indian Ocean Territory",
+        "alpha2Code": "IO",
+        "demonym": "Indian",
+        "independent": false
+    },
+    {
+        "name": "United States Minor Outlying Islands",
+        "alpha2Code": "UM",
+        "demonym": "American",
+        "independent": false
+    },
+    {
+        "name": "Virgin Islands (British)",
+        "alpha2Code": "VG",
+        "demonym": "Virgin Islander",
+        "independent": false
+    },
+    {
+        "name": "Virgin Islands (U.S.)",
+        "alpha2Code": "VI",
+        "demonym": "Virgin Islander",
+        "independent": false
+    },
+    {
+        "name": "Brunei Darussalam",
+        "alpha2Code": "BN",
+        "demonym": "Bruneian",
+        "independent": false
+    },
+    {
+        "name": "Bulgaria",
+        "alpha2Code": "BG",
+        "demonym": "Bulgarian",
+        "independent": false
+    },
+    {
+        "name": "Burkina Faso",
+        "alpha2Code": "BF",
+        "demonym": "Burkinabe",
+        "independent": false
+    },
+    {
+        "name": "Burundi",
+        "alpha2Code": "BI",
+        "demonym": "Burundian",
+        "independent": false
+    },
+    {
+        "name": "Cambodia",
+        "alpha2Code": "KH",
+        "demonym": "Cambodian",
+        "independent": false
+    },
+    {
+        "name": "Cameroon",
+        "alpha2Code": "CM",
+        "demonym": "Cameroonian",
+        "independent": false
+    },
+    {
+        "name": "Canada",
+        "alpha2Code": "CA",
+        "demonym": "Canadian",
+        "independent": false
+    },
+    {
+        "name": "Cabo Verde",
+        "alpha2Code": "CV",
+        "demonym": "Cape Verdian",
+        "independent": false
+    },
+    {
+        "name": "Cayman Islands",
+        "alpha2Code": "KY",
+        "demonym": "Caymanian",
+        "independent": false
+    },
+    {
+        "name": "Central African Republic",
+        "alpha2Code": "CF",
+        "demonym": "Central African",
+        "independent": false
+    },
+    {
+        "name": "Chad",
+        "alpha2Code": "TD",
+        "demonym": "Chadian",
+        "independent": false
+    },
+    {
+        "name": "Chile",
+        "alpha2Code": "CL",
+        "demonym": "Chilean",
+        "independent": false
+    },
+    {
+        "name": "China",
+        "alpha2Code": "CN",
+        "demonym": "Chinese",
+        "independent": false
+    },
+    {
+        "name": "Christmas Island",
+        "alpha2Code": "CX",
+        "demonym": "Christmas Island",
+        "independent": false
+    },
+    {
+        "name": "Cocos (Keeling) Islands",
+        "alpha2Code": "CC",
+        "demonym": "Cocos Islander",
+        "independent": false
+    },
+    {
+        "name": "Colombia",
+        "alpha2Code": "CO",
+        "demonym": "Colombian",
+        "independent": false
+    },
+    {
+        "name": "Comoros",
+        "alpha2Code": "KM",
+        "demonym": "Comoran",
+        "independent": false
+    },
+    {
+        "name": "Congo",
+        "alpha2Code": "CG",
+        "demonym": "Congolese",
+        "independent": false
+    },
+    {
+        "name": "Congo (Democratic Republic of the)",
+        "alpha2Code": "CD",
+        "demonym": "Congolese",
+        "independent": false
+    },
+    {
+        "name": "Cook Islands",
+        "alpha2Code": "CK",
+        "demonym": "Cook Islander",
+        "independent": false
+    },
+    {
+        "name": "Costa Rica",
+        "alpha2Code": "CR",
+        "demonym": "Costa Rican",
+        "independent": false
+    },
+    {
+        "name": "Croatia",
+        "alpha2Code": "HR",
+        "demonym": "Croatian",
+        "independent": false
+    },
+    {
+        "name": "Cuba",
+        "alpha2Code": "CU",
+        "demonym": "Cuban",
+        "independent": false
+    },
+    {
+        "name": "Curaçao",
+        "alpha2Code": "CW",
+        "demonym": "Dutch",
+        "independent": false
+    },
+    {
+        "name": "Cyprus",
+        "alpha2Code": "CY",
+        "demonym": "Cypriot",
+        "independent": false
+    },
+    {
+        "name": "Czech Republic",
+        "alpha2Code": "CZ",
+        "demonym": "Czech",
+        "independent": false
+    },
+    {
+        "name": "Denmark",
+        "alpha2Code": "DK",
+        "demonym": "Danish",
+        "independent": false
+    },
+    {
+        "name": "Djibouti",
+        "alpha2Code": "DJ",
+        "demonym": "Djibouti",
+        "independent": false
+    },
+    {
+        "name": "Dominica",
+        "alpha2Code": "DM",
+        "demonym": "Dominican",
+        "independent": false
+    },
+    {
+        "name": "Dominican Republic",
+        "alpha2Code": "DO",
+        "demonym": "Dominican",
+        "independent": false
+    },
+    {
+        "name": "Ecuador",
+        "alpha2Code": "EC",
+        "demonym": "Ecuadorean",
+        "independent": false
+    },
+    {
+        "name": "Egypt",
+        "alpha2Code": "EG",
+        "demonym": "Egyptian",
+        "independent": false
+    },
+    {
+        "name": "El Salvador",
+        "alpha2Code": "SV",
+        "demonym": "Salvadoran",
+        "independent": false
+    },
+    {
+        "name": "Equatorial Guinea",
+        "alpha2Code": "GQ",
+        "demonym": "Equatorial Guinean",
+        "independent": false
+    },
+    {
+        "name": "Eritrea",
+        "alpha2Code": "ER",
+        "demonym": "Eritrean",
+        "independent": false
+    },
+    {
+        "name": "Estonia",
+        "alpha2Code": "EE",
+        "demonym": "Estonian",
+        "independent": false
+    },
+    {
+        "name": "Ethiopia",
+        "alpha2Code": "ET",
+        "demonym": "Ethiopian",
+        "independent": false
+    },
+    {
+        "name": "Falkland Islands (Malvinas)",
+        "alpha2Code": "FK",
+        "demonym": "Falkland Islander",
+        "independent": false
+    },
+    {
+        "name": "Faroe Islands",
+        "alpha2Code": "FO",
+        "demonym": "Faroese",
+        "independent": false
+    },
+    {
+        "name": "Fiji",
+        "alpha2Code": "FJ",
+        "demonym": "Fijian",
+        "independent": false
+    },
+    {
+        "name": "Finland",
+        "alpha2Code": "FI",
+        "demonym": "Finnish",
+        "independent": false
+    },
+    {
+        "name": "France",
+        "alpha2Code": "FR",
+        "demonym": "French",
+        "independent": false
+    },
+    {
+        "name": "French Guiana",
+        "alpha2Code": "GF",
+        "demonym": "French Guianan",
+        "independent": false
+    },
+    {
+        "name": "French Polynesia",
+        "alpha2Code": "PF",
+        "demonym": "French Polynesian",
+        "independent": false
+    },
+    {
+        "name": "French Southern Territories",
+        "alpha2Code": "TF",
+        "demonym": "French",
+        "independent": false
+    },
+    {
+        "name": "Gabon",
+        "alpha2Code": "GA",
+        "demonym": "Gabonese",
+        "independent": false
+    },
+    {
+        "name": "Gambia",
+        "alpha2Code": "GM",
+        "demonym": "Gambian",
+        "independent": false
+    },
+    {
+        "name": "Georgia",
+        "alpha2Code": "GE",
+        "demonym": "Georgian",
+        "independent": false
+    },
+    {
+        "name": "Germany",
+        "alpha2Code": "DE",
+        "demonym": "German",
+        "independent": false
+    },
+    {
+        "name": "Ghana",
+        "alpha2Code": "GH",
+        "demonym": "Ghanaian",
+        "independent": false
+    },
+    {
+        "name": "Gibraltar",
+        "alpha2Code": "GI",
+        "demonym": "Gibraltar",
+        "independent": false
+    },
+    {
+        "name": "Greece",
+        "alpha2Code": "GR",
+        "demonym": "Greek",
+        "independent": false
+    },
+    {
+        "name": "Greenland",
+        "alpha2Code": "GL",
+        "demonym": "Greenlandic",
+        "independent": false
+    },
+    {
+        "name": "Grenada",
+        "alpha2Code": "GD",
+        "demonym": "Grenadian",
+        "independent": false
+    },
+    {
+        "name": "Guadeloupe",
+        "alpha2Code": "GP",
+        "demonym": "Guadeloupian",
+        "independent": false
+    },
+    {
+        "name": "Guam",
+        "alpha2Code": "GU",
+        "demonym": "Guamanian",
+        "independent": false
+    },
+    {
+        "name": "Guatemala",
+        "alpha2Code": "GT",
+        "demonym": "Guatemalan",
+        "independent": false
+    },
+    {
+        "name": "Guernsey",
+        "alpha2Code": "GG",
+        "demonym": "Channel Islander",
+        "independent": false
+    },
+    {
+        "name": "Guinea",
+        "alpha2Code": "GN",
+        "demonym": "Guinean",
+        "independent": false
+    },
+    {
+        "name": "Guinea-Bissau",
+        "alpha2Code": "GW",
+        "demonym": "Guinea-Bissauan",
+        "independent": false
+    },
+    {
+        "name": "Guyana",
+        "alpha2Code": "GY",
+        "demonym": "Guyanese",
+        "independent": false
+    },
+    {
+        "name": "Haiti",
+        "alpha2Code": "HT",
+        "demonym": "Haitian",
+        "independent": false
+    },
+    {
+        "name": "Heard Island and McDonald Islands",
+        "alpha2Code": "HM",
+        "demonym": "Heard and McDonald Islander",
+        "independent": false
+    },
+    {
+        "name": "Vatican City",
+        "alpha2Code": "VA",
+        "demonym": "Vatican",
+        "independent": false
+    },
+    {
+        "name": "Honduras",
+        "alpha2Code": "HN",
+        "demonym": "Honduran",
+        "independent": false
+    },
+    {
+        "name": "Hungary",
+        "alpha2Code": "HU",
+        "demonym": "Hungarian",
+        "independent": false
+    },
+    {
+        "name": "Hong Kong",
+        "alpha2Code": "HK",
+        "demonym": "Chinese",
+        "independent": false
+    },
+    {
+        "name": "Iceland",
+        "alpha2Code": "IS",
+        "demonym": "Icelander",
+        "independent": false
+    },
+    {
+        "name": "India",
+        "alpha2Code": "IN",
+        "demonym": "Indian",
+        "independent": false
+    },
+    {
+        "name": "Indonesia",
+        "alpha2Code": "ID",
+        "demonym": "Indonesian",
+        "independent": false
+    },
+    {
+        "name": "Ivory Coast",
+        "alpha2Code": "CI",
+        "demonym": "Ivorian",
+        "independent": false
+    },
+    {
+        "name": "Iran (Islamic Republic of)",
+        "alpha2Code": "IR",
+        "demonym": "Iranian",
+        "independent": false
+    },
+    {
+        "name": "Iraq",
+        "alpha2Code": "IQ",
+        "demonym": "Iraqi",
+        "independent": false
+    },
+    {
+        "name": "Ireland",
+        "alpha2Code": "IE",
+        "demonym": "Irish",
+        "independent": false
+    },
+    {
+        "name": "Isle of Man",
+        "alpha2Code": "IM",
+        "demonym": "Manx",
+        "independent": false
+    },
+    {
+        "name": "Israel",
+        "alpha2Code": "IL",
+        "demonym": "Israeli",
+        "independent": false
+    },
+    {
+        "name": "Italy",
+        "alpha2Code": "IT",
+        "demonym": "Italian",
+        "independent": false
+    },
+    {
+        "name": "Jamaica",
+        "alpha2Code": "JM",
+        "demonym": "Jamaican",
+        "independent": false
+    },
+    {
+        "name": "Japan",
+        "alpha2Code": "JP",
+        "demonym": "Japanese",
+        "independent": false
+    },
+    {
+        "name": "Jersey",
+        "alpha2Code": "JE",
+        "demonym": "Channel Islander",
+        "independent": false
+    },
+    {
+        "name": "Jordan",
+        "alpha2Code": "JO",
+        "demonym": "Jordanian",
+        "independent": false
+    },
+    {
+        "name": "Kazakhstan",
+        "alpha2Code": "KZ",
+        "demonym": "Kazakhstani",
+        "independent": false
+    },
+    {
+        "name": "Kenya",
+        "alpha2Code": "KE",
+        "demonym": "Kenyan",
+        "independent": false
+    },
+    {
+        "name": "Kiribati",
+        "alpha2Code": "KI",
+        "demonym": "I-Kiribati",
+        "independent": false
+    },
+    {
+        "name": "Kuwait",
+        "alpha2Code": "KW",
+        "demonym": "Kuwaiti",
+        "independent": false
+    },
+    {
+        "name": "Kyrgyzstan",
+        "alpha2Code": "KG",
+        "demonym": "Kirghiz",
+        "independent": false
+    },
+    {
+        "name": "Lao People's Democratic Republic",
+        "alpha2Code": "LA",
+        "demonym": "Laotian",
+        "independent": false
+    },
+    {
+        "name": "Latvia",
+        "alpha2Code": "LV",
+        "demonym": "Latvian",
+        "independent": false
+    },
+    {
+        "name": "Lebanon",
+        "alpha2Code": "LB",
+        "demonym": "Lebanese",
+        "independent": false
+    },
+    {
+        "name": "Lesotho",
+        "alpha2Code": "LS",
+        "demonym": "Mosotho",
+        "independent": false
+    },
+    {
+        "name": "Liberia",
+        "alpha2Code": "LR",
+        "demonym": "Liberian",
+        "independent": false
+    },
+    {
+        "name": "Libya",
+        "alpha2Code": "LY",
+        "demonym": "Libyan",
+        "independent": false
+    },
+    {
+        "name": "Liechtenstein",
+        "alpha2Code": "LI",
+        "demonym": "Liechtensteiner",
+        "independent": false
+    },
+    {
+        "name": "Lithuania",
+        "alpha2Code": "LT",
+        "demonym": "Lithuanian",
+        "independent": false
+    },
+    {
+        "name": "Luxembourg",
+        "alpha2Code": "LU",
+        "demonym": "Luxembourger",
+        "independent": false
+    },
+    {
+        "name": "Macao",
+        "alpha2Code": "MO",
+        "demonym": "Chinese",
+        "independent": false
+    },
+    {
+        "name": "North Macedonia",
+        "alpha2Code": "MK",
+        "demonym": "Macedonian",
+        "independent": false
+    },
+    {
+        "name": "Madagascar",
+        "alpha2Code": "MG",
+        "demonym": "Malagasy",
+        "independent": false
+    },
+    {
+        "name": "Malawi",
+        "alpha2Code": "MW",
+        "demonym": "Malawian",
+        "independent": false
+    },
+    {
+        "name": "Malaysia",
+        "alpha2Code": "MY",
+        "demonym": "Malaysian",
+        "independent": false
+    },
+    {
+        "name": "Maldives",
+        "alpha2Code": "MV",
+        "demonym": "Maldivan",
+        "independent": false
+    },
+    {
+        "name": "Mali",
+        "alpha2Code": "ML",
+        "demonym": "Malian",
+        "independent": false
+    },
+    {
+        "name": "Malta",
+        "alpha2Code": "MT",
+        "demonym": "Maltese",
+        "independent": false
+    },
+    {
+        "name": "Marshall Islands",
+        "alpha2Code": "MH",
+        "demonym": "Marshallese",
+        "independent": false
+    },
+    {
+        "name": "Martinique",
+        "alpha2Code": "MQ",
+        "demonym": "French",
+        "independent": false
+    },
+    {
+        "name": "Mauritania",
+        "alpha2Code": "MR",
+        "demonym": "Mauritanian",
+        "independent": false
+    },
+    {
+        "name": "Mauritius",
+        "alpha2Code": "MU",
+        "demonym": "Mauritian",
+        "independent": false
+    },
+    {
+        "name": "Mayotte",
+        "alpha2Code": "YT",
+        "demonym": "French",
+        "independent": false
+    },
+    {
+        "name": "Mexico",
+        "alpha2Code": "MX",
+        "demonym": "Mexican",
+        "independent": false
+    },
+    {
+        "name": "Micronesia (Federated States of)",
+        "alpha2Code": "FM",
+        "demonym": "Micronesian",
+        "independent": false
+    },
+    {
+        "name": "Moldova (Republic of)",
+        "alpha2Code": "MD",
+        "demonym": "Moldovan",
+        "independent": false
+    },
+    {
+        "name": "Monaco",
+        "alpha2Code": "MC",
+        "demonym": "Monegasque",
+        "independent": false
+    },
+    {
+        "name": "Mongolia",
+        "alpha2Code": "MN",
+        "demonym": "Mongolian",
+        "independent": false
+    },
+    {
+        "name": "Montenegro",
+        "alpha2Code": "ME",
+        "demonym": "Montenegrin",
+        "independent": false
+    },
+    {
+        "name": "Montserrat",
+        "alpha2Code": "MS",
+        "demonym": "Montserratian",
+        "independent": false
+    },
+    {
+        "name": "Morocco",
+        "alpha2Code": "MA",
+        "demonym": "Moroccan",
+        "independent": false
+    },
+    {
+        "name": "Mozambique",
+        "alpha2Code": "MZ",
+        "demonym": "Mozambican",
+        "independent": false
+    },
+    {
+        "name": "Myanmar",
+        "alpha2Code": "MM",
+        "demonym": "Burmese",
+        "independent": false
+    },
+    {
+        "name": "Namibia",
+        "alpha2Code": "NA",
+        "demonym": "Namibian",
+        "independent": false
+    },
+    {
+        "name": "Nauru",
+        "alpha2Code": "NR",
+        "demonym": "Nauruan",
+        "independent": false
+    },
+    {
+        "name": "Nepal",
+        "alpha2Code": "NP",
+        "demonym": "Nepalese",
+        "independent": false
+    },
+    {
+        "name": "Netherlands",
+        "alpha2Code": "NL",
+        "demonym": "Dutch",
+        "independent": false
+    },
+    {
+        "name": "New Caledonia",
+        "alpha2Code": "NC",
+        "demonym": "New Caledonian",
+        "independent": false
+    },
+    {
+        "name": "New Zealand",
+        "alpha2Code": "NZ",
+        "demonym": "New Zealander",
+        "independent": false
+    },
+    {
+        "name": "Nicaragua",
+        "alpha2Code": "NI",
+        "demonym": "Nicaraguan",
+        "independent": false
+    },
+    {
+        "name": "Niger",
+        "alpha2Code": "NE",
+        "demonym": "Nigerien",
+        "independent": false
+    },
+    {
+        "name": "Nigeria",
+        "alpha2Code": "NG",
+        "demonym": "Nigerian",
+        "independent": false
+    },
+    {
+        "name": "Niue",
+        "alpha2Code": "NU",
+        "demonym": "Niuean",
+        "independent": false
+    },
+    {
+        "name": "Norfolk Island",
+        "alpha2Code": "NF",
+        "demonym": "Norfolk Islander",
+        "independent": false
+    },
+    {
+        "name": "Korea (Democratic People's Republic of)",
+        "alpha2Code": "KP",
+        "demonym": "North Korean",
+        "independent": false
+    },
+    {
+        "name": "Northern Mariana Islands",
+        "alpha2Code": "MP",
+        "demonym": "American",
+        "independent": false
+    },
+    {
+        "name": "Norway",
+        "alpha2Code": "NO",
+        "demonym": "Norwegian",
+        "independent": false
+    },
+    {
+        "name": "Oman",
+        "alpha2Code": "OM",
+        "demonym": "Omani",
+        "independent": false
+    },
+    {
+        "name": "Pakistan",
+        "alpha2Code": "PK",
+        "demonym": "Pakistani",
+        "independent": false
+    },
+    {
+        "name": "Palau",
+        "alpha2Code": "PW",
+        "demonym": "Palauan",
+        "independent": false
+    },
+    {
+        "name": "Palestine, State of",
+        "alpha2Code": "PS",
+        "demonym": "Palestinian",
+        "independent": false
+    },
+    {
+        "name": "Panama",
+        "alpha2Code": "PA",
+        "demonym": "Panamanian",
+        "independent": false
+    },
+    {
+        "name": "Papua New Guinea",
+        "alpha2Code": "PG",
+        "demonym": "Papua New Guinean",
+        "independent": false
+    },
+    {
+        "name": "Paraguay",
+        "alpha2Code": "PY",
+        "demonym": "Paraguayan",
+        "independent": false
+    },
+    {
+        "name": "Peru",
+        "alpha2Code": "PE",
+        "demonym": "Peruvian",
+        "independent": false
+    },
+    {
+        "name": "Philippines",
+        "alpha2Code": "PH",
+        "demonym": "Filipino",
+        "independent": false
+    },
+    {
+        "name": "Pitcairn",
+        "alpha2Code": "PN",
+        "demonym": "Pitcairn Islander",
+        "independent": false
+    },
+    {
+        "name": "Poland",
+        "alpha2Code": "PL",
+        "demonym": "Polish",
+        "independent": false
+    },
+    {
+        "name": "Portugal",
+        "alpha2Code": "PT",
+        "demonym": "Portuguese",
+        "independent": false
+    },
+    {
+        "name": "Puerto Rico",
+        "alpha2Code": "PR",
+        "demonym": "Puerto Rican",
+        "independent": false
+    },
+    {
+        "name": "Qatar",
+        "alpha2Code": "QA",
+        "demonym": "Qatari",
+        "independent": false
+    },
+    {
+        "name": "Republic of Kosovo",
+        "alpha2Code": "XK",
+        "demonym": "Kosovar",
+        "independent": false
+    },
+    {
+        "name": "Réunion",
+        "alpha2Code": "RE",
+        "demonym": "French",
+        "independent": false
+    },
+    {
+        "name": "Romania",
+        "alpha2Code": "RO",
+        "demonym": "Romanian",
+        "independent": false
+    },
+    {
+        "name": "Russian Federation",
+        "alpha2Code": "RU",
+        "demonym": "Russian",
+        "independent": false
+    },
+    {
+        "name": "Rwanda",
+        "alpha2Code": "RW",
+        "demonym": "Rwandan",
+        "independent": false
+    },
+    {
+        "name": "Saint Barthélemy",
+        "alpha2Code": "BL",
+        "demonym": "Saint Barthélemy Islander",
+        "independent": false
+    },
+    {
+        "name": "Saint Helena, Ascension and Tristan da Cunha",
+        "alpha2Code": "SH",
+        "demonym": "Saint Helenian",
+        "independent": false
+    },
+    {
+        "name": "Saint Kitts and Nevis",
+        "alpha2Code": "KN",
+        "demonym": "Kittian and Nevisian",
+        "independent": false
+    },
+    {
+        "name": "Saint Lucia",
+        "alpha2Code": "LC",
+        "demonym": "Saint Lucian",
+        "independent": false
+    },
+    {
+        "name": "Saint Martin (French part)",
+        "alpha2Code": "MF",
+        "demonym": "Saint Martin Islander",
+        "independent": false
+    },
+    {
+        "name": "Saint Pierre and Miquelon",
+        "alpha2Code": "PM",
+        "demonym": "French",
+        "independent": false
+    },
+    {
+        "name": "Saint Vincent and the Grenadines",
+        "alpha2Code": "VC",
+        "demonym": "Saint Vincentian",
+        "independent": false
+    },
+    {
+        "name": "Samoa",
+        "alpha2Code": "WS",
+        "demonym": "Samoan",
+        "independent": false
+    },
+    {
+        "name": "San Marino",
+        "alpha2Code": "SM",
+        "demonym": "Sammarinese",
+        "independent": false
+    },
+    {
+        "name": "Sao Tome and Principe",
+        "alpha2Code": "ST",
+        "demonym": "Sao Tomean",
+        "independent": false
+    },
+    {
+        "name": "Saudi Arabia",
+        "alpha2Code": "SA",
+        "demonym": "Saudi Arabian",
+        "independent": false
+    },
+    {
+        "name": "Senegal",
+        "alpha2Code": "SN",
+        "demonym": "Senegalese",
+        "independent": false
+    },
+    {
+        "name": "Serbia",
+        "alpha2Code": "RS",
+        "demonym": "Serbian",
+        "independent": false
+    },
+    {
+        "name": "Seychelles",
+        "alpha2Code": "SC",
+        "demonym": "Seychellois",
+        "independent": false
+    },
+    {
+        "name": "Sierra Leone",
+        "alpha2Code": "SL",
+        "demonym": "Sierra Leonean",
+        "independent": false
+    },
+    {
+        "name": "Singapore",
+        "alpha2Code": "SG",
+        "demonym": "Singaporean",
+        "independent": false
+    },
+    {
+        "name": "Sint Maarten (Dutch part)",
+        "alpha2Code": "SX",
+        "demonym": "Dutch",
+        "independent": false
+    },
+    {
+        "name": "Slovakia",
+        "alpha2Code": "SK",
+        "demonym": "Slovak",
+        "independent": false
+    },
+    {
+        "name": "Slovenia",
+        "alpha2Code": "SI",
+        "demonym": "Slovene",
+        "independent": false
+    },
+    {
+        "name": "Solomon Islands",
+        "alpha2Code": "SB",
+        "demonym": "Solomon Islander",
+        "independent": false
+    },
+    {
+        "name": "Somalia",
+        "alpha2Code": "SO",
+        "demonym": "Somali",
+        "independent": false
+    },
+    {
+        "name": "South Africa",
+        "alpha2Code": "ZA",
+        "demonym": "South African",
+        "independent": false
+    },
+    {
+        "name": "South Georgia and the South Sandwich Islands",
+        "alpha2Code": "GS",
+        "demonym": "South Georgia and the South Sandwich Islander",
+        "independent": false
+    },
+    {
+        "name": "Korea (Republic of)",
+        "alpha2Code": "KR",
+        "demonym": "South Korean",
+        "independent": false
+    },
+    {
+        "name": "Spain",
+        "alpha2Code": "ES",
+        "demonym": "Spanish",
+        "independent": false
+    },
+    {
+        "name": "Sri Lanka",
+        "alpha2Code": "LK",
+        "demonym": "Sri Lankan",
+        "independent": false
+    },
+    {
+        "name": "Sudan",
+        "alpha2Code": "SD",
+        "demonym": "Sudanese",
+        "independent": false
+    },
+    {
+        "name": "South Sudan",
+        "alpha2Code": "SS",
+        "demonym": "South Sudanese",
+        "independent": false
+    },
+    {
+        "name": "Suriname",
+        "alpha2Code": "SR",
+        "demonym": "Surinamer",
+        "independent": false
+    },
+    {
+        "name": "Svalbard and Jan Mayen",
+        "alpha2Code": "SJ",
+        "demonym": "Norwegian",
+        "independent": false
+    },
+    {
+        "name": "Swaziland",
+        "alpha2Code": "SZ",
+        "demonym": "Swazi",
+        "independent": false
+    },
+    {
+        "name": "Sweden",
+        "alpha2Code": "SE",
+        "demonym": "Swedish",
+        "independent": false
+    },
+    {
+        "name": "Switzerland",
+        "alpha2Code": "CH",
+        "demonym": "Swiss",
+        "independent": false
+    },
+    {
+        "name": "Syrian Arab Republic",
+        "alpha2Code": "SY",
+        "demonym": "Syrian",
+        "independent": false
+    },
+    {
+        "name": "Taiwan",
+        "alpha2Code": "TW",
+        "demonym": "Taiwanese",
+        "independent": false
+    },
+    {
+        "name": "Tajikistan",
+        "alpha2Code": "TJ",
+        "demonym": "Tadzhik",
+        "independent": false
+    },
+    {
+        "name": "Tanzania, United Republic of",
+        "alpha2Code": "TZ",
+        "demonym": "Tanzanian",
+        "independent": false
+    },
+    {
+        "name": "Thailand",
+        "alpha2Code": "TH",
+        "demonym": "Thai",
+        "independent": false
+    },
+    {
+        "name": "Timor-Leste",
+        "alpha2Code": "TL",
+        "demonym": "East Timorese",
+        "independent": false
+    },
+    {
+        "name": "Togo",
+        "alpha2Code": "TG",
+        "demonym": "Togolese",
+        "independent": false
+    },
+    {
+        "name": "Tokelau",
+        "alpha2Code": "TK",
+        "demonym": "Tokelauan",
+        "independent": false
+    },
+    {
+        "name": "Tonga",
+        "alpha2Code": "TO",
+        "demonym": "Tongan",
+        "independent": false
+    },
+    {
+        "name": "Trinidad and Tobago",
+        "alpha2Code": "TT",
+        "demonym": "Trinidadian",
+        "independent": false
+    },
+    {
+        "name": "Tunisia",
+        "alpha2Code": "TN",
+        "demonym": "Tunisian",
+        "independent": false
+    },
+    {
+        "name": "Turkey",
+        "alpha2Code": "TR",
+        "demonym": "Turkish",
+        "independent": false
+    },
+    {
+        "name": "Turkmenistan",
+        "alpha2Code": "TM",
+        "demonym": "Turkmen",
+        "independent": false
+    },
+    {
+        "name": "Turks and Caicos Islands",
+        "alpha2Code": "TC",
+        "demonym": "Turks and Caicos Islander",
+        "independent": false
+    },
+    {
+        "name": "Tuvalu",
+        "alpha2Code": "TV",
+        "demonym": "Tuvaluan",
+        "independent": false
+    },
+    {
+        "name": "Uganda",
+        "alpha2Code": "UG",
+        "demonym": "Ugandan",
+        "independent": false
+    },
+    {
+        "name": "Ukraine",
+        "alpha2Code": "UA",
+        "demonym": "Ukrainian",
+        "independent": false
+    },
+    {
+        "name": "United Arab Emirates",
+        "alpha2Code": "AE",
+        "demonym": "Emirati",
+        "independent": false
+    },
+    {
+        "name": "United Kingdom of Great Britain and Northern Ireland",
+        "alpha2Code": "GB",
+        "demonym": "British",
+        "independent": false
+    },
+    {
+        "name": "United States of America",
+        "alpha2Code": "US",
+        "demonym": "American",
+        "independent": false
+    },
+    {
+        "name": "Uruguay",
+        "alpha2Code": "UY",
+        "demonym": "Uruguayan",
+        "independent": false
+    },
+    {
+        "name": "Uzbekistan",
+        "alpha2Code": "UZ",
+        "demonym": "Uzbekistani",
+        "independent": false
+    },
+    {
+        "name": "Vanuatu",
+        "alpha2Code": "VU",
+        "demonym": "Ni-Vanuatu",
+        "independent": false
+    },
+    {
+        "name": "Venezuela (Bolivarian Republic of)",
+        "alpha2Code": "VE",
+        "demonym": "Venezuelan",
+        "independent": false
+    },
+    {
+        "name": "Vietnam",
+        "alpha2Code": "VN",
+        "demonym": "Vietnamese",
+        "independent": false
+    },
+    {
+        "name": "Wallis and Futuna",
+        "alpha2Code": "WF",
+        "demonym": "Wallis and Futuna Islander",
+        "independent": false
+    },
+    {
+        "name": "Western Sahara",
+        "alpha2Code": "EH",
+        "demonym": "Sahrawi",
+        "independent": false
+    },
+    {
+        "name": "Yemen",
+        "alpha2Code": "YE",
+        "demonym": "Yemeni",
+        "independent": false
+    },
+    {
+        "name": "Zambia",
+        "alpha2Code": "ZM",
+        "demonym": "Zambian",
+        "independent": false
+    },
+    {
+        "name": "Zimbabwe",
+        "alpha2Code": "ZW",
+        "demonym": "Zimbabwean",
+        "independent": false
+    }
+]

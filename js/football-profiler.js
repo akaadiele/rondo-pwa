@@ -33,9 +33,11 @@ document.getElementById("createUpdateButton").addEventListener('click', createUp
 
 // Fetch country info from API
 function getNationalities() {
-    const apiURL_restCountries = encodeURI("https://restcountries.com/v2/all?fields=demonym");     // API URL
+    const countriesJson = "../js/json/countries.json";   // Path to file
+    // 20250303001747
+    // https://restcountries.com/v2/all?fields=name,demonym,alpha2Code  replica
 
-    fetch(apiURL_restCountries)
+    fetch(countriesJson)
         .then((response) => response.json())
         .then(function (data) {
             let countries = data;
@@ -149,7 +151,7 @@ function loadProfilerData() {
                         document.getElementById("passwordLoad").value = "";
 
                         document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
-                        // location.reload();
+                        location.reload();
                     } else {
                         // doc.data() will be undefined in this case
                         // console.log("No such document!");
@@ -224,7 +226,6 @@ function clearProfileData() {
 
 
 function createUpdateInfo() {
-
     let createUpdateUsername = document.getElementById("usernameEdit").value;
     userDisabled = document.getElementById("usernameEdit").disabled;
 
@@ -248,7 +249,7 @@ function createUpdateInfo() {
         // New profile
         rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).get().then((doc) => {
             if (doc.exists) {
-                let rondoUserData = doc.data();
+                // let rondoUserData = doc.data();
                 showSnackbar("Invalid username");
             } else {
                 // New profile
@@ -260,12 +261,14 @@ function createUpdateInfo() {
                     height: document.getElementById("profileHeightEdit").value,
                     weight: document.getElementById("profileWeightEdit").value,
                     password: document.getElementById("passwordEdit").value,
+                    theme: "",
+                    language: ""
                 };
 
                 rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).set(userInfo)
                     .catch(err => {
                         // console.log(err);
-                        showSnackbar("Unable to update while offline");
+                        showSnackbar("Error updating profile");
                         document.getElementById("clearDiv").setAttribute('class', 'row mx-auto hide');
                         clearProfileData();
                     });
@@ -273,22 +276,34 @@ function createUpdateInfo() {
                 localStorage.setItem(localStorageRondoUsername, createUpdateUsername);  // Set username on local storage
                 document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
                 showSnackbar("Done...");
-                initialProfilerData();
+                // initialProfilerData();
+                location.reload();
                 document.getElementById("passwordEdit").value = "";
             }
         }).catch((error) => {
             // console.log("Error getting document:", error);
-            showSnackbar("Unable to update while offline");
+            showSnackbar("Error updating profile");
         });
     } else {
         // Existing profile
         rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).get().then((doc) => {
             if (doc.exists) {
                 let rondoUserData = doc.data();
-
                 let passwordInput = document.getElementById("passwordEdit").value;
 
                 if (rondoUserData.password == passwordInput) {
+
+                    if (rondoUserData.theme) {
+                        newTheme = rondoUserData.theme;
+                    } else {
+                        newTheme = "";
+                    }
+
+                    if (rondoUserData.language) {
+                        newLanguage = rondoUserData.language;
+                    } else {
+                        newLanguage = "";
+                    }
 
                     const userInfo = {
                         name: document.getElementById("profileNameEdit").value,
@@ -297,15 +312,15 @@ function createUpdateInfo() {
                         age: document.getElementById("profileAgeEdit").value,
                         height: document.getElementById("profileHeightEdit").value,
                         weight: document.getElementById("profileWeightEdit").value,
-                        theme: rondoUserData.theme,
-                        language: rondoUserData.language,
-                        password: rondoUserData.password
+                        password: rondoUserData.password,
+                        theme: newTheme,
+                        language: newLanguage
                     };
 
                     rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).set(userInfo)
                         .catch(err => {
                             // console.log(err);
-                            showSnackbar("Unable to update while offline");
+                            showSnackbar("Error updating profile");
                             document.getElementById("clearDiv").setAttribute('class', 'row mx-auto hide');
                             clearProfileData();
                         });
@@ -313,7 +328,8 @@ function createUpdateInfo() {
                     localStorage.setItem(localStorageRondoUsername, createUpdateUsername);  // Set username on local storage
                     document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
                     showSnackbar("Done...");
-                    initialProfilerData();
+                    // initialProfilerData();
+                    location.reload();
                     document.getElementById("passwordEdit").value = "";
                 } else {
                     // doc.data() will be undefined in this case
@@ -323,11 +339,11 @@ function createUpdateInfo() {
                     showSnackbar("Incorrect password");
                 }
             } else {
-                showSnackbar("Unable to update while offline");
+                showSnackbar("Error updating profile");
             }
         }).catch((error) => {
             // console.log("Error getting document:", error);
-            showSnackbar("Unable to update while offline");
+            showSnackbar("Error updating profile");
         });
     }
 }

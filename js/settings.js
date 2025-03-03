@@ -108,8 +108,6 @@ function updateSettingsInfo() {
     const theme_value = themeSelect.value;
     const language_value = languageSelect.value;
 
-    // console.log('storedUsername', storedUsername);
-
     if (storedUsername) {
         // New profile
         rondoDb.collection(rondoUserInfoCollection).doc(storedUsername).get().then((doc) => {
@@ -134,7 +132,8 @@ function updateSettingsInfo() {
                     });
 
                 showSnackbar("Settings updated");
-                initialSettingsData();
+                // initialSettingsData();
+                location.reload();
             } else {
                 showSnackbar("Football profile setup required");
             }

@@ -1,3 +1,6 @@
+// Current Geolocation
+let currentLat, currentLng;
+
 
 // HTML List group for search results
 const searchResultsList = document.getElementById('pitchSearchResults');
@@ -7,11 +10,14 @@ const radioButtons = document.querySelectorAll('input[name="radiusOptions"]');
 radioButtons
 
 // Conversion value 
-const mileToMeterConv = 1600;
+const mileToMeterConv = 1609.34;
 
+// Search keyword
+const apiKeyword = "football+field";
 
 // Initial search with current location
 document.addEventListener("DOMContentLoaded", refreshSearch);  // trigger at point of loading page
+
 
 
 // Get user's current location coordinates
@@ -19,18 +25,21 @@ function getCurrentLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(searchFromCurrentLocation);
     } else {
-        tempDisplayMessage(`! ERROR: Geolocation is not supported by this browser.`)
+        tempDisplayMessage(`! ERROR: Geolocation is not supported by this device.`)
     }
 }
 
 // Search with user's current location coordinates
 function searchFromCurrentLocation(position) {
-    defaultLocation = position.coords.latitude + ", " + position.coords.longitude;
+    // defaultLocation = position.coords.latitude + ", " + position.coords.longitude;
+    currentLat = position.coords.latitude;
+    currentLng = position.coords.longitude;
 
     searchResultsList.innerHTML = '';
-    googleNearbySearch(defaultLocation);
+    googleNearbySearch(currentLat, currentLng, "");
 }
 // >>>
+
 
 
 // Clear Search box
@@ -40,7 +49,7 @@ document.getElementById('refreshIcon').addEventListener('click', refreshSearch);
 // Function to refresh search
 function refreshSearch() {
     // evt.preventDefault();
-    
+
     // searchResultsList.innerHTML = '';
     tempDisplayMessage(`Loading...`);
 
@@ -50,12 +59,13 @@ function refreshSearch() {
 }
 
 
+
 // search by using the enter button on search box
 document.getElementById('searchBox').addEventListener('keydown', (clicked) => {
     // clicked.preventDefault();
     if (clicked.key === 'Enter') {
         searchResultsList.innerHTML = '';
-        
+
         // Search with address input 
         if (document.getElementById('searchBox').value == "") {
             getCurrentLocation();
@@ -82,7 +92,7 @@ function initAutocomplete() {
 }
 
 function onPlaceChanged() {
-    var place = autocomplete.getPlace();
+    let place = autocomplete.getPlace();
 
     if (!place.formatted_address) {
         tempDisplayMessage(`! Select from dropdown... or click refresh icon`);
@@ -93,39 +103,6 @@ function onPlaceChanged() {
     }
 }
 // >>>
-
-
-// Get coordinates for the place selected 
-function getCoordinatesForPlaceID(placeId) {
-    const apiURL_places = encodeURI("https://places.googleapis.com/v1/places/" + placeId + "?fields=location" + "&key=" + apiKey);
-    
-    // Fetch contents from the API response and format contents to display as HTML elements
-    fetch(apiURL_places)
-        .then(response => response.text())
-        .then(result => {
-            const resultJson = JSON.parse(result) || [];
-            if (!resultJson) {
-                // console.warn(`No result found`);
-                tempDisplayMessage(`No result found`)
-                return;
-            }
-
-            let pitchLat = resultJson.location.latitude;
-            let pitchLng = resultJson.location.longitude;
-            altLocation = pitchLat + ", " + pitchLng;
-
-            searchResultsList.innerHTML = '';
-            googleNearbySearch(altLocation);
-
-        })
-        .catch(error => {
-            // Custom error response
-            // console.error("Search Error:", error);
-            // console.log("Search Error: ", error);
-            tempDisplayMessage(`! ERROR: Invalid Address.`)
-        });
-}
-
 
 
 
@@ -149,10 +126,41 @@ function tempDisplayMessage(errorMessage) {
 
 
 
+// Get coordinates for the place selected, searching with place_id
+function getCoordinatesForPlaceID(placeId) {
+    // Using API library
+    let map, mapCenter, request, service;
+
+    mapCenter = new google.maps.LatLng(currentLat, currentLng);
+    map = new google.maps.Map(document.getElementById('mapDummy'), { center: mapCenter, zoom: 15 });
+
+    request = { placeId: placeId, fields: ['geometry'] };
+
+    service = new google.maps.places.PlacesService(map);
+    service.getDetails(request, callback);
+
+
+    function callback(place, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+            if (place) {
+                searchResultsList.innerHTML = '';
+                googleNearbySearch("", "", place.geometry.location);
+            } else {
+                tempDisplayMessage(`! ERROR: Invalid Address.`)
+            }
+        }
+    }
+    // >>>
+}
+
+
+
 // Nearby search for pitch with Google API
-function googleNearbySearch(startLocation) {
+function googleNearbySearch(latitude, longitude, location) {
     tempDisplayMessage(`Loading...`);
+
     // Get radius in miles and convert to meters
+    let searchRadius;
     for (const radioButton of radioButtons) {
         if (radioButton.checked) {
             let milesRadius = radioButton.value;
@@ -161,55 +169,61 @@ function googleNearbySearch(startLocation) {
         }
     }
 
-    // Declaring variables
-    const apiURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
-    const apiKeyword = "football+field";
-    const baseURL = apiURL + "?key=" + apiKey + "&keyword=" + apiKeyword;
 
-    const apiURL_nearbySearch = encodeURI(baseURL + "&location=" + startLocation + "&radius=" + searchRadius);
-    // console.log(apiURL_nearbySearch);
-    // Fetch contents from the API response and format contents to display as HTML elements
-    fetch(apiURL_nearbySearch)
-        .then(resp => {
-            if (!resp.ok) throw new Error(`Search Error: ${resp.statusText}`);
-            return resp.json();
-        })
-        .then(data => {
-            const results = data.results || [];
-            if (!results.length) {
-                // console.warn(`No results found`);
-                tempDisplayMessage(`! ERROR: No results found.`)
-                return;
-            }
 
+    // Using API library
+    let map;
+    let service;
+    let searchLocation;
+
+    if (location == "") {
+        searchLocation = new google.maps.LatLng(latitude, longitude);
+    } else {
+        searchLocation = location;
+    }
+
+    map = new google.maps.Map(document.getElementById('mapDummy'), {
+        center: searchLocation,
+        zoom: 15
+    });
+
+    let request = {
+        location: searchLocation,
+        radius: searchRadius,
+        keyword: apiKeyword
+    };
+
+    service = new google.maps.places.PlacesService(map);
+    service.nearbySearch(request, callback);
+
+
+    function callback(results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
             searchResultsList.innerHTML = '';
-            
-            results.forEach(result => {
-                // Creating HTML elements
-                // Building list and list contents
-                const pitchLi = createNode('li');
-                pitchLi.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-start gap-3');
+            if (results.length > 0) {
+                for (let i = 0; i < results.length; i++) {
+                    // Creating HTML elements - building list and list contents
+                    const pitchLi = createNode('li');
+                    pitchLi.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-start gap-3');
 
-                const contentDiv = createNode('div');
-                contentDiv.setAttribute('class', 'ms-2 me-auto fw-bold text-truncate');
-                contentDiv.innerHTML = `<i class="fa-solid fa-map-pin"></i> ${result.name}`;
+                    const contentDiv = createNode('div');
+                    contentDiv.setAttribute('class', 'ms-2 me-auto fw-bold text-truncate');
+                    contentDiv.innerHTML = `<i class="fa-solid fa-map-pin"></i> ${results[i].name}`;
 
-                const viewSpan = createNode('span');
-                viewSpan.setAttribute('class', 'badge text-bg-dark rounded-pill');
-                viewSpan.innerHTML = `<a href="pitch-details.html?pitch=${result.place_id}"><i class="fa-solid fa-eye"></i></a>`;
+                    const viewSpan = createNode('span');
+                    viewSpan.setAttribute('class', 'badge text-bg-dark rounded-pill');
+                    viewSpan.innerHTML = `<a href="pitch-details.html?pitch=${results[i].place_id}"><i class="fa-solid fa-eye"></i></a>`;
 
 
-                append(pitchLi, contentDiv);
-                append(pitchLi, viewSpan);
-                append(searchResultsList, pitchLi);
-            });
-        })
-        .catch(error => {
-            // Custom error response
-            // console.error("Search Error:", error);
-            // console.log("url: " + apiURL_nearbySearch)
-            tempDisplayMessage(`! ERROR: Search Failure.`);
-            // tempDisplayMessage(`! ERROR: Search Failure. ${error} - ${apiURL_nearbySearch}`);
-        });
+                    append(pitchLi, contentDiv);
+                    append(pitchLi, viewSpan);
+                    append(searchResultsList, pitchLi);
+                }
+            } else {
+                tempDisplayMessage(`! ERROR: No results found.`)
+            }
+        }
+    }
+    // >>>
 }
 // >>>
