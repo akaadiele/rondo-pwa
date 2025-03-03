@@ -1,6 +1,20 @@
+// // Declaring global variables
+
 // Current Geolocation
 let currentLat, currentLng;
 
+// place id from autocomplete
+let autocomplete_placeId;
+
+// Interval variables
+let checkLoading; let intervalSeconds = 5;
+let checkCount = 0; let checkCountMax = 3;
+
+// Conversion value 
+const mileToMeterConv = 1609.34;
+
+// ------------------------------------------------------------------------------------------------------------
+// // Manipulating HTML
 
 // HTML List group for search results
 const searchResultsList = document.getElementById('pitchSearchResults');
@@ -8,16 +22,48 @@ const searchResultsList = document.getElementById('pitchSearchResults');
 // HTML radio buttons for search radius
 const radioButtons = document.querySelectorAll('input[name="radiusOptions"]');
 
-// Conversion value 
-const mileToMeterConv = 1609.34;
+// Search with current location on initial page load
+document.addEventListener("DOMContentLoaded", refreshSearch);
 
-// Search keyword
-const apiKeyword = "football+field";
+// // Search by using the radio buttons
+// document.getElementById('radius1').disabled = false;
+// document.getElementById('radius2').disabled = false;
+// document.getElementById('radius3').disabled = false;
 
-// Initial search with current location
-document.addEventListener("DOMContentLoaded", refreshSearch);  // trigger at point of loading page
+// Search by using the refresh icon
+document.getElementById('refreshIcon').addEventListener('click', refreshSearch);
 
+// Search by using the enter button on search box
+// document.getElementById('searchBox').disabled = false;
+document.getElementById('searchBox').addEventListener('keydown', (clicked) => {
+    if (clicked.key === 'Enter') {
+        // Search with address input 
+        if (document.getElementById('searchBox').value == "") {
+            getCurrentLocation();
+        } else {
+            tempDisplayMessage(`! Select from dropdown...`);
+        }
+    }
+})
 
+// ------------------------------------------------------------------------------------------------------------
+// // Functions
+
+// Function to refresh search
+function refreshSearch() {
+    loadingScreenShow();
+
+    if ((autocomplete_placeId == '') || (autocomplete_placeId == undefined)) {
+        autocomplete_placeId = '';
+        document.getElementById('searchBox').placeholder = '';
+        document.getElementById('searchBox').value = '';
+        getCurrentLocation();
+    } else {
+        // getCoordinatesForPlaceID(document.getElementById('searchBox').placeholder);
+        // getCoordinatesForPlaceID(docUrlPlaceId);
+        getCoordinatesForPlaceID(autocomplete_placeId);
+    }
+}
 
 // Get user's current location coordinates
 function getCurrentLocation() {
@@ -34,47 +80,33 @@ function searchFromCurrentLocation(position) {
     currentLat = position.coords.latitude;
     currentLng = position.coords.longitude;
 
-    searchResultsList.innerHTML = '';
+    // searchResultsList.innerHTML = '';
     googleNearbySearch(currentLat, currentLng, "");
 }
 // >>>
 
 
 
-// Clear Search box
-document.getElementById('refreshIcon').addEventListener('click', refreshSearch);
-
-
-// Function to refresh search
-function refreshSearch() {
-    // evt.preventDefault();
-
+// Formatting possible errors
+function tempDisplayMessage(errorMessage) {
     // searchResultsList.innerHTML = '';
-    tempDisplayMessage(`Loading...`);
+    loadingScreenHide();
 
-    document.getElementById('searchBox').placeholder = '';
-    document.getElementById('searchBox').value = '';
-    getCurrentLocation();
+    const pitchLi = createNode('li');
+    pitchLi.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-start');
+
+    const contentDiv = createNode('div');
+    contentDiv.setAttribute('class', 'ms-2 me-auto fw-bold container justify-content-center');
+
+    // contentDivText = document.createTextNode(errorMessage);
+    contentDiv.innerHTML = errorMessage;
+
+
+    // append(contentDiv, contentDivText);
+    append(pitchLi, contentDiv);
+    append(searchResultsList, pitchLi);
 }
-
-
-
-// search by using the enter button on search box
-document.getElementById('searchBox').addEventListener('keydown', (clicked) => {
-    // clicked.preventDefault();
-    if (clicked.key === 'Enter') {
-        searchResultsList.innerHTML = '';
-
-        // Search with address input 
-        if (document.getElementById('searchBox').value == "") {
-            getCurrentLocation();
-        } else {
-            tempDisplayMessage(`! Select from dropdown... or click refresh icon`);
-        }
-    }
-})
 // >>>
-
 
 
 
@@ -94,32 +126,16 @@ function onPlaceChanged() {
     let place = autocomplete.getPlace();
 
     if (!place.formatted_address) {
-        tempDisplayMessage(`! Select from dropdown... or click refresh icon`);
+        tempDisplayMessage(`! Select from dropdown...`);
     } else {
-        document.getElementById('searchBox').placeholder = '';
+        document.getElementById('searchBox').placeholder = place.place_id;
         document.getElementById('searchBox').value = place.name + ", " + place.formatted_address;
-        getCoordinatesForPlaceID(place.place_id);
+
+        // document.URL = document.URL + "?searchPlace=" + place.place_id;
+        autocomplete_placeId = place.place_id;
+
+        getCoordinatesForPlaceID(autocomplete_placeId);
     }
-}
-// >>>
-
-
-
-// Formatting possible errors
-function tempDisplayMessage(errorMessage) {
-    searchResultsList.innerHTML = '';
-
-    const pitchLi = createNode('li');
-    pitchLi.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-start');
-
-    const contentDiv = createNode('div');
-    contentDiv.setAttribute('class', 'ms-2 me-auto fw-bold container justify-content-center');
-
-    contentDivText = document.createTextNode(errorMessage);
-
-    append(contentDiv, contentDivText);
-    append(pitchLi, contentDiv);
-    append(searchResultsList, pitchLi);
 }
 // >>>
 
@@ -130,7 +146,8 @@ function getCoordinatesForPlaceID(placeId) {
     // Using API library
     let map, mapCenter, request, service;
 
-    mapCenter = new google.maps.LatLng(currentLat, currentLng);
+    // mapCenter = new google.maps.LatLng(currentLat, currentLng);
+    mapCenter = { lat: currentLat, lng: currentLng }
     map = new google.maps.Map(document.getElementById('mapDummy'), { center: mapCenter, zoom: 15 });
 
     request = { placeId: placeId, fields: ['geometry'] };
@@ -142,7 +159,7 @@ function getCoordinatesForPlaceID(placeId) {
     function callback(place, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
             if (place) {
-                searchResultsList.innerHTML = '';
+                // searchResultsList.innerHTML = '';
                 googleNearbySearch("", "", place.geometry.location);
             } else {
                 tempDisplayMessage(`! ERROR: Invalid Address.`)
@@ -156,7 +173,8 @@ function getCoordinatesForPlaceID(placeId) {
 
 // Nearby search for pitch with Google API
 function googleNearbySearch(latitude, longitude, location) {
-    tempDisplayMessage(`Loading...`);
+    loadingScreenShow();
+    checkLoading = setInterval(checkLoadingScreenStatus, intervalSeconds * 1000); // Start timed event
 
     // Get radius in miles and convert to meters
     let searchRadius;
@@ -169,20 +187,18 @@ function googleNearbySearch(latitude, longitude, location) {
     }
 
 
-
     // Using API library
     let map, searchLocation, request, service;
-    
+    const apiKeyword = "football+field";
+
     if (location == "") {
-        searchLocation = new google.maps.LatLng(latitude, longitude);
+        // searchLocation = new google.maps.LatLng(latitude, longitude);
+        searchLocation = { lat: latitude, lng: longitude }
     } else {
         searchLocation = location;
     }
 
-    map = new google.maps.Map(document.getElementById('mapDummy'), {
-        center: searchLocation,
-        zoom: 15
-    });
+    map = new google.maps.Map(document.getElementById('mapDummy'), { center: searchLocation, zoom: 15 });
 
     request = {
         location: searchLocation,
@@ -196,8 +212,9 @@ function googleNearbySearch(latitude, longitude, location) {
 
     function callback(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
-            searchResultsList.innerHTML = '';
             if (results.length > 0) {
+                loadingScreenHide();
+
                 for (let i = 0; i < results.length; i++) {
                     // Creating HTML elements - building list and list contents
                     const pitchLi = createNode('li');
@@ -224,3 +241,35 @@ function googleNearbySearch(latitude, longitude, location) {
     // >>>
 }
 // >>>
+
+
+// Show loading screen
+function loadingScreenShow() {
+    searchResultsList.innerHTML = '';
+    tempDisplayMessage(`Searching for nearby pitch(es)...<br><em><small>(Ensure you are online)</small></em>`);
+    document.getElementById("loadingDiv").hidden = "";
+}
+
+// Hide loading screen
+function loadingScreenHide() {
+    searchResultsList.innerHTML = '';
+    document.getElementById("loadingDiv").hidden = true;
+    clearInterval(checkLoading);    // Stop timed event
+}
+
+
+// Timed event to refresh search automatically
+function checkLoadingScreenStatus() {
+    checkCount += 1;
+    // console.log('checkCount', checkCount);
+    if ((document.getElementById("loadingDiv").hidden == "") && (checkCount < checkCountMax)) {
+        refreshSearch();
+    } else {
+        checkCount = 0;
+        // Stop timed event
+        clearInterval(checkLoading);
+        tempDisplayMessage(`No nearby pitch(es)<br><em><small>Try a different location or radius</small></em>`);
+    }
+}
+
+// ------------------------------------------------------------------------------------------------------------

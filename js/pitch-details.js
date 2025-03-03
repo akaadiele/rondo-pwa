@@ -10,13 +10,10 @@ const urlSplit = document.URL.split('?pitch='); const place_id = urlSplit[1];
 // HTML element for pitch info
 const pitchInfoDiv = document.getElementById("pitchInfo");
 
-
-
+// ------------------------------------------------------------------------------------------------------------
 
 // Google Maps API to get place details
 function viewPlace() {
-
-
     // Using API library
     let map, mapCenter, request, service;
 
@@ -86,7 +83,7 @@ function viewPlace() {
 }
 // >>>
 
-
+// ------------------------------------------------------------------------------------------------------------
 
 // Define Map with center and pin at the selected pitch
 async function initMap(pitchLatitude, pitchLongitude, location) {
@@ -98,8 +95,6 @@ async function initMap(pitchLatitude, pitchLongitude, location) {
     } else {
         position = location;
     }
-
-
 
     const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 15,
@@ -117,6 +112,4 @@ async function initMap(pitchLatitude, pitchLongitude, location) {
 }
 // >>>
 
-
-
-
+// ------------------------------------------------------------------------------------------------------------

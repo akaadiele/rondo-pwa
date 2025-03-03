@@ -1,11 +1,11 @@
-const staticCache = 'static-v00';
-const dynamicCache = 'dynamic-v00';
-
+const staticCache = 'static-v01';
+const dynamicCache = 'dynamic-v01';
 
 const staticCacheAssets = [
     './',
     './index.html',
     './pages/home.html',
+    './pages/pitch-finder.html',
     './pages/settings.html',
     './pages/fallback.html',
     './css/rondo-style.css',
@@ -19,17 +19,16 @@ const staticCacheAssets = [
     './js/json/themes.json',
     './img/Rondo-icon.ico',
     './img/kick-ball.jpg',
+    './img/gif/loading.gif',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'
 ];
 
-
-
-
+// ------------------------------------------------------------------------------------------------------------
 
 // cache size limit function
-const limitCacheSize = (name, size) => {
+function limitCacheSize(name, size) {
     caches.open(name).then(cache => {
         cache.keys().then(keys => {
             if (keys.length > size) {
@@ -37,14 +36,14 @@ const limitCacheSize = (name, size) => {
             }
         });
     });
-};
+}
 
-
+// ------------------------------------------------------------------------------------------------------------
 
 // 'install' event
-self.addEventListener('install', eventParam => {
+self.addEventListener('install', eventResp => {
     // console.log('service worker installed');
-    eventParam.waitUntil(
+    eventResp.waitUntil(
         caches.open(staticCache).then((cache) => {
             // console.log('Caching static assets');
             cache.addAll(staticCacheAssets);
@@ -52,11 +51,12 @@ self.addEventListener('install', eventParam => {
     );
 });
 
+// ------------------------------------------------------------------------------------------------------------
 
 // 'activate' event
-self.addEventListener('activate', eventParam => {
+self.addEventListener('activate', eventResp => {
     // console.log('service worker activated');
-    eventParam.waitUntil(
+    eventResp.waitUntil(
         caches.keys().then(keys => {
             //console.log(keys);
             return Promise.all(keys
@@ -68,28 +68,31 @@ self.addEventListener('activate', eventParam => {
     );
 });
 
-
+// ------------------------------------------------------------------------------------------------------------
 
 // 'fetch' events
-self.addEventListener('fetch', eventParam => {
+self.addEventListener('fetch', eventResp => {
     // Exclude firestore and google APIs
-    if ((eventParam.request.url.indexOf('firestore.googleapis.com') === -1) || (eventParam.request.url.indexOf('firestore') === -1) || (eventParam.request.url.indexOf('firebase') === -1) || (eventParam.request.url.indexOf('extension') === -1) || (eventParam.request.url.indexOf('google') === -1)) {
-        eventParam.respondWith(
-            caches.match(eventParam.request).then(cacheRes => {
-                return cacheRes || fetch(eventParam.request).then(fetchRes => {
+    if ((eventResp.request.url.indexOf('firestore.googleapis.com') === -1) || (eventResp.request.url.indexOf('firestore') === -1) || (eventResp.request.url.indexOf('firebase') === -1) || (eventResp.request.url.indexOf('extension') === -1)) {
+        // if ((eventResp.request.url.indexOf('firestore.googleapis.com') === -1) || (eventResp.request.url.indexOf('firestore') === -1) || (eventResp.request.url.indexOf('firebase') === -1) || (eventResp.request.url.indexOf('extension') === -1) || (eventResp.request.url.indexOf('google') === -1)) {
+        eventResp.respondWith(
+            caches.match(eventResp.request).then(cacheRes => {
+                return cacheRes || fetch(eventResp.request).then(fetchRes => {
                     // Cache all other dynamic assets
                     return caches.open(dynamicCache).then(cache => {
-                        cache.put(eventParam.request.url, fetchRes.clone());
+                        cache.put(eventResp.request.url, fetchRes.clone());
                         // check cached items size
-                        limitCacheSize(dynamicCache, 20);
+                        limitCacheSize(dynamicCache, 30);
                         return fetchRes;
                     })
                 });
             }).catch(() => {
-                if (eventParam.request.url.indexOf('.html') > -1) {
+                if (eventResp.request.url.indexOf('.html') > -1) {
                     return caches.match('./pages/fallback.html');
                 }
             })
         );
     }
 });
+
+// ------------------------------------------------------------------------------------------------------------
