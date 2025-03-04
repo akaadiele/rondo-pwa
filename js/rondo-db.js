@@ -1,8 +1,8 @@
-const rondoUserInfoCollection = 'rondo-user-info';  // Firestore DB Collection name
+// const rondoUserInfoCollection = 'rondo-user-info';  // Firestore DB Collection name
 
 // ------------------------------------------------------------------------------------------------------------
 
-// // // Still under testing: <<<
+// // // Still under testing: [Possible future use] <<<
 // // // Enable offline data / persistence
 // // rondoDb.enablePersistence()
 // //     .catch(function (err) {

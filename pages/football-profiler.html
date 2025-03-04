@@ -81,16 +81,16 @@
         </div>
 
         <div class="row justify-content-center align-items-center text-center mx-auto my-auto w-50">
-            <img src="../img/kick-ball.jpg" alt="..." class="rounded d-block" id="profilerPic">
+            <img src="../img/kick-ball.jpg" alt="Profile Image" class="rounded mx-auto d-block" id="profilerPic">
         </div>
 
         <hr class="border border-dark border-3 opacity-30 w-100 my-3">
 
         <div class="row align-items-center mx-auto px-3 mt-3 w-100">
             <div class="input-group mb-3">
-                <span class="input-group-text" id="usernameLabelView">Username</span>
+                <span class="input-group-text" id="usernameLabelView" hidden>Username</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                    aria-describedby="usernameLabelView" value="" id="usernameView" disabled>
+                    aria-describedby="usernameLabelView" value="" id="usernameView" disabled hidden>
             </div>
 
             <div class="input-group mb-3">
@@ -135,14 +135,14 @@
         <div class="row align-items-center gap-2">
             <div class="row gap-2 mx-auto">
                 <a class="col btn links border border-dark border-2" href="#" role="button" data-bs-toggle="modal"
-                    data-bs-target="#editProfileModal" id="editProfile">Edit Profile</a>
+                    data-bs-target="#editProfileModal" id="editProfile"> ... </a>
 
                 <a class="col btn links border border-dark border-2" href="#" role="button" data-bs-toggle="modal"
                     data-bs-target="#loadProfileModal" id="loadProfile">Load Profile</a>
             </div>
             <div class="row mx-auto hide" id="clearDiv">
                 <a class="btn links border border-dark border-2" href="#" role="button" data-bs-toggle="modal"
-                    data-bs-target="#clearProfileModal" id="clearProfile">Clear Profile</a>
+                    data-bs-target="#clearProfileModal" id="clearProfile">Unload Profile</a>
             </div>
         </div>
 
@@ -161,73 +161,73 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content text-bg-dark">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 fontColor1" id="editProfileModalLabel">Edit Profile</h1>
+                    <h1 class="modal-title fs-5 fontColor1" id="editProfileModalLabel">Profile</h1>
                     <button type="button" class="btn-close lightBg" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="usernameLabelEdit">Username (*)</span>
+                        <span class="input-group-text" id="usernameLabelEdit">Username &nbsp;<em><small>[*]</small></em></span>
                         <input type="text" class="form-control" aria-label="Sizing example input"
                             aria-describedby="usernameLabelEdit" value="" id="usernameEdit" disabled required>
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="profileNameEditLabel">Name</span>
+                        <span class="input-group-text" id="profileNameEditLabel">Name &nbsp;<em><small>[*]</small></em></span>
                         <input type="text" class="form-control" aria-label="Sizing example input"
                             aria-describedby="profileNameEditLabel" value="" id="profileNameEdit">
                     </div>
 
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="positionSelectEdit">Position</label>
+                        <label class="input-group-text" for="positionSelectEdit">Position &nbsp;<em><small>[*]</small></em></label>
                         <select class="form-select" id="positionSelectEdit">
                             <!-- <option value="" id="defaultPosition"></option> -->
                         </select>
                     </div>
 
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="nationalitySelectEdit">Nationality</label>
+                        <label class="input-group-text" for="nationalitySelectEdit">Nationality &nbsp;<em><small>[*]</small></em></label>
                         <select class="form-select" id="nationalitySelectEdit">
                             <!-- <option value="" id="defaultNationality"></option> -->
                         </select>
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="profileAgeEditLabel">Age</span>
+                        <span class="input-group-text" id="profileAgeEditLabel">Age &nbsp;<em><small>[*]</small></em></span>
                         <input type="number" class="form-control" aria-label="Sizing example input"
                             aria-describedby="profileAgeEditLabel" value="" id="profileAgeEdit" min="0" max="99">
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="profileHeightEditLabel">Height (cm)</span>
+                        <span class="input-group-text" id="profileHeightEditLabel">Height (cm) &nbsp;<em><small>[*]</small></em></span>
                         <input type="number" class="form-control" aria-label="Sizing example input"
                             aria-describedby="profileHeightEditLabel" value="" id="profileHeightEdit" min="50"
                             max="300">
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="profileWeightEditLabel">Weight (kg)</span>
+                        <span class="input-group-text" id="profileWeightEditLabel">Weight (kg) &nbsp;<em><small>[*]</small></em></span>
                         <input type="number" class="form-control" aria-label="Sizing example input"
                             aria-describedby="profileWeightEditLabel" value="" id="profileWeightEdit" min="10"
                             max="200">
                     </div>
 
                     <!-- Uploading profile picture -->
-                    <!-- <hr class="border border-light border-3 opacity-30">
+                    <hr class="border border-light border-3 opacity-30">
                     <div class="input-group justify-content-center gap-1">
                         <div class="row">
                             <label class="input-group-text" for="uploadImage">Upload Profile Image</label>
                         </div>
 
                         <div class="row">
-                            <input type="file" class="form-control" id="uploadImage" accept="image/*" multiple="false"
-                                onchange="uploadProfilerPic()">
+                            <input type="file" class="form-control" id="uploadImage" accept="image/*" multiple="false">
+                            <!-- onchange="uploadProfilerPic()"> -->
                         </div>
-                    </div> -->
+                    </div>
 
                 </div>
                 <div class="modal-footer">
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="passwordLabel">Enter Password (*)</span>
+                        <span class="input-group-text" id="passwordLabel">Enter Password &nbsp;<em><small>[*]</small></em></span>
                         <input type="password" class="form-control" aria-label="Sizing example input"
                             aria-describedby="passwordLabel" value="" id="passwordEdit" required>
                     </div>
@@ -283,6 +283,9 @@
     <!-- Firestore / Firebase Setups -->
     <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-compat-storage.js"></script>
+    
     <script>
         // Initialize Firebase
         var config = {
@@ -296,6 +299,7 @@
         };
         firebase.initializeApp(config);
         const rondoDb = firebase.firestore();
+        const rondoStorage = firebase.storage();    // Reference to the cloud storage
     </script>
 
 

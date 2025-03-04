@@ -1,9 +1,10 @@
-const staticCache = 'static-v001';
-const dynamicCache = 'dynamic-v001';
+// Live caches
+const staticCache = 'static-v0001';
+const dynamicCache = 'dynamic-v0001';
 
-// Testing
-// const staticCache = 'static-v01-00';
-// const dynamicCache = 'dynamic-v01-00';
+// // Test caches
+// const staticCache = 'static-v01-02';
+// const dynamicCache = 'dynamic-v01-02';
 
 const staticCacheAssets = [
     './',
@@ -77,7 +78,7 @@ self.addEventListener('activate', eventResp => {
 // 'fetch' events
 self.addEventListener('fetch', eventResp => {
     // Exclude firestore and google APIs
-    if ((eventResp.request.url.indexOf('firestore.googleapis.com') === -1) || (eventResp.request.url.indexOf('firestore') === -1) || (eventResp.request.url.indexOf('firebase') === -1) || (eventResp.request.url.indexOf('extension') === -1)) {
+    if ( (eventResp.request.url.indexOf('fire') === -1) ) {
         // if ((eventResp.request.url.indexOf('firestore.googleapis.com') === -1) || (eventResp.request.url.indexOf('firestore') === -1) || (eventResp.request.url.indexOf('firebase') === -1) || (eventResp.request.url.indexOf('extension') === -1) || (eventResp.request.url.indexOf('google') === -1)) {
         eventResp.respondWith(
             caches.match(eventResp.request).then(cacheRes => {

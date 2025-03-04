@@ -113,6 +113,13 @@ function updateSettingsInfo() {
         rondoDb.collection(rondoUserInfoCollection).doc(storedUsername).get().then((doc) => {
             if (doc.exists) {
                 let rondoUserData = doc.data();
+
+                if ((rondoUserData.imageUrl != '') && (rondoUserData.imageUrl != undefined)) {
+                // imageUrl exists
+                imageUrl_value = rondoUserData.imageUrl;
+                } else {
+                    imageUrl_value = "";
+                }
                 const userInfo = {
                     name: rondoUserData.name,
                     position: rondoUserData.position,
@@ -120,9 +127,10 @@ function updateSettingsInfo() {
                     age: rondoUserData.age,
                     height: rondoUserData.height,
                     weight: rondoUserData.weight,
+                    password: rondoUserData.password,
+                    imageUrl: imageUrl_value,
                     theme: theme_value,
-                    language: language_value,
-                    password: rondoUserData.password
+                    language: language_value
                 };
 
                 rondoDb.collection(rondoUserInfoCollection).doc(storedUsername).set(userInfo)
