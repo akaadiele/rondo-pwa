@@ -1,6 +1,6 @@
 // Live caches
-const staticCache = 'static-v0001';
-const dynamicCache = 'dynamic-v0001';
+const staticCache = 'static-v001';
+const dynamicCache = 'dynamic-v001';
 
 // // Test caches
 // const staticCache = 'static-v01-02';
@@ -87,7 +87,7 @@ self.addEventListener('fetch', eventResp => {
                     return caches.open(dynamicCache).then(cache => {
                         cache.put(eventResp.request.url, fetchRes.clone());
                         // check cached items size
-                        limitCacheSize(dynamicCache, 30);
+                        limitCacheSize(dynamicCache, 20);
                         return fetchRes;
                     })
                 });
