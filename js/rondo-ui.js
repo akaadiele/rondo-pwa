@@ -1,10 +1,21 @@
 // <-- Generic reusable codes, global variables, etc -->
 
-const apiKey = "AIzaSyCbvT_-aAvCZGD1uR70C5CUVHCEh3UK4Yo";
+// ------------------------------------------------------------------------------------------------------------
+// Variables
+
+const rondoUserInfoCollection = 'rondo-user-info';  // Firestore DB Collection name
+const googleMapApiKey = "AIzaSyCbvT_-aAvCZGD1uR70C5CUVHCEh3UK4Yo";  // Google Maps API key
+
+// Local Storage Items
 const localStorageRondoUsername = "rondoUsername";
-const localStorageRondoProfilePic = "rondoProfilePic";
+const localStorageRondoProfilePic = "rondoProfilePicUrl";
 const localStorageRondoShortName = "rondoShortName";
 
+// >>>
+
+
+// ------------------------------------------------------------------------------------------------------------
+// Functions
 
 function createNode(element) {
     // Function to create new HTML element
@@ -26,25 +37,27 @@ function showSnackbar(snackbarMessage) {
 
     let bodyElement = document.getElementById("body");
     append(bodyElement, snackbarDiv);
-    snackbarDiv.className = "show";
-
+    
     // Add the "show" class to DIV
-    snackbarDiv.setAttribute('class', 'show');
+    snackbarDiv.className = "show";
 
     // After 3 seconds, remove the show class from DIV
     setTimeout(function () { snackbarDiv.className = snackbarDiv.className.replace("show", ""); }, 3000);
 }
 
-
-
+// ------------------------------------------------------------------------------------------------------------
+// For 'home.html'
 
 const urlPageSplit = document.URL.split('pages/'); const pageName = urlPageSplit[1];
-if (pageName == "home.html") {
+// if (pageName == "home.html") {
+if (document.getElementById("recognizeUser")) {
     // Get items from local storage
     let storedShortName = localStorage.getItem(localStorageRondoShortName);
 
-    // Modify the welcome text
+    // Modify the text
     if ((storedShortName != "") && (storedShortName != undefined)) {
-        document.getElementById("welcomeText").innerHTML = "Welcome, " + storedShortName
+        document.getElementById("recognizeUser").innerHTML += " " + storedShortName;
     }
 }
+
+// ------------------------------------------------------------------------------------------------------------

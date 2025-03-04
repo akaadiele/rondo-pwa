@@ -1,5 +1,13 @@
-const positionSelect = document.getElementById("positionSelectEdit");   // Getting HTML element
-const nationalitySelect = document.getElementById("nationalitySelectEdit");     // Getting HTML element
+// ------------------------------------------------------------------------------------------------------------
+// Getting HTML elements
+const positionSelect = document.getElementById("positionSelectEdit");
+const nationalitySelect = document.getElementById("nationalitySelectEdit");
+
+// Declaring global variables
+let imageDownloadUrl = '', imageUploadErrMsg = "";
+let imageUploadStatus = 0;    // 0: No image || 1: Image uploaded success || 2: Image upload error
+
+let checkLoading; let intervalSeconds = 1; let checkCount = 0; let checkCountMax = 3;  // Interval variables
 
 
 // Get items from local storage
@@ -21,20 +29,20 @@ document.getElementById('passwordLoad').addEventListener('keydown', (clicked) =>
 })
 
 
-
 // Load profile data for edit
-document.getElementById("editProfile").addEventListener('click', loadProfileDataForEdit);
+document.getElementById("editProfile").addEventListener('click', populateDataForEdit);
 
-// Clear profile data
+// Clear/Unload profile data
 document.getElementById("clearProfile").addEventListener('click', clearProfileData);
 
 // Create new or update existing profile
 document.getElementById("createUpdateButton").addEventListener('click', createUpdateInfo);
 
 
+// ------------------------------------------------------------------------------------------------------------
+// Functions
 
-
-// Fetch country info from API
+// Fetch country info
 function getNationalities() {
     const countriesJson = "../js/json/countries.json";   // Path to file
     // 20250303001747
@@ -55,12 +63,12 @@ function getNationalities() {
         })
         .catch(function (error) {
             // console.log('error: ', error);
-            // nationalitySelect.innerHTML = `<option value="">Error loading options</option>`;
             nationalitySelect.innerHTML = ``
         });
 }
 
-// Fetch positions from json file
+
+// Fetch positions info
 function getPositions() {
     const positionsJson = "../js/json/positions.json";   // Path to file
 
@@ -76,15 +84,14 @@ function getPositions() {
         })
         .catch(function (error) {
             // console.log('error: ', error);
-            // positionSelect.innerHTML += `<option value="">Error loading options</option>`;
             positionSelect.innerHTML = ``
         });
 }
 
 
-
 // Get user data from firebase
 function initialProfilerData() {
+    storedUsername = localStorage.getItem(localStorageRondoUsername);
     if (storedUsername) {
         document.getElementById("usernameView").value = storedUsername;
 
@@ -110,6 +117,7 @@ function initialProfilerData() {
                 }
 
                 document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
+                document.getElementById("editProfile").innerHTML = `Edit Profile`
             } else {
                 // doc.data() will be undefined in this case
                 // console.log("No such document!");
@@ -130,9 +138,11 @@ function initialProfilerData() {
 }
 
 
+// Load user data from firebase
 function loadProfilerData() {
+    storedUsername = localStorage.getItem(localStorageRondoUsername);
     if (storedUsername) {
-        showSnackbar("An existing profile already loaded");
+        showSnackbar("Existing profile already loaded");
     } else {
         let username = document.getElementById("usernameLoad").value;
         let passwordInput = document.getElementById("passwordLoad").value;
@@ -155,13 +165,9 @@ function loadProfilerData() {
                         // document.getElementById("languageSelect").value = rondoUserData.language;
 
 
-                        const urlSplit = document.URL.split('?pitch='); const place_id = urlSplit[1];
-
-
+                        // Extracting short name 
                         let fullName = rondoUserData.name;
                         let fullNameSplit = fullName.split(' '); let shortName = fullNameSplit[0];
-                        console.log('fullName', fullName); console.log('shortName', shortName);
-
 
 
                         // Set local storage items
@@ -209,7 +215,12 @@ function loadProfilerData() {
 
 
 
-function loadProfileDataForEdit() {
+// Pre-fill data on Profile modal
+function populateDataForEdit() {
+
+    document.getElementById("uploadImage").value = ""
+    document.getElementById("passwordEdit").value = ""
+
 
     if (document.getElementById("usernameView").value) {
         document.getElementById("usernameEdit").value = document.getElementById("usernameView").value;
@@ -228,6 +239,7 @@ function loadProfileDataForEdit() {
         document.getElementById("profileAgeEdit").value = document.getElementById("profileAgeView").value;
         document.getElementById("profileHeightEdit").value = document.getElementById("profileHeightView").value;
         document.getElementById("profileWeightEdit").value = document.getElementById("profileWeightView").value;
+
     } else {
         // New profile
         document.getElementById("usernameEdit").disabled = false;
@@ -242,13 +254,14 @@ function loadProfileDataForEdit() {
 }
 
 
+// Clear/Unload profile
 function clearProfileData() {
     localStorage.setItem(localStorageRondoUsername, "");
     localStorage.removeItem(localStorageRondoUsername);
-    
+
     localStorage.setItem(localStorageRondoProfilePic, "");
     localStorage.removeItem(localStorageRondoProfilePic);
-    
+
     localStorage.setItem(localStorageRondoShortName, "");
     localStorage.removeItem(localStorageRondoShortName);
 
@@ -257,11 +270,12 @@ function clearProfileData() {
 
 
 
+// Create/Update Profile
 function createUpdateInfo() {
     let createUpdateUsername = document.getElementById("usernameEdit").value;
-    userDisabled = document.getElementById("usernameEdit").disabled;
-
-
+    let userDisabled = document.getElementById("usernameEdit").disabled;
+    storedUsername = localStorage.getItem(localStorageRondoUsername);
+    
 
     if (document.getElementById("positionSelectEdit").value != "") {
         newPosition = document.getElementById("positionSelectEdit").value;
@@ -286,38 +300,59 @@ function createUpdateInfo() {
             } else {
                 // New profile
 
-                const userInfo = {
-                    name: document.getElementById("profileNameEdit").value,
-                    position: newPosition,
-                    nationality: newNationality,
-                    age: document.getElementById("profileAgeEdit").value,
-                    height: document.getElementById("profileHeightEdit").value,
-                    weight: document.getElementById("profileWeightEdit").value,
-                    password: document.getElementById("passwordEdit").value,
-                    // imageUrl: imageDataUrl,
-                    theme: "",
-                    language: ""
-                };
+                if (imageUploadStatus != 2) {
+                    // Confirm no image upload error
 
-                rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).set(userInfo)
-                    .catch(err => {
-                        // console.log(err);
-                        showSnackbar("Error updating profile..");
-                        document.getElementById("clearDiv").setAttribute('class', 'row mx-auto hide');
-                        clearProfileData();
-                    });
+                    if ((imageUploadStatus == 0) || (imageDownloadUrl == undefined)) {
+                        // no new image uploaded for new profile
+                        imageDownloadUrl = '';
+                    }
 
-                localStorage.setItem(localStorageRondoUsername, createUpdateUsername);  // Set username on local storage
-                document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
-                
-                showSnackbar("Done...");
+                    if ((document.getElementById("profileNameEdit").value != '') && (newPosition != '') && (newNationality != '') && (document.getElementById("profileAgeEdit").value != '') && (document.getElementById("profileHeightEdit").value != '') && (document.getElementById("profileWeightEdit").value != '') && (document.getElementById("passwordEdit").value != '')) {
+                        // Confirm input on all mandatory fields
 
-                initialProfilerData();
-                // location.reload();
-                document.getElementById("passwordEdit").value = "";
+                        const userInfo = {
+                            name: document.getElementById("profileNameEdit").value,
+                            position: newPosition,
+                            nationality: newNationality,
+                            age: document.getElementById("profileAgeEdit").value,
+                            height: document.getElementById("profileHeightEdit").value,
+                            weight: document.getElementById("profileWeightEdit").value,
+                            password: document.getElementById("passwordEdit").value,
+                            imageUrl: imageDownloadUrl,
+                            theme: "",
+                            language: ""
+                        };
+
+                        // Proceed when no error encountered with image upload
+                        rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).set(userInfo)
+                            .catch(err => {
+                                // console.log(err);
+                                showSnackbar("Error updating profile..");
+                                document.getElementById("clearDiv").setAttribute('class', 'row mx-auto hide');
+                                clearProfileData();
+                            });
+
+                        localStorage.setItem(localStorageRondoUsername, createUpdateUsername);  // Set username on local storage
+                        localStorage.setItem(localStorageRondoProfilePic, imageDownloadUrl);  // Set image URL on local storage
+
+                        document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
+
+                        showSnackbar("New Profile created");
+
+                        checkLoading = setInterval(checkLoadingScreenStatus, intervalSeconds * 1000); // Start timed event
+                                                
+                        document.getElementById("passwordEdit").value = "";
+                    } else {
+                        showSnackbar("! Fill all mandatory fields - [*]");
+                    }
+
+                } else {
+                    showSnackbar(imageUploadErrMsg);
+                }
             }
         }).catch((error) => {
-            // console.log("Error getting document:", error);
+            console.log("Error getting document:", error);
             showSnackbar("Error updating profile.");
         });
     } else {
@@ -341,36 +376,67 @@ function createUpdateInfo() {
                         newLanguage = "";
                     }
 
-                    const userInfo = {
-                        name: document.getElementById("profileNameEdit").value,
-                        position: newPosition,
-                        nationality: newNationality,
-                        age: document.getElementById("profileAgeEdit").value,
-                        height: document.getElementById("profileHeightEdit").value,
-                        weight: document.getElementById("profileWeightEdit").value,
-                        password: rondoUserData.password,
-                        // imageUrl: imageDataUrl,
-                        theme: newTheme,
-                        language: newLanguage
-                    };
-
-                    rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).set(userInfo)
-                        .catch(err => {
-                            // console.log(err);
-                            showSnackbar("Error updating profile...");
-                            document.getElementById("clearDiv").setAttribute('class', 'row mx-auto hide');
-                            clearProfileData();
-                        });
 
 
-                    localStorage.setItem(localStorageRondoUsername, createUpdateUsername);  // Set username on local storage
-                    document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
-                    
-                    showSnackbar("Done...");
 
-                    initialProfilerData();
-                    // location.reload();
-                    document.getElementById("passwordEdit").value = "";
+                    if (imageUploadStatus != 2) {
+                        // Confirm no image upload error
+
+                        if ((imageUploadStatus == 0) || (imageDownloadUrl == undefined)) {
+                            // no new image uploaded for new profile
+
+                            storedProfilePic = localStorage.getItem(localStorageRondoProfilePic);
+                            if (storedProfilePic) {
+                                imageDownloadUrl = storedProfilePic;
+                            } else {
+                                imageDownloadUrl = ''
+                            }
+                        }
+
+                        if ((document.getElementById("profileNameEdit").value != '') && (newPosition != '') && (newNationality != '') && (document.getElementById("profileAgeEdit").value != '') && (document.getElementById("profileHeightEdit").value != '') && (document.getElementById("profileWeightEdit").value != '') && (document.getElementById("passwordEdit").value != '')) {
+                            // Confirm input on all mandatory fields
+
+                            const userInfo = {
+                                name: document.getElementById("profileNameEdit").value,
+                                position: newPosition,
+                                nationality: newNationality,
+                                age: document.getElementById("profileAgeEdit").value,
+                                height: document.getElementById("profileHeightEdit").value,
+                                weight: document.getElementById("profileWeightEdit").value,
+                                password: rondoUserData.password,
+                                imageUrl: imageDownloadUrl,
+                                theme: newTheme,
+                                language: newLanguage
+                            };
+
+                            // Proceed when no error encountered with image upload
+                            rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).set(userInfo)
+                                .catch(err => {
+                                    // console.log(err);
+                                    showSnackbar("Error updating profile...");
+                                    document.getElementById("clearDiv").setAttribute('class', 'row mx-auto hide');
+                                    clearProfileData();
+                                });
+
+
+                            localStorage.setItem(localStorageRondoUsername, createUpdateUsername);  // Set username on local storage
+                            localStorage.setItem(localStorageRondoProfilePic, imageDownloadUrl);  // Set image URL on local storage
+
+                            document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
+
+                            showSnackbar("Profile updated");
+
+                            checkLoading = setInterval(checkLoadingScreenStatus, intervalSeconds * 1000); // Start timed event
+                                                        
+                            document.getElementById("passwordEdit").value = "";
+
+                        } else {
+                            showSnackbar("! Fill all mandatory fields - [*]");
+                        }
+                    } else {
+                        showSnackbar(imageUploadErrMsg);
+                    }
+
                 } else {
                     // doc.data() will be undefined in this case
                     // console.log("No such document!");
@@ -383,42 +449,82 @@ function createUpdateInfo() {
             }
         }).catch((error) => {
             // console.log("Error getting document:", error);
-            showSnackbar("Error updating profile.");
+            showSnackbar("Error updating profile");
         });
     }
 }
 
 
+// ------------------------------------------------------------------------------------------------------------
+// Uploading image and retrieving URL with firebase storage
 
-// // Upload Profiler picture
-// function uploadProfilerPic() {
-//     console.log('uploading pic');
-//     let uploadImage = document.getElementById("uploadImage");
+document.getElementById("uploadImage").addEventListener("change", function () {
+    const imageUpload = document.getElementById("uploadImage").files[0];
+    uploadFile(imageUpload);
+});
 
-//     uploadImage.onchange = function () {
-//         const reader = new FileReader();
-//         console.log(reader);
+// Uploading image
+function uploadFile(imageFile) {
 
-//         reader.addEventListener('load', () => {
-//             console.log(reader);
-//             console.log(reader.result);
+    // Getting the file extension
+    let imageFileSplit = imageFile.name.split('.'); let imageFileSplitLen = imageFileSplit.length;
+    let imageFileExtension = imageFileSplit[imageFileSplitLen - 1];
 
-//             imageDataUrl = reader.result;
-//         });
+    const rondoStorageRef = rondoStorage.ref();     // Create a storage reference from firebase storage service
+    const rondoImageRef = rondoStorageRef.child('rondoUserImages/' + document.getElementById("usernameEdit").value + '.' + imageFileExtension);    // Reference pointing to the image file
 
-//         reader.readAsDataURL(uploadImage.files[0]);
-//     }
-// }
+    rondoImageRef.put(imageFile)
+        .then((snapshot) => {
+            rondoImageRef.getDownloadURL()
+                .then((downloadUrl) => {
+                    imageDownloadUrl = downloadUrl;
+                    imageUploadStatus = 1;    // 1: Image uploaded success
 
+                    showSnackbar("Image upload successful");
+                })
+                .catch((error) => {
+                    imageUploadStatus = 2;    // 2: Image upload error
+                    // console.log('error', error);
+                    imageUploadErrMsg = "Error retrieving image";
+                });
+        })
+        .catch((error) => {
+            imageUploadStatus = 2;    // 2: Image upload error
 
+            // console.log('error', error);
+            imageUploadErrMsg = "Image upload failed";
 
-// ###
-function uploadProfilerPic() {
-    let imageDataUrl = "";
-    document.getElementById("uploadImage").addEventListener("change", function () {
-        console.log('uploading pic');
-        imageDataUrl = URL.createObjectURL(document.getElementById("uploadImage").files[0]);
-        console.log('imageDataUrl', imageDataUrl);
-    });
+            // switch (error.code) {
+            //     case 'storage/unauthorized':
+            //         console.log('error.code', error.code, "User doesn't have permission to access the object");
+            //         break;
+            //     case 'storage/canceled':
+            //         console.log('error.code', error.code, "User canceled the upload");
+            //         break;
+            //     case 'storage/unknown':
+            //         console.log('error.code', error.code, "Unknown error occurred, inspect error.serverResponse");
+            //         break;
+            // }
+        });
 }
-// ###
+
+
+// ------------------------------------------------------------------------------------------------------------
+// Timed event to trigger 'initialProfilerData()' function automatically
+
+checkLoading = setInterval(checkLoadingScreenStatus, intervalSeconds * 1000); // Start timed event
+
+function checkLoadingScreenStatus() {
+    checkCount += 1;
+    // console.log('checkCount', checkCount);
+
+    if (checkCount < checkCountMax) {
+        initialProfilerData();
+    } else {
+        checkCount = 0;
+        // Stop timed event
+        clearInterval(checkLoading);
+    }
+}
+
+// ------------------------------------------------------------------------------------------------------------

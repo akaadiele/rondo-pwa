@@ -1,3 +1,4 @@
+// ------------------------------------------------------------------------------------------------------------
 // // Declaring global variables
 
 // Current Geolocation
@@ -14,7 +15,7 @@ let checkCount = 0; let checkCountMax = 3;
 const mileToMeterConv = 1609.34;
 
 // ------------------------------------------------------------------------------------------------------------
-// // Manipulating HTML
+// // Working with HTML elements
 
 // HTML List group for search results
 const searchResultsList = document.getElementById('pitchSearchResults');
