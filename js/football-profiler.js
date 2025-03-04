@@ -2,8 +2,11 @@ const positionSelect = document.getElementById("positionSelectEdit");   // Getti
 const nationalitySelect = document.getElementById("nationalitySelectEdit");     // Getting HTML element
 
 
-// Get username from local storage
+// Get items from local storage
 let storedUsername = localStorage.getItem(localStorageRondoUsername);
+let storedProfilePic = localStorage.getItem(localStorageRondoProfilePic);
+let storedShortName = localStorage.getItem(localStorageRondoShortName);
+
 
 // Load profile data on page load
 document.addEventListener("DOMContentLoaded", initialProfilerData);
@@ -100,6 +103,12 @@ function initialProfilerData() {
                 // document.getElementById("themeSelect").value = rondoUserData.theme;
                 // document.getElementById("languageSelect").value = rondoUserData.language;
 
+
+                if ((rondoUserData.imageUrl != '') && (rondoUserData.imageUrl != undefined)) {
+                    localStorage.setItem(localStorageRondoProfilePic, rondoUserData.imageUrl);
+                    document.getElementById("profilerPic").setAttribute('src', rondoUserData.imageUrl);
+                }
+
                 document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
             } else {
                 // doc.data() will be undefined in this case
@@ -145,7 +154,24 @@ function loadProfilerData() {
                         // document.getElementById("themeSelect").value = rondoUserData.theme;
                         // document.getElementById("languageSelect").value = rondoUserData.language;
 
-                        localStorage.setItem(localStorageRondoUsername, username);  // Set username on local storage
+
+                        const urlSplit = document.URL.split('?pitch='); const place_id = urlSplit[1];
+
+
+                        let fullName = rondoUserData.name;
+                        let fullNameSplit = fullName.split(' '); let shortName = fullNameSplit[0];
+                        console.log('fullName', fullName); console.log('shortName', shortName);
+
+
+
+                        // Set local storage items
+                        localStorage.setItem(localStorageRondoUsername, username);
+                        localStorage.setItem(localStorageRondoShortName, shortName);
+
+                        if ((rondoUserData.imageUrl != '') && (rondoUserData.imageUrl != undefined)) {
+                            localStorage.setItem(localStorageRondoProfilePic, rondoUserData.imageUrl);
+                            document.getElementById("profilerPic").setAttribute('src', rondoUserData.imageUrl);
+                        }
 
                         document.getElementById("usernameLoad").value = "";
                         document.getElementById("passwordLoad").value = "";
@@ -219,6 +245,12 @@ function loadProfileDataForEdit() {
 function clearProfileData() {
     localStorage.setItem(localStorageRondoUsername, "");
     localStorage.removeItem(localStorageRondoUsername);
+    
+    localStorage.setItem(localStorageRondoProfilePic, "");
+    localStorage.removeItem(localStorageRondoProfilePic);
+    
+    localStorage.setItem(localStorageRondoShortName, "");
+    localStorage.removeItem(localStorageRondoShortName);
 
     location.reload();
 }
@@ -253,6 +285,7 @@ function createUpdateInfo() {
                 showSnackbar("Invalid username");
             } else {
                 // New profile
+
                 const userInfo = {
                     name: document.getElementById("profileNameEdit").value,
                     position: newPosition,
@@ -261,6 +294,7 @@ function createUpdateInfo() {
                     height: document.getElementById("profileHeightEdit").value,
                     weight: document.getElementById("profileWeightEdit").value,
                     password: document.getElementById("passwordEdit").value,
+                    // imageUrl: imageDataUrl,
                     theme: "",
                     language: ""
                 };
@@ -275,7 +309,9 @@ function createUpdateInfo() {
 
                 localStorage.setItem(localStorageRondoUsername, createUpdateUsername);  // Set username on local storage
                 document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
+                
                 showSnackbar("Done...");
+
                 initialProfilerData();
                 // location.reload();
                 document.getElementById("passwordEdit").value = "";
@@ -313,6 +349,7 @@ function createUpdateInfo() {
                         height: document.getElementById("profileHeightEdit").value,
                         weight: document.getElementById("profileWeightEdit").value,
                         password: rondoUserData.password,
+                        // imageUrl: imageDataUrl,
                         theme: newTheme,
                         language: newLanguage
                     };
@@ -325,8 +362,10 @@ function createUpdateInfo() {
                             clearProfileData();
                         });
 
+
                     localStorage.setItem(localStorageRondoUsername, createUpdateUsername);  // Set username on local storage
                     document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
+                    
                     showSnackbar("Done...");
 
                     initialProfilerData();
@@ -349,3 +388,37 @@ function createUpdateInfo() {
     }
 }
 
+
+
+// // Upload Profiler picture
+// function uploadProfilerPic() {
+//     console.log('uploading pic');
+//     let uploadImage = document.getElementById("uploadImage");
+
+//     uploadImage.onchange = function () {
+//         const reader = new FileReader();
+//         console.log(reader);
+
+//         reader.addEventListener('load', () => {
+//             console.log(reader);
+//             console.log(reader.result);
+
+//             imageDataUrl = reader.result;
+//         });
+
+//         reader.readAsDataURL(uploadImage.files[0]);
+//     }
+// }
+
+
+
+// ###
+function uploadProfilerPic() {
+    let imageDataUrl = "";
+    document.getElementById("uploadImage").addEventListener("change", function () {
+        console.log('uploading pic');
+        imageDataUrl = URL.createObjectURL(document.getElementById("uploadImage").files[0]);
+        console.log('imageDataUrl', imageDataUrl);
+    });
+}
+// ###
