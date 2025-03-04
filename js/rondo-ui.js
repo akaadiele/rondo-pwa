@@ -2,6 +2,8 @@
 
 const apiKey = "AIzaSyCbvT_-aAvCZGD1uR70C5CUVHCEh3UK4Yo";
 const localStorageRondoUsername = "rondoUsername";
+const localStorageRondoProfilePic = "rondoProfilePic";
+const localStorageRondoShortName = "rondoShortName";
 
 
 function createNode(element) {
@@ -31,4 +33,18 @@ function showSnackbar(snackbarMessage) {
 
     // After 3 seconds, remove the show class from DIV
     setTimeout(function () { snackbarDiv.className = snackbarDiv.className.replace("show", ""); }, 3000);
+}
+
+
+
+
+const urlPageSplit = document.URL.split('pages/'); const pageName = urlPageSplit[1];
+if (pageName == "home.html") {
+    // Get items from local storage
+    let storedShortName = localStorage.getItem(localStorageRondoShortName);
+
+    // Modify the welcome text
+    if ((storedShortName != "") && (storedShortName != undefined)) {
+        document.getElementById("welcomeText").innerHTML = "Welcome, " + storedShortName
+    }
 }
