@@ -3,15 +3,18 @@
 // ------------------------------------------------------------------------------------------------------------
 // Variables
 
-const rondoUserInfoCollection = 'rondo-user-info';  // Firestore DB Collection name
-const googleMapApiKey = "AIzaSyCbvT_-aAvCZGD1uR70C5CUVHCEh3UK4Yo";  // Google Maps API key
+// Firestore DB Collection
+const rondoUserInfoCollection = 'rondo-user-info';  // User Info
+const rondoUserSettingsCollection = 'rondo-user-settings';  // User Settings
+
+// Google Maps API
+const googleMapApiKey = "AIzaSyCbvT_-aAvCZGD1uR70C5CUVHCEh3UK4Yo";
 
 // Local Storage Items
 const localStorageRondoUsername = "rondoUsername";
 const localStorageRondoProfilePic = "rondoProfilePicUrl";
+const localStorageRondoProfilePicName = "rondoProfilePicName";
 const localStorageRondoShortName = "rondoShortName";
-
-// >>>
 
 
 // ------------------------------------------------------------------------------------------------------------

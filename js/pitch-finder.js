@@ -8,7 +8,7 @@ let currentLat, currentLng;
 let autocomplete_placeId;
 
 // Interval variables
-let checkLoading; let intervalSeconds = 5;
+let checkLoading; let intervalSeconds = 10;
 let checkCount = 0; let checkCountMax = 3;
 
 // Conversion value 
@@ -42,7 +42,7 @@ document.getElementById('searchBox').addEventListener('keydown', (clicked) => {
         if (document.getElementById('searchBox').value == "") {
             getCurrentLocation();
         } else {
-            tempDisplayMessage(`! Select from dropdown...`);
+            tempDisplayMessage(`<small>! Select from dropdown...</small>`);
         }
     }
 })
@@ -127,7 +127,7 @@ function onPlaceChanged() {
     let place = autocomplete.getPlace();
 
     if (!place.formatted_address) {
-        tempDisplayMessage(`! Select from dropdown...`);
+        tempDisplayMessage(`<small>! Select from dropdown...</small>`);
     } else {
         document.getElementById('searchBox').placeholder = place.place_id;
         document.getElementById('searchBox').value = place.name + ", " + place.formatted_address;
@@ -175,7 +175,10 @@ function getCoordinatesForPlaceID(placeId) {
 // Nearby search for pitch with Google API
 function googleNearbySearch(latitude, longitude, location) {
     loadingScreenShow();
-    checkLoading = setInterval(checkLoadingScreenStatus, intervalSeconds * 1000); // Start timed event
+
+    if (checkCount == 0) {
+        checkLoading = setInterval(checkLoadingScreenStatus, intervalSeconds * 1000); // Start timed event
+    }
 
     // Get radius in miles and convert to meters
     let searchRadius;
@@ -247,7 +250,7 @@ function googleNearbySearch(latitude, longitude, location) {
 // Show loading screen
 function loadingScreenShow() {
     searchResultsList.innerHTML = '';
-    tempDisplayMessage(`Searching for nearby pitch(es)...<br><em><small>(Ensure you are online)</small></em>`);
+    tempDisplayMessage(`<small>Searching for nearby pitch(es)...</small><br><em><small>(Ensure you are online)</small></em>`);
     document.getElementById("loadingDiv").hidden = "";
 }
 
@@ -255,21 +258,22 @@ function loadingScreenShow() {
 function loadingScreenHide() {
     searchResultsList.innerHTML = '';
     document.getElementById("loadingDiv").hidden = true;
-    clearInterval(checkLoading);    // Stop timed event
 }
 
 
 // Timed event to refresh search automatically
 function checkLoadingScreenStatus() {
     checkCount += 1;
-    // console.log('checkCount', checkCount);
+    // console.log('checkCount: ', checkCount);
+
     if ((document.getElementById("loadingDiv").hidden == "") && (checkCount < checkCountMax)) {
         refreshSearch();
     } else {
-        checkCount = 0;
         // Stop timed event
+        checkCount = 0;
         clearInterval(checkLoading);
-        tempDisplayMessage(`No nearby pitch(es)<br><em><small>Try a different location or radius</small></em>`);
+
+        tempDisplayMessage(`<small>No nearby pitch(es) found</small><br><em><small>- Check connection,<br>- Try a different location or radius</small></em>`);
     }
 }
 

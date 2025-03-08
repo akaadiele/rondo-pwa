@@ -115,6 +115,11 @@ input[type="radio"]:checked {
     visibility: visible;
 }
 
+input[type="checkbox"]:checked {
+    accent-color: var(--color3);
+    background-color: var(--color5);
+    border-color: var(--color4);
+}
 
 
 /* Snackbar CSS setup */

@@ -4,16 +4,20 @@ const positionSelect = document.getElementById("positionSelectEdit");
 const nationalitySelect = document.getElementById("nationalitySelectEdit");
 
 // Declaring global variables
-let imageDownloadUrl = '', imageUploadErrMsg = "";
+let imageDownloadUrl = '', imageUploadErrMsg = "", imageFileName = "";
 let imageUploadStatus = 0;    // 0: No image || 1: Image uploaded success || 2: Image upload error
 
-let checkLoading; let intervalSeconds = 1; let checkCount = 0; let checkCountMax = 3;  // Interval variables
+let checkLoading; let intervalSeconds = 0.5; let checkCount = 0; let checkCountMax = 3;  // Interval variables
 
 
 // Get items from local storage
 let storedUsername = localStorage.getItem(localStorageRondoUsername);
 let storedProfilePic = localStorage.getItem(localStorageRondoProfilePic);
+let storedProfilePicName = localStorage.getItem(localStorageRondoProfilePicName);
 let storedShortName = localStorage.getItem(localStorageRondoShortName);
+
+// Create a storage reference from firebase storage service
+const rondoStorageRef = rondoStorage.ref();
 
 
 // Load profile data on page load
@@ -107,13 +111,16 @@ function initialProfilerData() {
                 document.getElementById("profileAgeView").value = rondoUserData.age;
                 document.getElementById("profileHeightView").value = rondoUserData.height;
                 document.getElementById("profileWeightView").value = rondoUserData.weight;
-                // document.getElementById("themeSelect").value = rondoUserData.theme;
-                // document.getElementById("languageSelect").value = rondoUserData.language;
 
 
                 if ((rondoUserData.imageUrl != '') && (rondoUserData.imageUrl != undefined)) {
+                    localStorage.setItem(localStorageRondoProfilePicName, rondoUserData.imageFile);
                     localStorage.setItem(localStorageRondoProfilePic, rondoUserData.imageUrl);
                     document.getElementById("profilerPic").setAttribute('src', rondoUserData.imageUrl);
+                } else {
+                    localStorage.setItem(localStorageRondoProfilePicName, "");
+                    localStorage.setItem(localStorageRondoProfilePic, "");
+                    document.getElementById("profilerPic").setAttribute('src', "../img/kick-ball.jpg");
                 }
 
                 document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
@@ -122,18 +129,18 @@ function initialProfilerData() {
                 // doc.data() will be undefined in this case
                 // console.log("No such document!");
                 rondoUserData = "";
-                document.getElementById("editProfile").innerHTML = `New Profile`
+                document.getElementById("editProfile").innerHTML = `Create Profile`
             }
         }).catch((error) => {
             // console.log("Error getting document:", error);
             rondoUserData = "";
-            document.getElementById("editProfile").innerHTML = `New Profile`
+            document.getElementById("editProfile").innerHTML = `Create Profile`
         });
     } else {
         // doc.data() will be undefined in this case
         // console.log("No such document!");
         rondoUserData = "";
-        document.getElementById("editProfile").innerHTML = `New Profile`
+        document.getElementById("editProfile").innerHTML = `Create Profile`
     }
 }
 
@@ -161,8 +168,6 @@ function loadProfilerData() {
                         document.getElementById("profileAgeView").value = rondoUserData.age;
                         document.getElementById("profileHeightView").value = rondoUserData.height;
                         document.getElementById("profileWeightView").value = rondoUserData.weight;
-                        // document.getElementById("themeSelect").value = rondoUserData.theme;
-                        // document.getElementById("languageSelect").value = rondoUserData.language;
 
 
                         // Extracting short name 
@@ -175,8 +180,13 @@ function loadProfilerData() {
                         localStorage.setItem(localStorageRondoShortName, shortName);
 
                         if ((rondoUserData.imageUrl != '') && (rondoUserData.imageUrl != undefined)) {
+                            localStorage.setItem(localStorageRondoProfilePicName, rondoUserData.imageFile);
                             localStorage.setItem(localStorageRondoProfilePic, rondoUserData.imageUrl);
                             document.getElementById("profilerPic").setAttribute('src', rondoUserData.imageUrl);
+                        } else {
+                            localStorage.setItem(localStorageRondoProfilePicName, "");
+                            localStorage.setItem(localStorageRondoProfilePic, "");
+                            document.getElementById("profilerPic").setAttribute('src', "../img/kick-ball.jpg");
                         }
 
                         document.getElementById("usernameLoad").value = "";
@@ -218,8 +228,10 @@ function loadProfilerData() {
 // Pre-fill data on Profile modal
 function populateDataForEdit() {
 
-    document.getElementById("uploadImage").value = ""
-    document.getElementById("passwordEdit").value = ""
+    document.getElementById("uploadImage").value = "";
+    document.getElementById("passwordEdit").value = "";
+    document.getElementById("removeImage").checked = false;
+
 
 
     if (document.getElementById("usernameView").value) {
@@ -262,6 +274,9 @@ function clearProfileData() {
     localStorage.setItem(localStorageRondoProfilePic, "");
     localStorage.removeItem(localStorageRondoProfilePic);
 
+    localStorage.setItem(localStorageRondoProfilePicName, "");
+    localStorage.removeItem(localStorageRondoProfilePicName);
+
     localStorage.setItem(localStorageRondoShortName, "");
     localStorage.removeItem(localStorageRondoShortName);
 
@@ -275,7 +290,7 @@ function createUpdateInfo() {
     let createUpdateUsername = document.getElementById("usernameEdit").value;
     let userDisabled = document.getElementById("usernameEdit").disabled;
     storedUsername = localStorage.getItem(localStorageRondoUsername);
-    
+
 
     if (document.getElementById("positionSelectEdit").value != "") {
         newPosition = document.getElementById("positionSelectEdit").value;
@@ -300,6 +315,11 @@ function createUpdateInfo() {
             } else {
                 // New profile
 
+                if (document.getElementById("removeImage").checked == true) {
+                    removeProfileImage();
+                    showSnackbar("Profile image removed");
+                }
+
                 if (imageUploadStatus != 2) {
                     // Confirm no image upload error
 
@@ -320,9 +340,9 @@ function createUpdateInfo() {
                             weight: document.getElementById("profileWeightEdit").value,
                             password: document.getElementById("passwordEdit").value,
                             imageUrl: imageDownloadUrl,
-                            theme: "",
-                            language: ""
+                            imageFile: imageFileName
                         };
+
 
                         // Proceed when no error encountered with image upload
                         rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).set(userInfo)
@@ -335,13 +355,15 @@ function createUpdateInfo() {
 
                         localStorage.setItem(localStorageRondoUsername, createUpdateUsername);  // Set username on local storage
                         localStorage.setItem(localStorageRondoProfilePic, imageDownloadUrl);  // Set image URL on local storage
+                        localStorage.setItem(localStorageRondoProfilePicName, imageFileName);  // Set image file name on local storage
+
 
                         document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
 
                         showSnackbar("New Profile created");
 
                         checkLoading = setInterval(checkLoadingScreenStatus, intervalSeconds * 1000); // Start timed event
-                                                
+
                         document.getElementById("passwordEdit").value = "";
                     } else {
                         showSnackbar("! Fill all mandatory fields - [*]");
@@ -352,7 +374,7 @@ function createUpdateInfo() {
                 }
             }
         }).catch((error) => {
-            console.log("Error getting document:", error);
+            // console.log("Error getting document:", error);
             showSnackbar("Error updating profile.");
         });
     } else {
@@ -364,20 +386,9 @@ function createUpdateInfo() {
 
                 if (rondoUserData.password == passwordInput) {
 
-                    if (rondoUserData.theme) {
-                        newTheme = rondoUserData.theme;
-                    } else {
-                        newTheme = "";
+                    if (document.getElementById("removeImage").checked == true) {
+                        removeProfileImage();
                     }
-
-                    if (rondoUserData.language) {
-                        newLanguage = rondoUserData.language;
-                    } else {
-                        newLanguage = "";
-                    }
-
-
-
 
                     if (imageUploadStatus != 2) {
                         // Confirm no image upload error
@@ -386,8 +397,10 @@ function createUpdateInfo() {
                             // no new image uploaded for new profile
 
                             storedProfilePic = localStorage.getItem(localStorageRondoProfilePic);
+                            storedProfilePicName = localStorage.getItem(localStorageRondoProfilePicName);
                             if (storedProfilePic) {
                                 imageDownloadUrl = storedProfilePic;
+                                storedProfilePicName
                             } else {
                                 imageDownloadUrl = ''
                             }
@@ -405,9 +418,9 @@ function createUpdateInfo() {
                                 weight: document.getElementById("profileWeightEdit").value,
                                 password: rondoUserData.password,
                                 imageUrl: imageDownloadUrl,
-                                theme: newTheme,
-                                language: newLanguage
+                                imageFile: imageFileName
                             };
+
 
                             // Proceed when no error encountered with image upload
                             rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).set(userInfo)
@@ -421,13 +434,14 @@ function createUpdateInfo() {
 
                             localStorage.setItem(localStorageRondoUsername, createUpdateUsername);  // Set username on local storage
                             localStorage.setItem(localStorageRondoProfilePic, imageDownloadUrl);  // Set image URL on local storage
+                            localStorage.setItem(localStorageRondoProfilePicName, imageFileName);  // Set image file name on local storage
 
                             document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
 
                             showSnackbar("Profile updated");
 
                             checkLoading = setInterval(checkLoadingScreenStatus, intervalSeconds * 1000); // Start timed event
-                                                        
+
                             document.getElementById("passwordEdit").value = "";
 
                         } else {
@@ -470,8 +484,11 @@ function uploadFile(imageFile) {
     let imageFileSplit = imageFile.name.split('.'); let imageFileSplitLen = imageFileSplit.length;
     let imageFileExtension = imageFileSplit[imageFileSplitLen - 1];
 
-    const rondoStorageRef = rondoStorage.ref();     // Create a storage reference from firebase storage service
-    const rondoImageRef = rondoStorageRef.child('rondoUserImages/' + document.getElementById("usernameEdit").value + '.' + imageFileExtension);    // Reference pointing to the image file
+    imageFileName = document.getElementById("usernameEdit").value + '.' + imageFileExtension;
+    localStorage.setItem(localStorageRondoProfilePicName, imageFileName);  // Set image anme on local storage
+
+
+    const rondoImageRef = rondoStorageRef.child('rondoUserImages/' + imageFileName);    // Reference pointing to the image file
 
     rondoImageRef.put(imageFile)
         .then((snapshot) => {
@@ -516,7 +533,6 @@ checkLoading = setInterval(checkLoadingScreenStatus, intervalSeconds * 1000); //
 
 function checkLoadingScreenStatus() {
     checkCount += 1;
-    // console.log('checkCount', checkCount);
 
     if (checkCount < checkCountMax) {
         initialProfilerData();
@@ -525,6 +541,49 @@ function checkLoadingScreenStatus() {
         // Stop timed event
         clearInterval(checkLoading);
     }
+}
+
+// ------------------------------------------------------------------------------------------------------------
+// Removing Profile image
+
+// document.getElementById("removeImage").addEventListener('click', removeProfileImage);
+
+// Function to remove image
+function removeProfileImage() {
+    storedProfilePic = localStorage.getItem(localStorageRondoProfilePic);
+    storedProfilePicName = localStorage.getItem(localStorageRondoProfilePicName);
+
+
+    // Deleting existing image from firebase storage
+    if (imageDownloadUrl != "") {
+        // Create a reference to the file to delete
+        const rondoImageRef = rondoStorageRef.child('rondoUserImages/' + storedProfilePicName);    // Reference pointing to the image file
+
+        // Delete the file
+        rondoImageRef.delete().then(() => {
+            // console.log("File deleted successfully");
+        }).catch((error) => {
+            // console.log("Uh-oh, an error occurred!");
+        });
+    }
+
+    // Resetting variables
+    imageDownloadUrl = ""; imageFileName = "";
+    document.getElementById("uploadImage").value = ""
+
+
+    // Resetting local storage
+    localStorage.setItem(localStorageRondoProfilePic, "");
+    localStorage.removeItem(localStorageRondoProfilePic);
+
+    localStorage.setItem(localStorageRondoProfilePicName, "");
+    localStorage.removeItem(localStorageRondoProfilePicName);
+
+
+    // Resetting default image
+    document.getElementById("profilerPic").setAttribute('src', "../img/kick-ball.jpg");
+
+    // showSnackbar("Profile image removed");
 }
 
 // ------------------------------------------------------------------------------------------------------------

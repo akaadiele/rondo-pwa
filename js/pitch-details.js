@@ -50,7 +50,8 @@ function viewPlace() {
                 contentP2.innerHTML = '';
                 if (place.international_phone_number) {
                     // Include phone number if available
-                    contentP2.innerHTML += `<i class="fa-solid fa-phone"></i>: &nbsp;&nbsp;` + place.international_phone_number;
+                    // <a class="btn btn-light links" href="tel:${place.international_phone_number}"></a>
+                    contentP2.innerHTML += `<i class="fa-solid fa-phone"></i>: &nbsp;&nbsp; <a href="tel:${place.international_phone_number}">` + place.international_phone_number +`</a>`;
                 }
                 if ((place.international_phone_number) && (place.rating)) {
                     // Include demarcation bar if both phone number and rating exist
@@ -64,8 +65,8 @@ function viewPlace() {
                 const contentA = createNode('a');
                 contentA.setAttribute('class', 'btn btn-light links');
                 contentA.setAttribute('href', place.url);
-                // contentA.setAttribute('target', '_blank');
-                contentA.innerHTML = `<i class="fa-brands fa-google"></i>`;
+                contentA.setAttribute('target', '_blank');  // ###
+                contentA.innerHTML = `<i class="fa-brands fa-google"></i> &nbsp <small>Map</small>`;
 
 
                 append(contentDiv, contentH5);
