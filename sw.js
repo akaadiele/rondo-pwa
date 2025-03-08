@@ -1,10 +1,13 @@
 // Live caches
-const staticCache = 'static-v001';
-const dynamicCache = 'dynamic-v001';
+const staticCache = 'static-v002';
+const dynamicCache = 'dynamic-v002';
+const googleApiCache = 'googleApi-v002';
 
 // // Test caches
-// const staticCache = 'static-v01-02';
-// const dynamicCache = 'dynamic-v01-02';
+// const staticCache = 'static-v0001';
+// const dynamicCache = 'dynamic-v0001';
+// const googleApiCache = 'googleApi-v0001';
+
 
 const staticCacheAssets = [
     './',
@@ -16,7 +19,6 @@ const staticCacheAssets = [
     './css/rondo-style.css',
     './js/rondo-app.js',
     './js/rondo-ui.js',
-    './js/rondo-db.js',
     './js/settings.js',
     './js/json/countries.json',
     './js/json/languages.json',
@@ -65,7 +67,7 @@ self.addEventListener('activate', eventResp => {
         caches.keys().then(keys => {
             //console.log(keys);
             return Promise.all(keys
-                .filter(key => (key !== staticCache) && (key !== dynamicCache))
+                .filter(key => (key !== staticCache) && (key !== dynamicCache) && (key !== googleApiCache))
                 // exclude needed caches from deleting
                 .map(key => caches.delete(key))
             );
@@ -83,13 +85,24 @@ self.addEventListener('fetch', eventResp => {
         eventResp.respondWith(
             caches.match(eventResp.request).then(cacheRes => {
                 return cacheRes || fetch(eventResp.request).then(fetchRes => {
-                    // Cache all other dynamic assets
-                    return caches.open(dynamicCache).then(cache => {
-                        cache.put(eventResp.request.url, fetchRes.clone());
-                        // check cached items size
-                        limitCacheSize(dynamicCache, 20);
-                        return fetchRes;
-                    })
+                    // Cache unmatched requests
+                    if (eventResp.request.url.indexOf('maps') > -1) {
+                        // Cache google api assets
+                        return caches.open(googleApiCache).then(cache => {
+                            cache.put(eventResp.request.url, fetchRes.clone());
+                            // check cached items size
+                            limitCacheSize(googleApiCache, 20);
+                            return fetchRes;
+                        })
+                    } else {
+                        // Cache all other dynamic assets
+                        return caches.open(dynamicCache).then(cache => {
+                            cache.put(eventResp.request.url, fetchRes.clone());
+                            // check cached items size
+                            limitCacheSize(dynamicCache, 20);
+                            return fetchRes;
+                        })
+                    }
                 });
             }).catch(() => {
                 if (eventResp.request.url.indexOf('.html') > -1) {
