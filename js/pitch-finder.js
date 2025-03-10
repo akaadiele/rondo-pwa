@@ -1,4 +1,6 @@
 // ------------------------------------------------------------------------------------------------------------
+// checkOnline();  // Check online status
+// ------------------------------------------------------------------------------------------------------------
 // // Declaring global variables
 
 // Current Geolocation
@@ -255,6 +257,8 @@ function loadingScreenShow() {
     searchResultsList.innerHTML = '';
     tempDisplayMessage(`<small>Searching for nearby pitch(es)...</small><br><em><small>(Ensure you are online)</small></em>`);
     document.getElementById("loadingDiv").hidden = "";
+
+    // checkOnline();  // Check online status
 }
 
 // Hide loading screen
@@ -290,5 +294,15 @@ function checkLoadingDivStatus() {
         loadingScreenHide();
     }
 }
+
+// ------------------------------------------------------------------------------------------------------------
+
+// // Error output when Rondo is offline
+// function checkOnline() {
+//     console.log('window.navigator.onLine', window.navigator.onLine);
+//     if (window.navigator.onLine != true) {
+//         tempDisplayMessage(`<em><small>Rondo is currently offline</small></em>`);
+//     }
+// }
 
 // ------------------------------------------------------------------------------------------------------------

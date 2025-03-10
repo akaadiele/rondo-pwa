@@ -4,9 +4,9 @@
 // const googleApiCache = 'googleApi-v002';
 
 // Test caches
-const staticCache = 'static-v0004';
-const dynamicCache = 'dynamic-v0004';
-const googleApiCache = 'googleApi-v0004';
+const staticCache = 'static-v007';
+const dynamicCache = 'dynamic-v007';
+const googleApiCache = 'googleApi-v007';
 
 
 const staticCacheAssets = [
@@ -19,6 +19,8 @@ const staticCacheAssets = [
     './css/rondo-style.css',
     './js/rondo-app.js',
     './js/rondo-ui.js',
+    './js/home.js',
+    './js/pitch-finder.js',
     './js/settings.js',
     './js/json/countries.json',
     './js/json/languages.json',
@@ -29,7 +31,8 @@ const staticCacheAssets = [
     './img/gif/loading.gif',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
-    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'
+    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js',
+    'https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&display=swap'
 ];
 
 // ------------------------------------------------------------------------------------------------------------
