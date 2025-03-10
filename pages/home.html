@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
     <!-- Animate CSS -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
     <!-- Manifest file -->
     <link rel="manifest" href="../manifest.json">
@@ -75,19 +75,32 @@
 
     <!-- Main content -->
     <main class="container-fluid text-center py-5 mb-5">
-        <div class="row justify-content-center my-5">
-            <h1 class="text-capitalize" id="recognizeUser">Welcome,</h1>
-            <hr class="border border-dark border-3 opacity-30 w-50">
-            <h2>Choose an option to begin.</h2>
+        <div class="animate__animated animate__fadeInDown">
+            <div class="row justify-content-center my-5">
+                <h1 class="text-capitalize" id="recognizeUser">Welcome,</h1>
+                <hr class="border border-dark border-3 opacity-30 w-50">
+                <h2>Choose an option to begin.</h2>
+            </div>
         </div>
 
-        <div class="row align-items-center mx-3 px-2 mb-3">
-            <a class="btn links border border-dark border-2" href="pitch-finder.html" role="button">Pitch Finder</a>
+        <div class="animate__animated animate__fadeIn animate__delay-2s animate__slower">
+            <div class="row align-items-center mx-3 px-2 mb-3">
+                <a class="btn links border border-dark border-2" href="pitch-finder.html" role="button">Pitch Finder</a>
+            </div>
+            <div class="row align-items-center mx-3 px-2 mt-3">
+                <a class="btn links border border-dark border-2" href="football-profiler.html" role="button">Football
+                    Profiler</a>
+            </div>
         </div>
-        <div class="row align-items-center mx-3 px-2 mt-3">
-            <a class="btn links border border-dark border-2" href="football-profiler.html" role="button">Football
-                Profiler</a>
+
+        <!-- PWA Install prompt button -->
+        <div class="animate__animated animate__zoomIn animate__delay-3s animate__slower">
+            <div
+                class="container align-items-center justify-content-center text-center mx-auto mt-5 pt-5 animate__animated animate__jello animate__slow animate__delay-5s">
+                <button id="install" class="btn btn-dark rounded-pill sticky-bottom" hidden>Install Rondo App</button>
+            </div>
         </div>
+
     </main>
 
 
@@ -142,6 +155,7 @@
     <!-- Rondo JS -->
     <script src="../js/rondo-app.js"></script>
     <script src="../js/rondo-ui.js"></script>
+    <script src="../js/home.js"></script>
 
 
     <!-- Bootstrap JS -->
