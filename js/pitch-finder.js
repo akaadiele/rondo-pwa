@@ -9,7 +9,8 @@ let autocomplete_placeId;
 
 // Interval variables
 let checkLoading; let intervalSeconds = 10;
-let checkCount = 0; let checkCountMax = 3;
+let refreshCount = 0; let refreshCountMax = 2;
+let timerRunning = false;
 
 // Conversion value 
 const mileToMeterConv = 1609.34;
@@ -90,8 +91,8 @@ function searchFromCurrentLocation(position) {
 
 // Formatting possible errors
 function tempDisplayMessage(errorMessage) {
-    // searchResultsList.innerHTML = '';
-    loadingScreenHide();
+    searchResultsList.innerHTML = '';
+    // loadingScreenHide();
 
     const pitchLi = createNode('li');
     pitchLi.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-start');
@@ -176,8 +177,10 @@ function getCoordinatesForPlaceID(placeId) {
 function googleNearbySearch(latitude, longitude, location) {
     loadingScreenShow();
 
-    if (checkCount == 0) {
-        checkLoading = setInterval(checkLoadingScreenStatus, intervalSeconds * 1000); // Start timed event
+    if (timerRunning != true) {
+        // Timer - started
+        refreshCount = 0;
+        checkLoading = setInterval(checkLoadingDivStatus, intervalSeconds * 1000); // Start timed event
     }
 
     // Get radius in miles and convert to meters
@@ -258,22 +261,33 @@ function loadingScreenShow() {
 function loadingScreenHide() {
     searchResultsList.innerHTML = '';
     document.getElementById("loadingDiv").hidden = true;
+
+
+    // Timer - stopped
+    timerRunning = false;
+    refreshCount = 0;
+    clearInterval(checkLoading);    // Stop timed event
 }
 
 
 // Timed event to refresh search automatically
-function checkLoadingScreenStatus() {
-    checkCount += 1;
-    // console.log('checkCount: ', checkCount);
+function checkLoadingDivStatus() {
+    if ((document.getElementById("loadingDiv").hidden == "")) {
+        if (refreshCount < refreshCountMax) {
+            // Timer - running
+            timerRunning = true;
+            refreshCount += 1;
 
-    if ((document.getElementById("loadingDiv").hidden == "") && (checkCount < checkCountMax)) {
-        refreshSearch();
+            refreshSearch();    // Refresh Search
+        } else {
+            // Timer - timed out
+            loadingScreenHide();
+
+            tempDisplayMessage(`<small>! No nearby pitch(es) found</small><br><em><small>- Check connection,<br>- Try a different location or radius</small></em>`);
+        }
     } else {
-        // Stop timed event
-        checkCount = 0;
-        clearInterval(checkLoading);
-
-        tempDisplayMessage(`<small>No nearby pitch(es) found</small><br><em><small>- Check connection,<br>- Try a different location or radius</small></em>`);
+        // Timer - stopped
+        loadingScreenHide();
     }
 }
 
