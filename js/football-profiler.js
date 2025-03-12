@@ -362,7 +362,7 @@ function createUpdateInfo() {
                             imageFile: imageFileName
                         };
 
-                        let theme_value = '', language_value = '', fontSize_value = '';
+                        let theme_value = "Default", language_value = "English", fontSize_value = "Normal";
                         const userSettings = {
                             theme: theme_value,
                             language: language_value,
@@ -373,6 +373,7 @@ function createUpdateInfo() {
                             .catch(err => {
                                 // console.log(err);
                                 showSnackbar("Error in updating settings");
+                                // showSnackbar("Unable to Update data while offline");
                             });
 
                         // Proceed when no error encountered with image upload
@@ -380,6 +381,7 @@ function createUpdateInfo() {
                             .catch(err => {
                                 // console.log(err);
                                 showSnackbar("Error updating profile..");
+                                // showSnackbar("Unable to Update data while offline");
                                 document.getElementById("clearDiv").setAttribute('class', 'row mx-auto hide');
                                 clearProfileData();
                             });
@@ -407,6 +409,7 @@ function createUpdateInfo() {
         }).catch((error) => {
             console.log("Error getting document:", error);
             showSnackbar("Error updating profile.");
+            // showSnackbar("Unable to Update data while offline");
         });
     } else {
         // Existing profile
@@ -458,6 +461,7 @@ function createUpdateInfo() {
                                 .catch(err => {
                                     // console.log(err);
                                     showSnackbar("Error updating profile...");
+                                    // showSnackbar("Unable to Update data while offline");
                                     document.getElementById("clearDiv").setAttribute('class', 'row mx-auto hide');
                                     clearProfileData();
                                 });
@@ -495,6 +499,7 @@ function createUpdateInfo() {
         }).catch((error) => {
             // console.log("Error getting document:", error);
             showSnackbar("Error updating profile");
+            // showSnackbar("Unable to Update data while offline");
         });
     }
 }
