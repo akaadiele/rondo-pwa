@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Normal",
+        "code": "fs-6"
+    },
+    {
+        "name": "Large",
+        "code": "fs-3"
+    },
+    {
+        "name": "Extra-Large",
+        "code": "fs-1"
+    }
+]

@@ -11,7 +11,7 @@ let autocomplete_placeId;
 
 // Interval variables
 let checkLoading; let intervalSeconds = 10;
-let refreshCount = 0; let refreshCountMax = 2;
+let refreshCount = 0; let refreshCountMax = 3;
 let timerRunning = false;
 
 // Conversion value 
@@ -55,6 +55,8 @@ document.getElementById('searchBox').addEventListener('keydown', (clicked) => {
 
 // Function to refresh search
 function refreshSearch() {
+    setFontSize();  // Update font size
+    
     loadingScreenShow();
 
     if ((autocomplete_placeId == '') || (autocomplete_placeId == undefined)) {
@@ -223,6 +225,7 @@ function googleNearbySearch(latitude, longitude, location) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
             if (results.length > 0) {
                 loadingScreenHide();
+                searchResultsList.innerHTML = '';
 
                 for (let i = 0; i < results.length; i++) {
                     // Creating HTML elements - building list and list contents
@@ -254,7 +257,7 @@ function googleNearbySearch(latitude, longitude, location) {
 
 // Show loading screen
 function loadingScreenShow() {
-    searchResultsList.innerHTML = '';
+    // searchResultsList.innerHTML = '';
     tempDisplayMessage(`<small>Searching for nearby pitch(es)...</small><br><em><small>(Ensure you are online)</small></em>`);
     document.getElementById("loadingDiv").hidden = "";
 
@@ -263,7 +266,7 @@ function loadingScreenShow() {
 
 // Hide loading screen
 function loadingScreenHide() {
-    searchResultsList.innerHTML = '';
+    // searchResultsList.innerHTML = '';
     document.getElementById("loadingDiv").hidden = true;
 
 
@@ -292,6 +295,7 @@ function checkLoadingDivStatus() {
     } else {
         // Timer - stopped
         loadingScreenHide();
+        searchResultsList.innerHTML = '';
     }
 }
 

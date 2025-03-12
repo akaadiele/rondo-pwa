@@ -95,6 +95,8 @@ function getPositions() {
 
 // Get user data from firebase
 function initialProfilerData() {
+    readUserSettings(); // Read user settings from firebase
+
     storedUsername = localStorage.getItem(localStorageRondoUsername);
     if (storedUsername) {
         document.getElementById("usernameView").value = storedUsername;
@@ -122,6 +124,15 @@ function initialProfilerData() {
                     localStorage.setItem(localStorageRondoProfilePic, "");
                     document.getElementById("profilerPic").setAttribute('src', "../img/kick-ball.jpg");
                 }
+
+
+                // Extracting short name 
+                let fullName = rondoUserData.name;
+                let fullNameSplit = fullName.split(' '); let shortName = fullNameSplit[0];
+
+                // Set local storage items
+                localStorage.setItem(localStorageRondoShortName, shortName);
+
 
                 document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
                 document.getElementById("editProfile").innerHTML = `Edit Profile`
@@ -179,6 +190,7 @@ function loadProfilerData() {
                         localStorage.setItem(localStorageRondoUsername, username);
                         localStorage.setItem(localStorageRondoShortName, shortName);
 
+
                         if ((rondoUserData.imageUrl != '') && (rondoUserData.imageUrl != undefined)) {
                             localStorage.setItem(localStorageRondoProfilePicName, rondoUserData.imageFile);
                             localStorage.setItem(localStorageRondoProfilePic, rondoUserData.imageUrl);
@@ -193,7 +205,11 @@ function loadProfilerData() {
                         document.getElementById("passwordLoad").value = "";
 
                         document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
-                        location.reload();
+
+                        readUserSettings(); // Read user settings from firebase
+                        setFontSize();  // Update font size
+
+                        location.reload();  // Reload to take effect
                     } else {
                         // doc.data() will be undefined in this case
                         // console.log("No such document!");
@@ -280,6 +296,9 @@ function clearProfileData() {
     localStorage.setItem(localStorageRondoShortName, "");
     localStorage.removeItem(localStorageRondoShortName);
 
+    localStorage.setItem(localStorageRondoFontSize, "");
+    localStorage.removeItem(localStorageRondoFontSize);
+
     location.reload();
 }
 
@@ -343,6 +362,18 @@ function createUpdateInfo() {
                             imageFile: imageFileName
                         };
 
+                        let theme_value = '', language_value = '', fontSize_value = '';
+                        const userSettings = {
+                            theme: theme_value,
+                            language: language_value,
+                            fontSize: fontSize_value
+                        };
+
+                        rondoDb.collection(rondoUserSettingsCollection).doc(createUpdateUsername).set(userSettings)
+                            .catch(err => {
+                                // console.log(err);
+                                showSnackbar("Error in updating settings");
+                            });
 
                         // Proceed when no error encountered with image upload
                         rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).set(userInfo)
@@ -362,7 +393,7 @@ function createUpdateInfo() {
 
                         showSnackbar("New Profile created");
 
-                        checkLoading = setInterval(checkLoadingScreenStatus, intervalSeconds * 1000); // Start timed event
+                        checkLoading = setInterval(refreshPage, intervalSeconds * 1000); // Start timed event
 
                         document.getElementById("passwordEdit").value = "";
                     } else {
@@ -374,7 +405,7 @@ function createUpdateInfo() {
                 }
             }
         }).catch((error) => {
-            // console.log("Error getting document:", error);
+            console.log("Error getting document:", error);
             showSnackbar("Error updating profile.");
         });
     } else {
@@ -440,7 +471,7 @@ function createUpdateInfo() {
 
                             showSnackbar("Profile updated");
 
-                            checkLoading = setInterval(checkLoadingScreenStatus, intervalSeconds * 1000); // Start timed event
+                            checkLoading = setInterval(refreshPage, intervalSeconds * 1000); // Start timed event
 
                             document.getElementById("passwordEdit").value = "";
 
@@ -529,13 +560,14 @@ function uploadFile(imageFile) {
 // ------------------------------------------------------------------------------------------------------------
 // Timed event to trigger 'initialProfilerData()' function automatically
 
-checkLoading = setInterval(checkLoadingScreenStatus, intervalSeconds * 1000); // Start timed event
+// checkLoading = setInterval(refreshPage, intervalSeconds * 1000); // Start timed event
 
-function checkLoadingScreenStatus() {
+function refreshPage() {
     checkCount += 1;
 
     if (checkCount < checkCountMax) {
-        initialProfilerData();
+        // initialProfilerData();
+        location.reload();  // Reload to take effect
     } else {
         checkCount = 0;
         // Stop timed event

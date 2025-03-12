@@ -34,18 +34,18 @@
 <body class="lightBg" id="body">
 
     <!-- Navigation bar and side bar menu -->
-    <nav class="container-fluid navbar mb-5 navigArea">
+    <nav class="container-fluid navbar mb-5 navigArea sticky-top font-size">
         <div class="container-fluid">
             <button class="btn btn-dark" onclick="history.back()">
                 <i class="fa-duotone fa-solid fa-left-long"></i>
             </button>
-            <a class="navbar-brand fontColor1" href="home.html">RONDO</a>
+            <a class="navbar-brand fontColor1 font-size" href="home.html">RONDO</a>
             <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+            <div class="offcanvas offcanvas-end text-bg-dark font-size" tabindex="-1" id="offcanvasDarkNavbar"
                 aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header navigArea">
                     <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
@@ -74,15 +74,15 @@
 
 
     <!-- Main content -->
-    <main class="container-fluid text-center mb-5">
+    <main class="container-fluid text-center mb-5 font-size">
         <div class="row justify-content-center">
-            <h1>Pitch Details</h1>
+            <h1 class="font-size">Pitch Details</h1>
             <hr class="border border-dark border-3 opacity-30 w-50 mx-auto">
         </div>
 
         <div class="row" id="map"></div>
 
-        <div class="row my-4 mx-auto justify-content-center" id="pitchInfo"></div>
+        <div class="row my-4 mx-auto justify-content-center font-size" id="pitchInfo"></div>
 
         <div id="mapDummy"></div>
     </main>

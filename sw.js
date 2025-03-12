@@ -4,9 +4,9 @@
 // const googleApiCache = 'googleApi-v002';
 
 // Test caches
-const staticCache = 'static-v007';
-const dynamicCache = 'dynamic-v007';
-const googleApiCache = 'googleApi-v007';
+const staticCache = 'static-v0006';
+const dynamicCache = 'dynamic-v0006';
+const googleApiCache = 'googleApi-v0006';
 
 
 const staticCacheAssets = [
@@ -23,6 +23,7 @@ const staticCacheAssets = [
     './js/pitch-finder.js',
     './js/settings.js',
     './js/json/countries.json',
+    './js/json/fontSizes.json',
     './js/json/languages.json',
     './js/json/positions.json',
     './js/json/themes.json',

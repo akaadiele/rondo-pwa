@@ -34,12 +34,12 @@
 <body class="lightBg" id="body">
 
     <!-- Navigation bar and side bar menu -->
-    <nav class="container-fluid navbar mb-5 navigArea">
+    <nav class="container-fluid navbar mb-5 navigArea sticky-top font-size">
         <div class="container-fluid">
             <button class="btn btn-dark" onclick="history.back()">
                 <i class="fa-duotone fa-solid fa-left-long"></i>
             </button>
-            <a class="navbar-brand fontColor1" href="home.html">RONDO</a>
+            <a class="navbar-brand fontColor1 font-size" href="home.html">RONDO</a>
             <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
                 aria-label="Toggle navigation">
@@ -48,7 +48,7 @@
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
                 aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header navigArea">
-                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
+                    <h5 class="offcanvas-title font-size" id="offcanvasDarkNavbarLabel">Menu</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
@@ -74,9 +74,9 @@
 
 
     <!-- Main content -->
-    <main class="container-fluid text-center mb-5">
+    <main class="container-fluid text-center mb-5 font-size">
         <div class="row justify-content-center">
-            <h1>Football Profiler</h1>
+            <h1 class="font-size">Football Profiler</h1>
             <hr class="border border-dark border-3 opacity-30 w-50">
         </div>
 
@@ -86,53 +86,53 @@
 
         <hr class="border border-dark border-3 opacity-30 w-100 my-3">
 
-        <div class="row align-items-center mx-auto px-3 mt-3 w-100">
+        <div class="row align-items-center mx-auto px-3 mt-3 w-100 font-size">
             <div class="input-group mb-3">
-                <span class="input-group-text" id="usernameLabelView" hidden>Username</span>
-                <input type="text" class="form-control" aria-label="Sizing example input"
+                <span class="input-group-text font-size" id="usernameLabelView" hidden>Username</span>
+                <input type="text" class="form-control font-size" aria-label="Sizing example input"
                     aria-describedby="usernameLabelView" value="" id="usernameView" disabled hidden>
             </div>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="profileNameLabel">Name</span>
-                <input type="text" class="form-control" aria-label="Sizing example input"
+                <span class="input-group-text font-size" id="profileNameLabel">Name</span>
+                <input type="text" class="form-control font-size" aria-label="Sizing example input"
                     aria-describedby="profileNameLabel" value="" id="profileNameView" disabled>
             </div>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="profilePositionLabel">Position</span>
-                <input type="text" class="form-control" aria-label="Sizing example input"
+                <span class="input-group-text font-size" id="profilePositionLabel">Position</span>
+                <input type="text" class="form-control font-size" aria-label="Sizing example input"
                     aria-describedby="profilePositionLabel" value="" id="profilePositionView" disabled>
             </div>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="profileNationalityLabel">Nationality</span>
-                <input type="text" class="form-control" aria-label="Sizing example input"
+                <span class="input-group-text font-size" id="profileNationalityLabel">Nationality</span>
+                <input type="text" class="form-control font-size" aria-label="Sizing example input"
                     aria-describedby="profileNationalityLabel" value="" id="profileNationalityView" disabled>
             </div>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="profileAgeLabel">Age</span>
-                <input type="number" class="form-control" aria-label="Sizing example input"
+                <span class="input-group-text font-size" id="profileAgeLabel">Age</span>
+                <input type="number" class="form-control font-size" aria-label="Sizing example input"
                     aria-describedby="profileAgeLabel" value="" id="profileAgeView" disabled>
             </div>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="profileHeightLabel">Height (cm)</span>
-                <input type="number" class="form-control" aria-label="Sizing example input"
+                <span class="input-group-text font-size" id="profileHeightLabel">Height (cm)</span>
+                <input type="number" class="form-control font-size" aria-label="Sizing example input"
                     aria-describedby="profileHeightLabel" value="" id="profileHeightView" disabled>
             </div>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="profileWeightLabel">Weight (kg)</span>
-                <input type="number" class="form-control" aria-label="Sizing example input"
+                <span class="input-group-text font-size" id="profileWeightLabel">Weight (kg)</span>
+                <input type="number" class="form-control font-size" aria-label="Sizing example input"
                     aria-describedby="profileWeightLabel" value="" id="profileWeightView" disabled>
             </div>
         </div>
 
         <hr class="border border-dark border-2 opacity-30 w-100">
 
-        <div class="row align-items-center gap-2">
+        <div class="row align-items-center gap-2 font-size">
             <div class="row gap-2 mx-auto">
                 <a class="col btn links border border-dark border-2" href="#" role="button" data-bs-toggle="modal"
                     data-bs-target="#editProfileModal" id="editProfile">Create Profile</a>
@@ -161,59 +161,59 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content text-bg-dark">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 fontColor1" id="editProfileModalLabel">Profile</h1>
+                    <h1 class="modal-title fs-5 fontColor1 font-size" id="editProfileModalLabel">Profile</h1>
                     <button type="button" class="btn-close lightBg" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="usernameLabelEdit">Username
+                        <span class="input-group-text font-size" id="usernameLabelEdit">Username
                             <em><small>*</small></em></span>
-                        <input type="text" class="form-control" aria-label="Sizing example input"
+                        <input type="text" class="form-control font-size" aria-label="Sizing example input"
                             aria-describedby="usernameLabelEdit" value="" id="usernameEdit" disabled required>
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="profileNameEditLabel">Name
+                        <span class="input-group-text font-size" id="profileNameEditLabel">Name
                             <em><small>*</small></em></span>
-                        <input type="text" class="form-control" aria-label="Sizing example input"
+                        <input type="text" class="form-control font-size" aria-label="Sizing example input"
                             aria-describedby="profileNameEditLabel" value="" id="profileNameEdit">
                     </div>
 
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="positionSelectEdit">Position
+                        <label class="input-group-text font-size" for="positionSelectEdit">Position
                             <em><small>*</small></em></label>
-                        <select class="form-select" id="positionSelectEdit">
+                        <select class="form-select font-size" id="positionSelectEdit">
                             <!-- <option value="" id="defaultPosition"></option> -->
                         </select>
                     </div>
 
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="nationalitySelectEdit">Nationality
+                        <label class="input-group-text font-size" for="nationalitySelectEdit">Nationality
                             <em><small>*</small></em></label>
-                        <select class="form-select" id="nationalitySelectEdit">
+                        <select class="form-select font-size" id="nationalitySelectEdit">
                             <!-- <option value="" id="defaultNationality"></option> -->
                         </select>
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="profileAgeEditLabel">Age
+                        <span class="input-group-text font-size" id="profileAgeEditLabel">Age
                             <em><small>*</small></em></span>
-                        <input type="number" class="form-control" aria-label="Sizing example input"
+                        <input type="number" class="form-control font-size" aria-label="Sizing example input"
                             aria-describedby="profileAgeEditLabel" value="" id="profileAgeEdit" min="0" max="99">
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="profileHeightEditLabel">Height (cm)
+                        <span class="input-group-text font-size" id="profileHeightEditLabel">Height (cm)
                             <em><small>*</small></em></span>
-                        <input type="number" class="form-control" aria-label="Sizing example input"
+                        <input type="number" class="form-control font-size" aria-label="Sizing example input"
                             aria-describedby="profileHeightEditLabel" value="" id="profileHeightEdit" min="50"
                             max="300">
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="profileWeightEditLabel">Weight (kg)
+                        <span class="input-group-text font-size" id="profileWeightEditLabel">Weight (kg)
                             <em><small>*</small></em></span>
-                        <input type="number" class="form-control" aria-label="Sizing example input"
+                        <input type="number" class="form-control font-size" aria-label="Sizing example input"
                             aria-describedby="profileWeightEditLabel" value="" id="profileWeightEdit" min="10"
                             max="200">
                     </div>
@@ -226,7 +226,7 @@
                             <!-- onchange="uploadProfilerPic()"> -->
                         </div>
                         <div class="row justify-content-center mx-5">
-                            <label class="text-center btn btn-light" for="uploadImage">Upload Profile Image</label>
+                            <label class="text-center btn btn-light font-size" for="uploadImage">Upload Profile Image</label>
                         </div>
                     </div>
 
@@ -235,20 +235,20 @@
                     <!-- <button type="button" class="btn btn-secondary" id="removeImage">Remove Existing Image</button> -->
                     <div class="form-check form-switch">
                         <input class="form-check-input dark" type="checkbox" role="switch" id="removeImage">
-                        <label class="form-check-label" for="removeImage">Remove Profile Image</label>
+                        <label class="form-check-label font-size" for="removeImage">Remove Profile Image</label>
                     </div>
                 </div>
 
                 <div class="modal-footer">
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="passwordLabel">Enter Password
+                        <span class="input-group-text font-size" id="passwordLabel">Enter Password
                             <em><small>*</small></em></span>
-                        <input type="password" class="form-control" aria-label="Sizing example input"
+                        <input type="password" class="form-control font-size" aria-label="Sizing example input"
                             aria-describedby="passwordLabel" value="" id="passwordEdit" required>
                     </div>
 
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn lightBg" id="createUpdateButton"
+                    <button type="button" class="btn btn-secondary font-size" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn lightBg font-size" id="createUpdateButton"
                         data-bs-dismiss="modal">Done</button>
                 </div>
             </div>
@@ -263,29 +263,29 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content text-bg-dark">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 fontColor1" id="loadProfileModalLabel">Load Profile</h1>
+                    <h1 class="modal-title fs-5 fontColor1 font-size" id="loadProfileModalLabel">Load Profile</h1>
                     <button type="button" class="btn-close lightBg" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 
                     <!-- <form> -->
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="usernameLoadLabel">Username</span>
-                        <input type="text" class="form-control" aria-label="Sizing example input"
+                        <span class="input-group-text font-size" id="usernameLoadLabel">Username</span>
+                        <input type="text" class="form-control font-size" aria-label="Sizing example input"
                             aria-describedby="usernameLoadLabel" value="" id="usernameLoad">
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="passwordLoadLabel">Password</span>
-                        <input type="password" class="form-control" aria-label="Sizing example input"
+                        <span class="input-group-text font-size" id="passwordLoadLabel">Password</span>
+                        <input type="password" class="form-control font-size" aria-label="Sizing example input"
                             aria-describedby="passwordLoadLabel" value="" id="passwordLoad">
                     </div>
                     <!-- </form> -->
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn lightBg" id="loadProfileButton" data-bs-dismiss="modal">Load
+                    <button type="button" class="btn btn-secondary font-size" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn lightBg font-size" id="loadProfileButton" data-bs-dismiss="modal">Load
                         Profile</button>
                 </div>
             </div>
