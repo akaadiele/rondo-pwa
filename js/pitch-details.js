@@ -15,6 +15,8 @@ const pitchInfoDiv = document.getElementById("pitchInfo");
 
 // Google Maps API to get place details
 function viewPlace() {
+    setFontSize();  // Update font size
+    
     // Using API library
     let map, mapCenter, request, service;
 
@@ -65,7 +67,7 @@ function viewPlace() {
                 const contentA = createNode('a');
                 contentA.setAttribute('class', 'btn btn-light links');
                 contentA.setAttribute('href', place.url);
-                contentA.setAttribute('target', '_blank');  // ###
+                contentA.setAttribute('target', '_blank');
                 contentA.innerHTML = `<i class="fa-brands fa-google"></i> &nbsp <small>Map</small>`;
 
 

@@ -1,4 +1,19 @@
 // ------------------------------------------------------------------------------------------------------------
+// For 'home.html'
+
+const urlPageSplit = document.URL.split('pages/'); const pageName = urlPageSplit[1];
+// if (pageName == "home.html") {
+if (document.getElementById("recognizeUser")) {
+    // Get items from local storage
+    let storedShortName = localStorage.getItem(localStorageRondoShortName);
+
+    // Modify the text
+    if ((storedShortName != "") && (storedShortName != undefined)) {
+        document.getElementById("recognizeUser").innerHTML += " " + storedShortName;
+    }
+}
+
+// ------------------------------------------------------------------------------------------------------------
 // Handling install prompt
 let installPrompt = null;
 const installButton = document.querySelector("#install");

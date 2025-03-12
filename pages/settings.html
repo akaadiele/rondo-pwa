@@ -34,12 +34,12 @@
 <body class="lightBg" id="body">
 
     <!-- Navigation bar and side bar menu -->
-    <nav class="container-fluid navbar mb-5 navigArea">
+    <nav class="container-fluid navbar mb-5 navigArea sticky-top font-size">
         <div class="container-fluid">
             <button class="btn btn-dark" onclick="history.back()">
                 <i class="fa-duotone fa-solid fa-left-long"></i>
             </button>
-            <a class="navbar-brand fontColor1" href="home.html">RONDO</a>
+            <a class="navbar-brand fontColor1 font-size" href="home.html">RONDO</a>
             <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
                 aria-label="Toggle navigation">
@@ -48,7 +48,7 @@
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
                 aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header navigArea">
-                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
+                    <h5 class="offcanvas-title font-size" id="offcanvasDarkNavbarLabel">Menu</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
@@ -61,10 +61,10 @@
                             <a class="nav-link" href="pitch-finder.html">Pitch Finder</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="football-profiler.html">Football Profiler</a>
+                            <a class="nav-link" href="football-profiler.html">Football Profiler</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="settings.html">Settings</a>
+                            <a class="nav-link active" href="settings.html">Settings</a>
                         </li>
                     </ul>
                 </div>
@@ -74,9 +74,9 @@
 
 
     <!-- Main content -->
-    <main class="container-fluid text-center mb-5">
+    <main class="container-fluid text-center mb-5 font-size">
         <div class="row justify-content-center">
-            <h1> <i class="fa-duotone fa-solid fa-gear"></i> Settings</h1>
+            <h1> <i class="fa-duotone fa-solid fa-gear font-size"></i> Settings</h1>
             <hr class="border border-dark border-3 opacity-30 w-50">
         </div>
 
@@ -84,16 +84,23 @@
 
         <div class="row align-items-center mx-auto px-3 mt-3 w-100">
             <div class="input-group mb-3">
-                <label class="input-group-text" for="themeSelect">Theme</label>
-                <select class="form-select" id="themeSelect">
+                <label class="input-group-text font-size" for="themeSelect">Theme</label>
+                <select class="form-select font-size" id="themeSelect">
                     <!-- <option value="" id="defaultTheme" selected>...</option> -->
                 </select>
             </div>
 
             <div class="input-group mb-3">
-                <label class="input-group-text" for="languageSelect">Language</label>
-                <select class="form-select" id="languageSelect">
+                <label class="input-group-text font-size" for="languageSelect">Language</label>
+                <select class="form-select font-size" id="languageSelect">
                     <!-- <option value="" id="defaultLanguage" selected>...</option> -->
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <label class="input-group-text font-size" for="fontSizeSelect">Font size</label>
+                <select class="form-select font-size" id="fontSizeSelect">
+                    <!-- <option value="" id="defaultfontSize" selected>...</option> -->
                 </select>
             </div>
 
@@ -101,7 +108,7 @@
         </div>
 
         <div class="row align-items-center mx-3 px-2 mb-3">
-            <a class="btn links border border-dark border-2" href="#" role="button" id="updateSettings">Update</a>
+            <a class="btn links border border-dark border-2 font-size" href="#" role="button" id="updateSettings">Update</a>
         </div>
 
     </main>
