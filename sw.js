@@ -1,12 +1,12 @@
 // Live caches
-const staticCache = 'static-v003';
-const dynamicCache = 'dynamic-v003';
-const googleApiCache = 'googleApi-v003';
+const staticCache = 'static-v003.1';
+const dynamicCache = 'dynamic-v003.1';
+const googleApiCache = 'googleApi-v003.1';
 
 // // Test caches
-// const staticCache = 'static-v0001';
-// const dynamicCache = 'dynamic-v0001';
-// const googleApiCache = 'googleApi-v0001';
+// const staticCache = 'static-v00002';
+// const dynamicCache = 'dynamic-v00002';
+// const googleApiCache = 'googleApi-v00002';
 
 
 const staticCacheAssets = [

@@ -7,7 +7,7 @@ const nationalitySelect = document.getElementById("nationalitySelectEdit");
 let imageDownloadUrl = '', imageUploadErrMsg = "", imageFileName = "";
 let imageUploadStatus = 0;    // 0: No image || 1: Image uploaded success || 2: Image upload error
 
-let checkLoading; let intervalSeconds = 0.5; let checkCount = 0; let checkCountMax = 3;  // Interval variables
+let checkReloading; let intervalSeconds = 0.5; let checkCount = 0; let checkCountMax = 3;  // Interval variables
 
 
 // Get items from local storage
@@ -209,7 +209,8 @@ function loadProfilerData() {
                         readUserSettings(); // Read user settings from firebase
                         setFontSize();  // Update font size
 
-                        location.reload();  // Reload to take effect
+                        // location.reload();  // Reload to take effect
+                        checkReloading = setInterval(refreshPage, intervalSeconds * 1000); // Start timed event
                     } else {
                         // doc.data() will be undefined in this case
                         // console.log("No such document!");
@@ -395,7 +396,7 @@ function createUpdateInfo() {
 
                         showSnackbar("New Profile created");
 
-                        checkLoading = setInterval(refreshPage, intervalSeconds * 1000); // Start timed event
+                        checkReloading = setInterval(refreshPage, intervalSeconds * 1000); // Start timed event
 
                         document.getElementById("passwordEdit").value = "";
                     } else {
@@ -475,7 +476,7 @@ function createUpdateInfo() {
 
                             showSnackbar("Profile updated");
 
-                            checkLoading = setInterval(refreshPage, intervalSeconds * 1000); // Start timed event
+                            checkReloading = setInterval(refreshPage, intervalSeconds * 1000); // Start timed event
 
                             document.getElementById("passwordEdit").value = "";
 
@@ -565,7 +566,7 @@ function uploadFile(imageFile) {
 // ------------------------------------------------------------------------------------------------------------
 // Timed event to trigger 'initialProfilerData()' function automatically
 
-// checkLoading = setInterval(refreshPage, intervalSeconds * 1000); // Start timed event
+// checkReloading = setInterval(refreshPage, intervalSeconds * 1000); // Start timed event
 
 function refreshPage() {
     checkCount += 1;
@@ -576,7 +577,7 @@ function refreshPage() {
     } else {
         checkCount = 0;
         // Stop timed event
-        clearInterval(checkLoading);
+        clearInterval(checkReloading);
     }
 }
 
