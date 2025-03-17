@@ -92,7 +92,7 @@
         }
     ],
     "display_override": [
-        "window-control-overlay"
+        "window-controls-overlay"
     ],
     "launch_handler": {
         "client_mode": "auto"
@@ -112,5 +112,8 @@
             "origin": ""
         }
     ],
-    "iarc_rating_id": "e58c174a-81d2-5c3c-32cc-34b8de4a52e9"
+    "iarc_rating_id": "e58c174a-81d2-5c3c-32cc-34b8de4a52e9",
+    "edge_side_panel": {
+        "preferred_width": 480
+    }
 }
