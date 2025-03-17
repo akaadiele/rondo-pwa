@@ -94,26 +94,26 @@
     "display_override": [
         "window-controls-overlay"
     ],
+    "dir": "auto",
+    "lang": "en-GB",
+    "prefer_related_applications": false,
+    "iarc_rating_id": "e58c174a-81d2-5c3c-32cc-34b8de4a52e9",
     "launch_handler": {
         "client_mode": "auto"
     },
+    "edge_side_panel": {
+        "preferred_width": 480
+    },
+    "scope_extensions": [
+        {
+            "origin": ""
+        }
+    ],
     "categories": [
         "sports",
         "navigation",
         "transportation",
         "health",
         "fitness"
-    ],
-    "dir": "auto",
-    "lang": "en-GB",
-    "prefer_related_applications": false,
-    "scope_extensions": [
-        {
-            "origin": ""
-        }
-    ],
-    "iarc_rating_id": "e58c174a-81d2-5c3c-32cc-34b8de4a52e9",
-    "edge_side_panel": {
-        "preferred_width": 480
-    }
+    ]
 }
