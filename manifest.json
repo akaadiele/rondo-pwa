@@ -4,8 +4,8 @@
     "id": "./index.html",
     "start_url": "./index.html",
     "display": "standalone",
-    "background_color": "#d9fff5",
-    "theme_color": "#AAD2BA",
+    "background_color": "#1D1E18",
+    "theme_color": "#1D1E18",
     "orientation": "portrait-primary",
     "icons": [
         {
@@ -91,5 +91,26 @@
             ]
         }
     ],
-    "display_override": ["window-control-overlay"]
+    "display_override": [
+        "window-control-overlay"
+    ],
+    "launch_handler": {
+        "client_mode": "auto"
+    },
+    "categories": [
+        "sports",
+        "navigation",
+        "transportation",
+        "health",
+        "fitness"
+    ],
+    "dir": "auto",
+    "lang": "en-GB",
+    "prefer_related_applications": false,
+    "scope_extensions": [
+        {
+            "origin": ""
+        }
+    ],
+    "iarc_rating_id": "e58c174a-81d2-5c3c-32cc-34b8de4a52e9"
 }

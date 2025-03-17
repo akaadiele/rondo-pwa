@@ -4,9 +4,9 @@
 // const googleApiCache = 'googleApi-v003.1';
 
 // Test caches
-const staticCache = 'static-v00004';
-const dynamicCache = 'dynamic-v00004';
-const googleApiCache = 'googleApi-v00004';
+const staticCache = 'static-v0006';
+const dynamicCache = 'dynamic-v0006';
+const googleApiCache = 'googleApi-v0006';
 
 
 const staticCacheAssets = [
@@ -14,7 +14,6 @@ const staticCacheAssets = [
     './index.html',
     './pages/home.html',
     './pages/pitch-finder.html',
-    './pages/settings.html',
     './pages/fallback.html',
     './css/rondo-style.css',
     './js/rondo-app.js',
@@ -22,7 +21,6 @@ const staticCacheAssets = [
     './js/home.js',
     './js/pitch-finder.js',
     './js/football-profiler.js',
-    './js/settings.js',
     './js/json/countries.json',
     './js/json/fontSizes.json',
     './js/json/languages.json',

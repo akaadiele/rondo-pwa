@@ -1,6 +1,5 @@
 // <-- Code to initiate Service Worker -->
 
-
 // Register Service Worker
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('../sw.js')
