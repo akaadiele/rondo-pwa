@@ -4,9 +4,9 @@
 // const googleApiCache = 'googleApi-v003.1';
 
 // Test caches
-const staticCache = 'static-v00003';
-const dynamicCache = 'dynamic-v00003';
-const googleApiCache = 'googleApi-v00003';
+const staticCache = 'static-v00004';
+const dynamicCache = 'dynamic-v00004';
+const googleApiCache = 'googleApi-v00004';
 
 
 const staticCacheAssets = [
