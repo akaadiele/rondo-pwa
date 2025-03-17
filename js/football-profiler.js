@@ -36,8 +36,8 @@ document.getElementById('passwordLoad').addEventListener('keydown', (clicked) =>
 // Load profile data for edit
 document.getElementById("editProfile").addEventListener('click', populateDataForEdit);
 
-// Clear/Unload profile data
-document.getElementById("clearProfile").addEventListener('click', clearProfileData);
+// Unload profile data
+document.getElementById("unloadProfile").addEventListener('click', unloadProfileData);
 
 // Create new or update existing profile
 document.getElementById("createUpdateButton").addEventListener('click', createUpdateInfo);
@@ -134,8 +134,13 @@ function initialProfilerData() {
                 localStorage.setItem(localStorageRondoShortName, shortName);
 
 
-                document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
                 document.getElementById("editProfile").innerHTML = `Edit Profile`
+
+                // Switching 'load profile' button to 'unload profile' button
+                // document.getElementById("unloadDiv").setAttribute('class', 'row mx-auto show');
+                document.getElementById("loadProfile").hidden = true;   // Hide 'load' button
+                document.getElementById("unloadProfile").hidden = "";     // Show 'unload' button
+
             } else {
                 // doc.data() will be undefined in this case
                 // console.log("No such document!");
@@ -204,7 +209,10 @@ function loadProfilerData() {
                         document.getElementById("usernameLoad").value = "";
                         document.getElementById("passwordLoad").value = "";
 
-                        document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
+                        // document.getElementById("unloadDiv").setAttribute('class', 'row mx-auto show');
+                        document.getElementById("loadProfile").hidden = true;   // Hide 'load' button
+                        document.getElementById("unloadProfile").hidden = "";     // Show 'unload' button
+
 
                         readUserSettings(); // Read user settings from firebase
                         setFontSize();  // Update font size
@@ -283,8 +291,8 @@ function populateDataForEdit() {
 }
 
 
-// Clear/Unload profile
-function clearProfileData() {
+// Unload profile
+function unloadProfileData() {
     localStorage.setItem(localStorageRondoUsername, "");
     localStorage.removeItem(localStorageRondoUsername);
 
@@ -383,8 +391,12 @@ function createUpdateInfo() {
                                 // console.log(err);
                                 showSnackbar("Error updating profile..");
                                 // showSnackbar("Unable to Update data while offline");
-                                document.getElementById("clearDiv").setAttribute('class', 'row mx-auto hide');
-                                clearProfileData();
+
+                                // document.getElementById("unloadDiv").setAttribute('class', 'row mx-auto show');
+                                document.getElementById("loadProfile").hidden = true;   // Hide 'load' button
+                                document.getElementById("unloadProfile").hidden = "";     // Show 'unload' button
+
+                                unloadProfileData();
                             });
 
                         localStorage.setItem(localStorageRondoUsername, createUpdateUsername);  // Set username on local storage
@@ -392,7 +404,10 @@ function createUpdateInfo() {
                         localStorage.setItem(localStorageRondoProfilePicName, imageFileName);  // Set image file name on local storage
 
 
-                        document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
+                        // document.getElementById("unloadDiv").setAttribute('class', 'row mx-auto show');
+                        document.getElementById("loadProfile").hidden = true;   // Hide 'load' button
+                        document.getElementById("unloadProfile").hidden = "";     // Show 'unload' button
+
 
                         showSnackbar("New Profile created");
 
@@ -463,8 +478,12 @@ function createUpdateInfo() {
                                     // console.log(err);
                                     showSnackbar("Error updating profile...");
                                     // showSnackbar("Unable to Update data while offline");
-                                    document.getElementById("clearDiv").setAttribute('class', 'row mx-auto hide');
-                                    clearProfileData();
+
+                                    // document.getElementById("unloadDiv").setAttribute('class', 'row mx-auto show');
+                                    document.getElementById("loadProfile").hidden = true;   // Hide 'load' button
+                                    document.getElementById("unloadProfile").hidden = "";     // Show 'unload' button
+
+                                    unloadProfileData();
                                 });
 
 
@@ -472,7 +491,10 @@ function createUpdateInfo() {
                             localStorage.setItem(localStorageRondoProfilePic, imageDownloadUrl);  // Set image URL on local storage
                             localStorage.setItem(localStorageRondoProfilePicName, imageFileName);  // Set image file name on local storage
 
-                            document.getElementById("clearDiv").setAttribute('class', 'row mx-auto show');
+                            // document.getElementById("unloadDiv").setAttribute('class', 'row mx-auto show');
+                            document.getElementById("loadProfile").hidden = true;   // Hide 'load' button
+                            document.getElementById("unloadProfile").hidden = "";     // Show 'unload' button
+
 
                             showSnackbar("Profile updated");
 

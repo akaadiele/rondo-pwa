@@ -139,20 +139,18 @@
 
                 <a class="col btn links border border-dark border-2" href="#" role="button" data-bs-toggle="modal"
                     data-bs-target="#loadProfileModal" id="loadProfile">Load Profile</a>
-            </div>
-            <div class="row mx-auto hide" id="clearDiv">
-                <a class="btn links border border-dark border-2" href="#" role="button" data-bs-toggle="modal"
-                    data-bs-target="#clearProfileModal" id="clearProfile">Unload Profile</a>
+
+                <a class="col btn links border border-dark border-2" href="#" role="button" id="unloadProfile"
+                    hidden>Unload Profile</a>
             </div>
         </div>
-
     </main>
 
 
     <!-- Footer -->
-    <footer class="container-fluid align-items-center text-center navigArea">
+    <!-- <footer class="container-fluid align-items-center text-center navigArea">
         <hr class="border border-dark border-2 opacity-30 w-100">
-    </footer>
+    </footer> -->
 
 
     <!-- Modal -->
@@ -226,7 +224,8 @@
                             <!-- onchange="uploadProfilerPic()"> -->
                         </div>
                         <div class="row justify-content-center mx-5">
-                            <label class="text-center btn btn-light font-size" for="uploadImage">Upload Profile Image</label>
+                            <label class="text-center btn btn-light font-size" for="uploadImage">Upload Profile
+                                Image</label>
                         </div>
                     </div>
 
@@ -285,7 +284,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary font-size" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn lightBg font-size" id="loadProfileButton" data-bs-dismiss="modal">Load
+                    <button type="button" class="btn lightBg font-size" id="loadProfileButton"
+                        data-bs-dismiss="modal">Load
                         Profile</button>
                 </div>
             </div>
