@@ -56,7 +56,7 @@ function viewPlace() {
                 }
                 if ((place.international_phone_number) && (place.rating)) {
                     // Include demarcation bar if both phone number and rating exist
-                    contentP2.innerHTML += `&nbsp;&nbsp&nbsp;&nbsp <i class="fa-solid fa-grip-lines-vertical"></i> &nbsp;&nbsp&nbsp;&nbsp`
+                    contentP2.innerHTML += `<br><br>`;
                 }
                 if (place.rating) {
                     // Include rating if available

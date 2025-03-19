@@ -6,7 +6,7 @@
     "display": "standalone",
     "background_color": "#1D1E18",
     "theme_color": "#1D1E18",
-    "orientation": "any",
+    "orientation":"natural",
     "icons": [
         {
             "src": "./img/icons/Rondo-icon-72.png",

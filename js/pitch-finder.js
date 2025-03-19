@@ -51,7 +51,7 @@ function refreshSearch() {
 
     if ((autocomplete_placeId == '') || (autocomplete_placeId == undefined)) {
         autocomplete_placeId = '';
-        document.getElementById('searchBox').placeholder = '';
+        document.getElementById('searchBox').placeholder = 'Enter search location';
         document.getElementById('searchBox').value = '';
         getCurrentLocation();
     } else {
@@ -106,7 +106,6 @@ function initAutocomplete() {
     autocomplete = new google.maps.places.Autocomplete(document.getElementById('searchBox'),
         {
             types: ['establishment'],
-            // componentRestrictions: { 'country': ['AU'] },
             fields: ['place_id', 'geometry', 'name', 'formatted_address', 'geometry.location']
         });
     autocomplete.addListener('place_changed', onPlaceChanged);
@@ -124,7 +123,6 @@ function onPlaceChanged() {
         document.getElementById('searchBox').placeholder = place.place_id;
         document.getElementById('searchBox').value = place.name + ", " + place.formatted_address;
 
-        // document.URL = document.URL + "?searchPlace=" + place.place_id;
         autocomplete_placeId = place.place_id;
 
         getCoordinatesForPlaceID(autocomplete_placeId);
@@ -174,7 +172,7 @@ function googleNearbySearch(latitude, longitude, location) {
     for (const radioButton of radioButtons) {
         if (radioButton.checked) {
             let milesRadius = radioButton.value;
-            searchRadius = milesRadius * mileToMeterConv;  // Converting to meters
+            searchRadius = milesRadius * mileToMeterConv;  // Converting from miles to metres
             break;
         }
     }
@@ -216,7 +214,7 @@ function googleNearbySearch(latitude, longitude, location) {
                     contentDiv.innerHTML = `<i class="fa-solid fa-map-pin"></i> ${results[i].name}`;
 
                     const viewSpan = createNode('span');
-                    viewSpan.setAttribute('class', 'badge text-bg-dark rounded-pill');
+                    viewSpan.setAttribute('class', 'badge rounded-pill darkBg text-light');
                     viewSpan.innerHTML = `<a href="pitch-details.html?pitch=${results[i].place_id}"><i class="fa-solid fa-eye"></i></a>`;
 
 
