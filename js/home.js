@@ -1,8 +1,8 @@
 // ------------------------------------------------------------------------------------------------------------
-// For 'home.html'
+// // Recognizing loaded profile
 
 const urlPageSplit = document.URL.split('pages/'); const pageName = urlPageSplit[1];
-// if (pageName == "home.html") {
+
 if (document.getElementById("recognizeUser")) {
     // Get items from local storage
     let storedShortName = localStorage.getItem(localStorageRondoShortName);
@@ -14,12 +14,12 @@ if (document.getElementById("recognizeUser")) {
 }
 
 // ------------------------------------------------------------------------------------------------------------
-// Handling install prompt
+// // Handling install prompt
+
 let installPrompt = null;
 const installButton = document.querySelector("#install");
 
-
-// Listening for beforeinstallprompt
+// Listening for beforeinstallprompt event
 window.addEventListener("beforeinstallprompt", (event) => {
     // event.preventDefault();
     installPrompt = event;
@@ -33,7 +33,7 @@ installButton.addEventListener("click", async () => {
         return;
     }
     const result = await installPrompt.prompt();
-    console.log(`Install prompt was: ${result.outcome}`);
+    // console.log(`Install prompt was: ${result.outcome}`);
     disableInAppInstallPrompt();
 });
 

@@ -1,14 +1,16 @@
 // ------------------------------------------------------------------------------------------------------------
+// // Variable declaration
+
 // Getting HTML elements
 const positionSelect = document.getElementById("positionSelectEdit");
 const nationalitySelect = document.getElementById("nationalitySelectEdit");
 
-// Declaring global variables
+// For images
 let imageDownloadUrl = '', imageUploadErrMsg = "", imageFileName = "";
 let imageUploadStatus = 0;    // 0: No image || 1: Image uploaded success || 2: Image upload error
 
-let checkReloading; let intervalSeconds = 0.5; let checkCount = 0; let checkCountMax = 3;  // Interval variables
-
+// Timer Interval variables
+let checkReloading; let intervalSeconds = 0.5; let checkCount = 0; let checkCountMax = 3;
 
 // Get items from local storage
 let storedUsername = localStorage.getItem(localStorageRondoUsername);
@@ -26,12 +28,10 @@ document.addEventListener("DOMContentLoaded", initialProfilerData);
 // Load profile data on request
 document.getElementById("loadProfileButton").addEventListener('click', loadProfilerData);
 document.getElementById('passwordLoad').addEventListener('keydown', (clicked) => {
-    // clicked.preventDefault();
     if (clicked.key === 'Enter') {
         loadProfilerData();
     }
 })
-
 
 // Load profile data for edit
 document.getElementById("editProfile").addEventListener('click', populateDataForEdit);
@@ -42,16 +42,14 @@ document.getElementById("unloadProfile").addEventListener('click', unloadProfile
 // Create new or update existing profile
 document.getElementById("createUpdateButton").addEventListener('click', createUpdateInfo);
 
-
 // ------------------------------------------------------------------------------------------------------------
-// Functions
+// // Functions
 
-// Fetch country info
 function getNationalities() {
+    // Fetch country info
     const countriesJson = "../js/json/countries.json";   // Path to file
     // 20250303001747
-    // https://restcountries.com/v2/all?fields=name,demonym,alpha2Code  replica
-
+    // replica of https://restcountries.com/v2/all?fields=name,demonym,alpha2Code
     fetch(countriesJson)
         .then((response) => response.json())
         .then(function (data) {
@@ -67,13 +65,14 @@ function getNationalities() {
         })
         .catch(function (error) {
             // console.log('error: ', error);
-            nationalitySelect.innerHTML = ``
+            nationalitySelect.innerHTML = ``;
         });
 }
 
 
-// Fetch positions info
+
 function getPositions() {
+    // Fetch positions info
     const positionsJson = "../js/json/positions.json";   // Path to file
 
     fetch(positionsJson)
@@ -88,13 +87,14 @@ function getPositions() {
         })
         .catch(function (error) {
             // console.log('error: ', error);
-            positionSelect.innerHTML = ``
+            positionSelect.innerHTML = ``;
         });
 }
 
 
-// Get user data from firebase
+
 function initialProfilerData() {
+    // Get user data from firebase
     readUserSettings(); // Read user settings from firebase
 
     storedUsername = localStorage.getItem(localStorageRondoUsername);
@@ -125,7 +125,6 @@ function initialProfilerData() {
                     document.getElementById("profilerPic").setAttribute('src', "../img/kick-ball.jpg");
                 }
 
-
                 // Extracting short name 
                 let fullName = rondoUserData.name;
                 let fullNameSplit = fullName.split(' '); let shortName = fullNameSplit[0];
@@ -133,11 +132,9 @@ function initialProfilerData() {
                 // Set local storage items
                 localStorage.setItem(localStorageRondoShortName, shortName);
 
-
-                document.getElementById("editProfile").innerHTML = `Edit Profile`
+                document.getElementById("editProfile").innerHTML = `Edit Profile`;
 
                 // Switching 'load profile' button to 'unload profile' button
-                // document.getElementById("unloadDiv").setAttribute('class', 'row mx-auto show');
                 document.getElementById("loadProfile").hidden = true;   // Hide 'load' button
                 document.getElementById("unloadProfile").hidden = "";     // Show 'unload' button
 
@@ -145,24 +142,25 @@ function initialProfilerData() {
                 // doc.data() will be undefined in this case
                 // console.log("No such document!");
                 rondoUserData = "";
-                document.getElementById("editProfile").innerHTML = `Create Profile`
+                document.getElementById("editProfile").innerHTML = `Create Profile`;
             }
         }).catch((error) => {
             // console.log("Error getting document:", error);
             rondoUserData = "";
-            document.getElementById("editProfile").innerHTML = `Create Profile`
+            document.getElementById("editProfile").innerHTML = `Create Profile`;
         });
     } else {
         // doc.data() will be undefined in this case
         // console.log("No such document!");
         rondoUserData = "";
-        document.getElementById("editProfile").innerHTML = `Create Profile`
+        document.getElementById("editProfile").innerHTML = `Create Profile`;
     }
 }
 
 
-// Load user data from firebase
+
 function loadProfilerData() {
+    // Load user data from firebase
     storedUsername = localStorage.getItem(localStorageRondoUsername);
     if (storedUsername) {
         showSnackbar("Existing profile already loaded");
@@ -185,11 +183,9 @@ function loadProfilerData() {
                         document.getElementById("profileHeightView").value = rondoUserData.height;
                         document.getElementById("profileWeightView").value = rondoUserData.weight;
 
-
                         // Extracting short name 
                         let fullName = rondoUserData.name;
                         let fullNameSplit = fullName.split(' '); let shortName = fullNameSplit[0];
-
 
                         // Set local storage items
                         localStorage.setItem(localStorageRondoUsername, username);
@@ -209,15 +205,12 @@ function loadProfilerData() {
                         document.getElementById("usernameLoad").value = "";
                         document.getElementById("passwordLoad").value = "";
 
-                        // document.getElementById("unloadDiv").setAttribute('class', 'row mx-auto show');
                         document.getElementById("loadProfile").hidden = true;   // Hide 'load' button
                         document.getElementById("unloadProfile").hidden = "";     // Show 'unload' button
-
 
                         readUserSettings(); // Read user settings from firebase
                         setFontSize();  // Update font size
 
-                        // location.reload();  // Reload to take effect
                         checkReloading = setInterval(refreshPage, intervalSeconds * 1000); // Start timed event
                     } else {
                         // doc.data() will be undefined in this case
@@ -227,7 +220,6 @@ function loadProfilerData() {
                         document.getElementById("passwordLoad").value = "";
                         showSnackbar("Incorrect profile password");
                     }
-
                 } else {
                     // doc.data() will be undefined in this case
                     // console.log("No such document!");
@@ -243,21 +235,17 @@ function loadProfilerData() {
                 document.getElementById("passwordLoad").value = "";
                 showSnackbar("Unable to load data while offline");
             });
-
         }
     }
 }
 
 
 
-// Pre-fill data on Profile modal
 function populateDataForEdit() {
-
+    // Pre-fill data on Profile modal
     document.getElementById("uploadImage").value = "";
     document.getElementById("passwordEdit").value = "";
     document.getElementById("removeImage").checked = false;
-
-
 
     if (document.getElementById("usernameView").value) {
         document.getElementById("usernameEdit").value = document.getElementById("usernameView").value;
@@ -280,19 +268,16 @@ function populateDataForEdit() {
     } else {
         // New profile
         document.getElementById("usernameEdit").disabled = false;
-        // document.getElementById("passwordEdit").disabled = false;
     }
 
-    // Get list of countries / nationality
-    getNationalities();
-
-    // Get list of positions
-    getPositions();
+    getNationalities(); // Get list of nationalities
+    getPositions(); // Get list of positions
 }
 
 
-// Unload profile
+
 function unloadProfileData() {
+    // Unload profile
     localStorage.setItem(localStorageRondoUsername, "");
     localStorage.removeItem(localStorageRondoUsername);
 
@@ -313,8 +298,8 @@ function unloadProfileData() {
 
 
 
-// Create/Update Profile
 function createUpdateInfo() {
+    // Create/Update Profile
     let createUpdateUsername = document.getElementById("usernameEdit").value;
     let userDisabled = document.getElementById("usernameEdit").disabled;
     storedUsername = localStorage.getItem(localStorageRondoUsername);
@@ -342,7 +327,6 @@ function createUpdateInfo() {
                 showSnackbar("Invalid username");
             } else {
                 // New profile
-
                 if (document.getElementById("removeImage").checked == true) {
                     removeProfileImage();
                     showSnackbar("Profile image removed");
@@ -350,7 +334,6 @@ function createUpdateInfo() {
 
                 if (imageUploadStatus != 2) {
                     // Confirm no image upload error
-
                     if ((imageUploadStatus == 0) || (imageDownloadUrl == undefined)) {
                         // no new image uploaded for new profile
                         imageDownloadUrl = '';
@@ -358,7 +341,6 @@ function createUpdateInfo() {
 
                     if ((document.getElementById("profileNameEdit").value != '') && (newPosition != '') && (newNationality != '') && (document.getElementById("profileAgeEdit").value != '') && (document.getElementById("profileHeightEdit").value != '') && (document.getElementById("profileWeightEdit").value != '') && (document.getElementById("passwordEdit").value != '')) {
                         // Confirm input on all mandatory fields
-
                         const userInfo = {
                             name: document.getElementById("profileNameEdit").value,
                             position: newPosition,
@@ -382,15 +364,13 @@ function createUpdateInfo() {
                             .catch(err => {
                                 // console.log(err);
                                 showSnackbar("Error in updating settings");
-                                // showSnackbar("Unable to Update data while offline");
                             });
 
                         // Proceed when no error encountered with image upload
                         rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).set(userInfo)
                             .catch(err => {
                                 // console.log(err);
-                                showSnackbar("Error updating profile..");
-                                // showSnackbar("Unable to Update data while offline");
+                                showSnackbar("Error updating profile");
 
                                 // document.getElementById("unloadDiv").setAttribute('class', 'row mx-auto show');
                                 document.getElementById("loadProfile").hidden = true;   // Hide 'load' button
@@ -403,11 +383,8 @@ function createUpdateInfo() {
                         localStorage.setItem(localStorageRondoProfilePic, imageDownloadUrl);  // Set image URL on local storage
                         localStorage.setItem(localStorageRondoProfilePicName, imageFileName);  // Set image file name on local storage
 
-
-                        // document.getElementById("unloadDiv").setAttribute('class', 'row mx-auto show');
                         document.getElementById("loadProfile").hidden = true;   // Hide 'load' button
                         document.getElementById("unloadProfile").hidden = "";     // Show 'unload' button
-
 
                         showSnackbar("New Profile created");
 
@@ -423,9 +400,8 @@ function createUpdateInfo() {
                 }
             }
         }).catch((error) => {
-            console.log("Error getting document:", error);
-            showSnackbar("Error updating profile.");
-            // showSnackbar("Unable to Update data while offline");
+            // console.log("Error getting document:", error);
+            showSnackbar("Error updating profile");
         });
     } else {
         // Existing profile
@@ -442,23 +418,24 @@ function createUpdateInfo() {
 
                     if (imageUploadStatus != 2) {
                         // Confirm no image upload error
-
                         if ((imageUploadStatus == 0) || (imageDownloadUrl == undefined)) {
                             // no new image uploaded for new profile
-
                             storedProfilePic = localStorage.getItem(localStorageRondoProfilePic);
                             storedProfilePicName = localStorage.getItem(localStorageRondoProfilePicName);
                             if (storedProfilePic) {
                                 imageDownloadUrl = storedProfilePic;
-                                storedProfilePicName
                             } else {
-                                imageDownloadUrl = ''
+                                imageDownloadUrl = '';
+                            }
+                            if (storedProfilePicName) {
+                                imageFileName = storedProfilePicName;
+                            } else {
+                                imageFileName = '';
                             }
                         }
 
                         if ((document.getElementById("profileNameEdit").value != '') && (newPosition != '') && (newNationality != '') && (document.getElementById("profileAgeEdit").value != '') && (document.getElementById("profileHeightEdit").value != '') && (document.getElementById("profileWeightEdit").value != '') && (document.getElementById("passwordEdit").value != '')) {
                             // Confirm input on all mandatory fields
-
                             const userInfo = {
                                 name: document.getElementById("profileNameEdit").value,
                                 position: newPosition,
@@ -471,30 +448,24 @@ function createUpdateInfo() {
                                 imageFile: imageFileName
                             };
 
-
                             // Proceed when no error encountered with image upload
                             rondoDb.collection(rondoUserInfoCollection).doc(createUpdateUsername).set(userInfo)
                                 .catch(err => {
                                     // console.log(err);
-                                    showSnackbar("Error updating profile...");
-                                    // showSnackbar("Unable to Update data while offline");
+                                    showSnackbar("Error updating profile");
 
-                                    // document.getElementById("unloadDiv").setAttribute('class', 'row mx-auto show');
                                     document.getElementById("loadProfile").hidden = true;   // Hide 'load' button
                                     document.getElementById("unloadProfile").hidden = "";     // Show 'unload' button
 
                                     unloadProfileData();
                                 });
 
-
                             localStorage.setItem(localStorageRondoUsername, createUpdateUsername);  // Set username on local storage
                             localStorage.setItem(localStorageRondoProfilePic, imageDownloadUrl);  // Set image URL on local storage
                             localStorage.setItem(localStorageRondoProfilePicName, imageFileName);  // Set image file name on local storage
 
-                            // document.getElementById("unloadDiv").setAttribute('class', 'row mx-auto show');
                             document.getElementById("loadProfile").hidden = true;   // Hide 'load' button
                             document.getElementById("unloadProfile").hidden = "";     // Show 'unload' button
-
 
                             showSnackbar("Profile updated");
 
@@ -517,35 +488,29 @@ function createUpdateInfo() {
                     showSnackbar("Incorrect password");
                 }
             } else {
-                showSnackbar("Error updating profile..");
+                showSnackbar("Error updating profile");
             }
         }).catch((error) => {
             // console.log("Error getting document:", error);
             showSnackbar("Error updating profile");
-            // showSnackbar("Unable to Update data while offline");
         });
     }
 }
 
 
-// ------------------------------------------------------------------------------------------------------------
-// Uploading image and retrieving URL with firebase storage
 
 document.getElementById("uploadImage").addEventListener("change", function () {
     const imageUpload = document.getElementById("uploadImage").files[0];
     uploadFile(imageUpload);
 });
-
-// Uploading image
 function uploadFile(imageFile) {
+    // Uploading image and retrieving URL with firebase storage
 
-    // Getting the file extension
     let imageFileSplit = imageFile.name.split('.'); let imageFileSplitLen = imageFileSplit.length;
-    let imageFileExtension = imageFileSplit[imageFileSplitLen - 1];
+    let imageFileExtension = imageFileSplit[imageFileSplitLen - 1];     // Getting the file extension
 
     imageFileName = document.getElementById("usernameEdit").value + '.' + imageFileExtension;
     localStorage.setItem(localStorageRondoProfilePicName, imageFileName);  // Set image anme on local storage
-
 
     const rondoImageRef = rondoStorageRef.child('rondoUserImages/' + imageFileName);    // Reference pointing to the image file
 
@@ -565,32 +530,17 @@ function uploadFile(imageFile) {
                 });
         })
         .catch((error) => {
-            imageUploadStatus = 2;    // 2: Image upload error
-
             // console.log('error', error);
             imageUploadErrMsg = "Image upload failed";
-
-            // switch (error.code) {
-            //     case 'storage/unauthorized':
-            //         console.log('error.code', error.code, "User doesn't have permission to access the object");
-            //         break;
-            //     case 'storage/canceled':
-            //         console.log('error.code', error.code, "User canceled the upload");
-            //         break;
-            //     case 'storage/unknown':
-            //         console.log('error.code', error.code, "Unknown error occurred, inspect error.serverResponse");
-            //         break;
-            // }
+            imageUploadStatus = 2;    // 2: Image upload error
         });
 }
 
 
 // ------------------------------------------------------------------------------------------------------------
-// Timed event to trigger 'initialProfilerData()' function automatically
-
-// checkReloading = setInterval(refreshPage, intervalSeconds * 1000); // Start timed event
 
 function refreshPage() {
+    // Timed event to trigger 'initialProfilerData()' function automatically
     checkCount += 1;
 
     if (checkCount < checkCountMax) {
@@ -603,13 +553,10 @@ function refreshPage() {
     }
 }
 
-// ------------------------------------------------------------------------------------------------------------
-// Removing Profile image
 
-// document.getElementById("removeImage").addEventListener('click', removeProfileImage);
 
-// Function to remove image
 function removeProfileImage() {
+    // Removing Profile image
     storedProfilePic = localStorage.getItem(localStorageRondoProfilePic);
     storedProfilePicName = localStorage.getItem(localStorageRondoProfilePicName);
 
@@ -629,8 +576,7 @@ function removeProfileImage() {
 
     // Resetting variables
     imageDownloadUrl = ""; imageFileName = "";
-    document.getElementById("uploadImage").value = ""
-
+    document.getElementById("uploadImage").value = "";
 
     // Resetting local storage
     localStorage.setItem(localStorageRondoProfilePic, "");
@@ -639,11 +585,8 @@ function removeProfileImage() {
     localStorage.setItem(localStorageRondoProfilePicName, "");
     localStorage.removeItem(localStorageRondoProfilePicName);
 
-
     // Resetting default image
     document.getElementById("profilerPic").setAttribute('src', "../img/kick-ball.jpg");
-
-    // showSnackbar("Profile image removed");
 }
 
 // ------------------------------------------------------------------------------------------------------------

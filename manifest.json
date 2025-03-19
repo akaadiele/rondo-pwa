@@ -53,13 +53,13 @@
     "description": "Football pitch finder and football profiler",
     "screenshots": [
         {
-            "src": "./img/screenshot-narrow-540x720.png",
+            "src": "./img/screenshots/screenshot-narrow-540x720.png",
             "type": "image/png",
             "sizes": "540x720",
             "form_factor": "narrow"
         },
         {
-            "src": "./img/screenshot-wide-720x540.jpg",
+            "src": "./img/screenshots/screenshot-wide-720x540.jpg",
             "type": "image/jpg",
             "sizes": "720x540",
             "form_factor": "wide"

@@ -19,9 +19,6 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
-    <!-- Animate CSS -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"> -->
-
     <!-- Manifest file -->
     <link rel="manifest" href="../manifest.json">
 
@@ -81,12 +78,14 @@
         </div>
 
         <div class="row justify-content-center align-items-center text-center mx-auto my-auto w-50">
+            <!-- Profiler image -->
             <img src="../img/kick-ball.jpg" alt="Profile Image" class="rounded mx-auto d-block" id="profilerPic">
         </div>
 
         <hr class="border border-dark border-3 opacity-30 w-100 my-3">
 
         <div class="row align-items-center mx-auto px-3 mt-3 w-100 font-size">
+            <!-- Profiler details -->
             <div class="input-group mb-3">
                 <span class="input-group-text font-size" id="usernameLabelView" hidden>Username</span>
                 <input type="text" class="form-control font-size" aria-label="Sizing example input"
@@ -134,13 +133,13 @@
 
         <div class="row align-items-center gap-2 font-size">
             <div class="row gap-2 mx-auto">
-                <a class="col btn links border border-dark border-2" href="#" role="button" data-bs-toggle="modal"
+                <a class="col btn links border border-dark border-2 font-size" href="#" role="button" data-bs-toggle="modal"
                     data-bs-target="#editProfileModal" id="editProfile">Create Profile</a>
 
-                <a class="col btn links border border-dark border-2" href="#" role="button" data-bs-toggle="modal"
+                <a class="col btn links border border-dark border-2 font-size" href="#" role="button" data-bs-toggle="modal"
                     data-bs-target="#loadProfileModal" id="loadProfile">Load Profile</a>
 
-                <a class="col btn links border border-dark border-2" href="#" role="button" id="unloadProfile"
+                <a class="col btn links border border-dark border-2 font-size" href="#" role="button" id="unloadProfile"
                     hidden>Unload Profile</a>
             </div>
         </div>
@@ -148,12 +147,12 @@
 
 
     <!-- Footer -->
-    <!-- <footer class="container-fluid align-items-center text-center navigArea">
+    <footer class="container-fluid align-items-center text-center navigArea">
         <hr class="border border-dark border-2 opacity-30 w-100">
-    </footer> -->
+    </footer>
 
 
-    <!-- Modal -->
+    <!-- Modal - Edit Profile -->
     <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel"
         data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -163,6 +162,7 @@
                     <button type="button" class="btn-close lightBg" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <!-- Input details for profiler -->
                     <div class="input-group mb-3">
                         <span class="input-group-text font-size" id="usernameLabelEdit">Username
                             <em><small>*</small></em></span>
@@ -181,7 +181,7 @@
                         <label class="input-group-text font-size" for="positionSelectEdit">Position
                             <em><small>*</small></em></label>
                         <select class="form-select font-size" id="positionSelectEdit">
-                            <!-- <option value="" id="defaultPosition"></option> -->
+                            <!-- Dropdown for positions -->
                         </select>
                     </div>
 
@@ -189,7 +189,7 @@
                         <label class="input-group-text font-size" for="nationalitySelectEdit">Nationality
                             <em><small>*</small></em></label>
                         <select class="form-select font-size" id="nationalitySelectEdit">
-                            <!-- <option value="" id="defaultNationality"></option> -->
+                            <!-- Dropdown for nationalities -->
                         </select>
                     </div>
 
@@ -216,23 +216,22 @@
                             max="200">
                     </div>
 
-                    <!-- Uploading profile picture -->
                     <hr class="border border-light border-3 opacity-30">
                     <div class="input-group justify-content-center gap-2">
+                        <!-- Upload profiler image -->
                         <div class="row">
                             <input type="file" class="form-control" id="uploadImage" accept="image/* capture">
-                            <!-- onchange="uploadProfilerPic()"> -->
                         </div>
                         <div class="row justify-content-center mx-5">
-                            <label class="text-center btn btn-light font-size" for="uploadImage">Upload Profile
-                                Image</label>
+                            <label class="text-center btn btn-light font-size" for="uploadImage">
+                                Upload Profile Image</label>
                         </div>
                     </div>
 
                     <hr class="border border-light border-3 opacity-30 my-2">
-                    <!-- <div class="row justify-content-center my-1 p-1"> -->
-                    <!-- <button type="button" class="btn btn-secondary" id="removeImage">Remove Existing Image</button> -->
+
                     <div class="form-check form-switch">
+                        <!-- Remove profiler image -->
                         <input class="form-check-input dark" type="checkbox" role="switch" id="removeImage">
                         <label class="form-check-label font-size" for="removeImage">Remove Profile Image</label>
                     </div>
@@ -253,10 +252,10 @@
             </div>
         </div>
     </div>
-
-
-
     <!-- Modal -->
+
+
+    <!-- Modal - Load Profile -->
     <div class="modal fade" id="loadProfileModal" tabindex="-1" aria-labelledby="loadProfileModalLabel"
         data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -266,8 +265,7 @@
                     <button type="button" class="btn-close lightBg" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
-                    <!-- <form> -->
+                    <!-- Load an existing profiler -->
                     <div class="input-group mb-3">
                         <span class="input-group-text font-size" id="usernameLoadLabel">Username</span>
                         <input type="text" class="form-control font-size" aria-label="Sizing example input"
@@ -279,23 +277,22 @@
                         <input type="password" class="form-control font-size" aria-label="Sizing example input"
                             aria-describedby="passwordLoadLabel" value="" id="passwordLoad">
                     </div>
-                    <!-- </form> -->
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary font-size" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn lightBg font-size" id="loadProfileButton"
-                        data-bs-dismiss="modal">Load
-                        Profile</button>
+                    <button type="button" class="btn lightBg font-size" id="loadProfileButton" data-bs-dismiss="modal">
+                        Load Profile
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Modal -->
 
 
 
-
-    <!-- Firestore / Firebase Setups -->
+    <!-- Firebase Setups -->
     <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-storage.js"></script>

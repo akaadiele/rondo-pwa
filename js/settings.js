@@ -1,7 +1,9 @@
 // ------------------------------------------------------------------------------------------------------------
-// Load profile data on page load
+// // Load profile data on page load
 document.addEventListener("DOMContentLoaded", initialSettingsData);
 
+// ------------------------------------------------------------------------------------------------------------
+// // Variable declarations
 
 // Getting HTML elements
 const themeSelect = document.getElementById("themeSelect");
@@ -14,16 +16,16 @@ let storedUsername = localStorage.getItem(localStorageRondoUsername);
 // Interval variables
 let checkReloading; let intervalSeconds = 0.5; let timerCount = 0; let timerCountMax = 2;
 
+// ------------------------------------------------------------------------------------------------------------
+
 // Trigger function to cache settings from the sw.js
 document.getElementById('updateSettings').addEventListener('click', updateSettingsInfo);
 
-
 // ------------------------------------------------------------------------------------------------------------
-// Functions
+// // Functions
 
-
-// Fetch theme info from json file
 async function getThemes() {
+    // Fetch theme info from json file
     const themesJson = "../js/json/themes.json";   // Path to file
 
     fetch(themesJson)
@@ -44,8 +46,8 @@ async function getThemes() {
 
 
 
-// Fetch languages from json file
 async function getLanguages() {
+    // Fetch languages from json file
     const languagesJson = "../js/json/languages.json";   // Path to file
 
     fetch(languagesJson)
@@ -66,8 +68,8 @@ async function getLanguages() {
 
 
 
-// Fetch font sizes from json file
 async function getFontSizes() {
+    // Fetch font sizes from json file
     const fontSizesJson = "../js/json/fontSizes.json";   // Path to file
 
     fetch(fontSizesJson)
@@ -88,31 +90,9 @@ async function getFontSizes() {
 
 
 
-
-// Initialize settings data for current football profile
 function initialSettingsData() {
+    // Initialize settings data for current football profile
     readUserSettings(); // Read user settings from firebase
-
-    // if (storedUsername) {
-    //     console.log('userTheme', userTheme);
-    //     console.log('userLanguage', userLanguage);
-    //     console.log('userFontSize', userFontSize);
-
-    //     if ((userTheme != undefined) && (userLanguage != undefined) && (userFontSize != undefined)) {
-    //         themeSelect.innerHTML = `<option class="font-size" value="${userTheme}" id="${userTheme}">${userTheme}</option>`;
-    //         themeSelect.innerHTML += `<option class="font-size" value="" id="">----------</option>`;
-
-    //         languageSelect.innerHTML = `<option class="font-size" value="${userLanguage}" id="${userLanguage}">${userLanguage}</option>`;
-    //         languageSelect.innerHTML += `<option class="font-size" value="" id="">----------</option>`;
-
-    //         fontSizeSelect.innerHTML = `<option class="font-size" value="${userFontSize}" id="${userFontSize}">${userFontSize}</option>`;
-    //         fontSizeSelect.innerHTML += `<option class="font-size" value="" id="">----------</option>`;
-
-    //         getThemes();     // Get list of themes
-    //         getLanguages();     // Get list of languages
-    //         getFontSizes();     // Get list of font sizes
-    //     }
-    // }
 
     if (storedUsername) {
         rondoDb.collection(rondoUserSettingsCollection).doc(storedUsername).get().then((doc) => {
@@ -123,17 +103,14 @@ function initialSettingsData() {
                 if (!rondoUserSettings.theme) { rondoUserSettings.theme = ''; }
                 themeSelect.innerHTML = `<option class="font-size" value="${rondoUserSettings.theme}" id="${rondoUserSettings.theme}">${rondoUserSettings.theme}</option>`;
                 themeSelect.innerHTML += `<option class="font-size" value="" id="">----------</option>`;
-                // getThemes();     // Get list of themes
 
                 if (!rondoUserSettings.language) { rondoUserSettings.language = ''; }
                 languageSelect.innerHTML = `<option class="font-size" value="${rondoUserSettings.language}" id="${rondoUserSettings.language}">${rondoUserSettings.language}</option>`;
                 languageSelect.innerHTML += `<option class="font-size" value="" id="">----------</option>`;
-                // getLanguages();     // Get list of languages
 
                 if (!rondoUserSettings.fontSize) { rondoUserSettings.fontSize = ''; }
                 fontSizeSelect.innerHTML = `<option class="font-size" value="${rondoUserSettings.fontSize}" id="${rondoUserSettings.fontSize}">${rondoUserSettings.fontSize}</option>`;
                 fontSizeSelect.innerHTML += `<option class="font-size" value="" id="">----------</option>`;
-                // getfontSizes();     // Get list of fontSizes
 
                 getThemes();     // Get list of themes
                 getLanguages();     // Get list of languages
@@ -157,8 +134,8 @@ function initialSettingsData() {
 
 
 
-// Update setting data for user on firebase
 function updateSettingsInfo() {
+    // Update setting data for user on firebase
     const theme_value = themeSelect.value;
     const language_value = languageSelect.value;
     const fontSize_value = fontSizeSelect.value;
@@ -167,8 +144,6 @@ function updateSettingsInfo() {
         // New profile
         rondoDb.collection(rondoUserSettingsCollection).doc(storedUsername).get().then((doc) => {
             if (doc.exists) {
-                // let rondoUserSettings = doc.data();
-
                 const userSettings = {
                     theme: theme_value,
                     language: language_value,
@@ -187,7 +162,6 @@ function updateSettingsInfo() {
                 localStorage.setItem(localStorageRondoFontSize, fontSize_value);    // Update font size on local storage
                 setFontSize();  // Update font size
 
-                // location.reload();  // Reload to take effect
                 checkReloading = setInterval(reloadPage, intervalSeconds * 1000); // Start timed event
             } else {
                 showSnackbar("! Football profile setup required");
@@ -201,15 +175,14 @@ function updateSettingsInfo() {
     }
 }
 
-// ------------------------------------------------------------------------------------------------------------
-// Timed event to trigger 'initialSettingsData()' function automatically
+
 
 function reloadPage() {
-    timerCount += 1;
+    // Timed event to trigger 'initialSettingsData()' function automatically
 
+    timerCount += 1;
     if (timerCount < timerCountMax) {
-        // console.log('reloading');
-        location.reload();  // Reload to take effect
+        location.reload();  // Reload page
     } else {
         timerCount = 0;
         clearInterval(checkReloading);    // Stop timed event

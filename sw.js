@@ -1,16 +1,18 @@
-// Live caches
-const staticCache = 'static-v004';
-const dynamicCache = 'dynamic-v004';
-const googleApiCache = 'googleApi-v004';
+// ------------------------------------------------------------------------------------------------------------
+// Variable declarations
 
-// // Test caches
-// const staticCache = 'static-v0001';
-// const dynamicCache = 'dynamic-v0001';
-// const googleApiCache = 'googleApi-v0001';
+// // Live caches
+// const staticCache = 'static-cache-v001';
+// const dynamicCache = 'dynamic-cache-v001';
+// const googleApiCache = 'googleApi-cache-v001';
+
+// Test caches
+const staticCache = 'static-v000001';
+const dynamicCache = 'dynamic-v000001';
+const googleApiCache = 'googleApi-v000001';
 
 
 const staticCacheAssets = [
-    './',
     './index.html',
     './pages/home.html',
     './pages/pitch-finder.html',
@@ -21,6 +23,7 @@ const staticCacheAssets = [
     './js/home.js',
     './js/pitch-finder.js',
     './js/football-profiler.js',
+    './js/settings.js',
     './js/json/countries.json',
     './js/json/fontSizes.json',
     './js/json/languages.json',
@@ -82,9 +85,8 @@ self.addEventListener('activate', eventResp => {
 
 // 'fetch' events
 self.addEventListener('fetch', eventResp => {
-    // Exclude firestore and google APIs
-    if ( (eventResp.request.url.indexOf('fire') === -1) ) {
-        // if ((eventResp.request.url.indexOf('firestore.googleapis.com') === -1) || (eventResp.request.url.indexOf('firestore') === -1) || (eventResp.request.url.indexOf('firebase') === -1) || (eventResp.request.url.indexOf('extension') === -1) || (eventResp.request.url.indexOf('google') === -1)) {
+    if ((eventResp.request.url.indexOf('fire') === -1)) {
+        // Exclude firestore and google APIs
         eventResp.respondWith(
             caches.match(eventResp.request).then(cacheRes => {
                 return cacheRes || fetch(eventResp.request).then(fetchRes => {
@@ -108,6 +110,7 @@ self.addEventListener('fetch', eventResp => {
                     }
                 });
             }).catch(() => {
+                // Offline functionality with fallback page
                 if (eventResp.request.url.indexOf('.html') > -1) {
                     return caches.match('./pages/fallback.html');
                 }
