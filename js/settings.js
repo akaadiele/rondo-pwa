@@ -119,7 +119,7 @@ function initialSettingsData() {
             } else {
                 // doc.data() will be undefined in this case
                 // console.log("No such document!");
-                showSnackbar("! Football profile setup required*");
+                showSnackbar("! Football profile setup required");
             }
         }).catch((error) => {
             // console.log("Error getting document:", error);
@@ -128,7 +128,7 @@ function initialSettingsData() {
     else {
         // doc.data() will be undefined in this case
         // console.log("No such document!");
-        showSnackbar("! Football profile setup required**");
+        showSnackbar("! Football profile setup required");
     }
 }
 
