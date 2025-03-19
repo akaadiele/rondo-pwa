@@ -1,15 +1,15 @@
 // ------------------------------------------------------------------------------------------------------------
 // Variable declarations
 
-// // Live caches
-// const staticCache = 'static-cache-v001';
-// const dynamicCache = 'dynamic-cache-v001';
-// const googleApiCache = 'googleApi-cache-v001';
+// Live caches
+const staticCache = 'static-cache-v01';
+const dynamicCache = 'dynamic-cache-v01';
+const googleApiCache = 'googleApi-cache-v01';
 
-// Test caches
-const staticCache = 'static-v000002';
-const dynamicCache = 'dynamic-v000002';
-const googleApiCache = 'googleApi-v000002';
+// // Test caches
+// const staticCache = 'static-v000001';
+// const dynamicCache = 'dynamic-v000001';
+// const googleApiCache = 'googleApi-v000001';
 
 
 const staticCacheAssets = [
