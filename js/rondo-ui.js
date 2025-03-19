@@ -1,6 +1,8 @@
 // <-- Generic reusable codes, global variables, etc -->
 
 // ------------------------------------------------------------------------------------------------------------
+// // Trigger on document loading
+
 document.addEventListener("DOMContentLoaded", loadFunctions);
 function loadFunctions() {
     readUserSettings(); // Read user settings from firebase
@@ -8,7 +10,7 @@ function loadFunctions() {
 }
 
 // ------------------------------------------------------------------------------------------------------------
-// Variables
+// // Variable declarations
 
 // Firestore DB Collection
 const rondoUserInfoCollection = 'rondo-user-info';  // User Info
@@ -29,7 +31,7 @@ let loggedInUsername, userTheme, userLanguage, userFontSize;
 let sysFontSizeClass, storedFontSize;
 
 // ------------------------------------------------------------------------------------------------------------
-// Functions
+// // Functions
 
 function createNode(element) {
     // Function to create new HTML element
@@ -59,51 +61,46 @@ function showSnackbar(snackbarMessage) {
     setTimeout(function () { snackbarDiv.className = snackbarDiv.className.replace("show", ""); }, 3000);
 }
 
-// ------------------------------------------------------------------------------------------------------------
-// Read user settings from firebase
-
 
 function readUserSettings() {
+    // Read user settings from firebase
     loggedInUsername = localStorage.getItem(localStorageRondoUsername);   // Get username from local storage
 
-    if (loggedInUsername) {
-        rondoDb.collection(rondoUserSettingsCollection).doc(loggedInUsername).get().then((doc) => {
-            if (doc.exists) {
-                console.log("Document data:", doc.data());
-                rondoUserSettings = doc.data();
+    if (rondoDb) {
+        if (loggedInUsername) {
+            rondoDb.collection(rondoUserSettingsCollection).doc(loggedInUsername).get().then((doc) => {
+                if (doc.exists) {
+                    // console.log("Document data:", doc.data());
+                    rondoUserSettings = doc.data();
 
-                userTheme = rondoUserSettings.theme;
-                userLanguage = rondoUserSettings.language;
-                userFontSize = rondoUserSettings.fontSize;
+                    userTheme = rondoUserSettings.theme;
+                    userLanguage = rondoUserSettings.language;
+                    userFontSize = rondoUserSettings.fontSize;
 
-                if ( (!userTheme) || ( userTheme == undefined) ) { userTheme = '' ;}
-                if ( (!userLanguage) || ( userLanguage == undefined) ) { userLanguage = '' ;}
-                if ( (!userFontSize) || ( userFontSize == undefined) ) { userFontSize = '' ;}
-                
-                localStorage.setItem(localStorageRondoFontSize, userFontSize);    // Update font size on local storage        
+                    if ((!userTheme) || (userTheme == undefined)) { userTheme = ''; }
+                    if ((!userLanguage) || (userLanguage == undefined)) { userLanguage = ''; }
+                    if ((!userFontSize) || (userFontSize == undefined)) { userFontSize = ''; }
 
-
-            } else {
+                    localStorage.setItem(localStorageRondoFontSize, userFontSize);    // Update font size on local storage        
+                } else {
+                    userTheme = ''; userLanguage = ''; userFontSize = '';
+                }
+            }).catch((error) => {
+                // console.log("Error getting document:", error);
                 userTheme = ''; userLanguage = ''; userFontSize = '';
-            }
-        }).catch((error) => {
-            // console.log("Error getting document:", error);
+            });
+        } else {
             userTheme = ''; userLanguage = ''; userFontSize = '';
-        });
-    } else {
-        userTheme = ''; userLanguage = ''; userFontSize = '';
+        }
     }
 }
 
-// ------------------------------------------------------------------------------------------------------------
-// Setting font size
 
 function setFontSize() {
+    // Setting font size
     storedFontSize = localStorage.getItem(localStorageRondoFontSize);   // Get username from local storage
 
     if (storedFontSize) {
-        console.log('storedFontSize', storedFontSize);
-
         switch (storedFontSize) {
             case "Normal":
                 sysFontSizeClass = "fs-6";
@@ -125,9 +122,6 @@ function setFontSize() {
             element.classList.replace("font-size", sysFontSizeClass);
             // element.classList.replace("font-size", "fs-1");
         });
-
-        console.log('font size updated');
-
     }
 }
 

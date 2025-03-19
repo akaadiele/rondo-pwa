@@ -1,11 +1,12 @@
-/* fonts */
-/* @import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&family=Roboto+Slab:wght@100..900&display=swap'); */
+/* ---------------------------------------------------- */
+
+/* Importing fonts */
 @import url('https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&display=swap');
 
+/* ---------------------------------------------------- */
 
-
-/* colours */
 :root {
+    /* Colours */
     --color1: #D9FFF5;
     --color2: #B9F5D8;
     --color3: #AAD2BA;
@@ -13,12 +14,9 @@
     --color5: #1D1E18;
 }
 
-#body {
-    /* font-family: "Overpass", serif;
-    font-optical-sizing: auto;
-    font-weight: 500;
-    font-style: normal; */
+/* ---------------------------------------------------- */
 
+#body {
     font-family: "Delius Swash Caps", cursive;
     font-weight: 400;
     font-style: normal;
@@ -29,8 +27,7 @@
 }
 
 .font-size {
-    /* used to add dynamic font sizing */
-
+    /* class used to add dynamic font sizing */
     font-style: normal;
 }
 
@@ -98,7 +95,6 @@ a:hover {
     font-size: x-large;
 }
 
-
 .cardP {
     font-size: medium;
 }
@@ -111,13 +107,11 @@ a:hover {
     height: 15rem;
 }
 
-
 input[type="radio"]:checked {
     accent-color: var(--color3);
     background-color: var(--color5);
     border-color: var(--color4);
 }
-
 
 .hide {
     visibility: hidden;
@@ -133,6 +127,19 @@ input[type="checkbox"]:checked {
     border-color: var(--color4);
 }
 
+/* ---------------------------------------------------- */
+
+/* Loading div */
+#loadingDiv {
+    background: url("../img/gif/loading.gif") no-repeat center center;
+    position: relative;
+    height: 20rem;
+    width: 100%;
+}
+
+/* Loading div */
+
+/* ---------------------------------------------------- */
 
 /* Snackbar CSS setup */
 /* The snackbar - position it at the bottom and in the middle of the screen */
@@ -224,19 +231,4 @@ input[type="checkbox"]:checked {
 
 /* Snackbar CSS setup */
 
-
-/* Loading div */
-#loadingDiv {
-    background: url("../img/gif/loading.gif") no-repeat center center;
-    position: relative;
-    height: 20rem;
-    width: 100%;
-}
-
-/* Loading div */
-
-
-
-#uploadImage {
-    /* display: none; */
-}
+/* ---------------------------------------------------- */

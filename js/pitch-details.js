@@ -1,9 +1,8 @@
 // ------------------------------------------------------------------------------------------------------------
+// // Variable declarations
+
 // Current Geolocation
 let currentLat, currentLng;
-
-// // Initiate 'viewPlace' function
-// document.addEventListener("DOMContentLoaded", viewPlace);
 
 // Get place_id from url
 const urlSplit = document.URL.split('?pitch='); const place_id = urlSplit[1];
@@ -12,13 +11,14 @@ const urlSplit = document.URL.split('?pitch='); const place_id = urlSplit[1];
 const pitchInfoDiv = document.getElementById("pitchInfo");
 
 // ------------------------------------------------------------------------------------------------------------
+// // Functions
 
-// Google Maps API to get place details
 function viewPlace() {
-    setFontSize();  // Update font size
-    
+    // Google Maps API to get place details
     // Using API library
     let map, mapCenter, request, service;
+
+    setFontSize();  // Update font size
 
     mapCenter = new google.maps.LatLng(0, 0);
     map = new google.maps.Map(document.getElementById('mapDummy'), { center: mapCenter, zoom: 15 });
@@ -39,21 +39,20 @@ function viewPlace() {
                 contentDiv.setAttribute('class', 'card-body p-3 darkBg fontColor1');
 
                 const contentH5 = createNode('h5');
-                contentH5.setAttribute('class', 'card-title');
+                contentH5.setAttribute('class', 'card-title font-size');
                 contentH5.innerHTML = place.name;
 
                 const contentP1 = createNode('p');
-                contentP1.setAttribute('class', 'card-text cardP');
+                contentP1.setAttribute('class', 'card-text cardP font-size');
                 contentP1.innerHTML = `<hr><i class="fa-solid fa-location-crosshairs"></i>: &nbsp;&nbsp;` + place.formatted_address;
 
                 const contentP2 = createNode('p');
-                contentP2.setAttribute('class', 'card-text cardP');
+                contentP2.setAttribute('class', 'card-text cardP font-size');
 
                 contentP2.innerHTML = '';
                 if (place.international_phone_number) {
                     // Include phone number if available
-                    // <a class="btn btn-light links" href="tel:${place.international_phone_number}"></a>
-                    contentP2.innerHTML += `<i class="fa-solid fa-phone"></i>: &nbsp;&nbsp; <a href="tel:${place.international_phone_number}">` + place.international_phone_number +`</a>`;
+                    contentP2.innerHTML += `<i class="fa-solid fa-phone"></i>: &nbsp;&nbsp; <a href="tel:${place.international_phone_number}" class="font-size">` + place.international_phone_number + `</a>`;
                 }
                 if ((place.international_phone_number) && (place.rating)) {
                     // Include demarcation bar if both phone number and rating exist
@@ -65,11 +64,10 @@ function viewPlace() {
                 }
 
                 const contentA = createNode('a');
-                contentA.setAttribute('class', 'btn btn-light links');
+                contentA.setAttribute('class', 'btn btn-light links font-size');
                 contentA.setAttribute('href', place.url);
                 contentA.setAttribute('target', '_blank');
                 contentA.innerHTML = `<i class="fa-brands fa-google"></i> &nbsp <small>Map</small>`;
-
 
                 append(contentDiv, contentH5);
                 append(contentDiv, contentP1);
@@ -82,15 +80,14 @@ function viewPlace() {
                 pitchInfoDiv.innerHTML = `! ERROR: Unable to load info.`;
             }
         }
+        setFontSize();  // Setting font size
     }
-    // >>>
 }
-// >>>
 
 // ------------------------------------------------------------------------------------------------------------
 
-// Define Map with center and pin at the selected pitch
 async function initMap(pitchLatitude, pitchLongitude, location) {
+    // Define Map with center and pin at the selected pitch
     let position;
 
     // The location of selected pitch
