@@ -67,9 +67,9 @@
     ],
     "shortcuts": [
         {
-            "name": "Find a pitch near you?",
-            "short_name": "Nearby Pitches",
-            "description": "View football pitches near you",
+            "name": "Find a pitch",
+            "short_name": "Pitch Finder",
+            "description": "Launch Pitch Finder",
             "url": "./pages/pitch-finder.html",
             "icons": [
                 {
@@ -79,9 +79,9 @@
             ]
         },
         {
-            "name": "View your football profile",
-            "short_name": "Football profile",
-            "description": "View your football profile",
+            "name": "Build football profile",
+            "short_name": "Football Profiler",
+            "description": "Launch Football Profiler",
             "url": "./pages/football-profiler.html",
             "icons": [
                 {
