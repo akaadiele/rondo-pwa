@@ -8,8 +8,8 @@ let currentLat, currentLng;
 let autocomplete_placeId;
 
 // Interval variables
-let checkLoading; let intervalSeconds = 10;
-let refreshCount = 0; let refreshCountMax = 3; let timerRunning = false;
+let checkLoading; let intervalSeconds = 5;
+let refreshCount = 0; let refreshCountMax = 5; let timerRunning = false;
 
 // Conversion value 
 const mileToMeterConv = 1609.34;
@@ -201,8 +201,8 @@ function googleNearbySearch(latitude, longitude, location) {
     function callback(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
             if (results.length > 0) {
-                loadingScreenHide();    // Hide loading gif
                 searchResultsList.innerHTML = '';
+                loadingScreenHide();    // Hide loading gif
 
                 for (let i = 0; i < results.length; i++) {
                     // Creating HTML elements - building list and list contents
@@ -267,8 +267,8 @@ function checkLoadingDivStatus() {
         }
     } else {
         // Timer - stopped
-        loadingScreenHide();    // Hide loading gif
         searchResultsList.innerHTML = '';
+        loadingScreenHide();    // Hide loading gif
     }
 }
 
