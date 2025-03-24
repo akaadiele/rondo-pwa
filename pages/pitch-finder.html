@@ -103,7 +103,8 @@
                     <i class="fa-solid fa-magnifying-glass-location"></i>
                 </span>
 
-                <input class="form-control" type="text" placeholder="Enter search location" aria-label="Search" id="searchBox">
+                <input class="form-control" type="text" placeholder="Enter search location" aria-label="Search"
+                    id="searchBox">
 
                 <span class="input-group-text darkBg text-light" id="refreshIcon">
                     <i class="fa-solid fa-arrows-rotate"></i>
@@ -134,6 +135,24 @@
     </footer>
 
 
+
+    <!-- Firebase Setups -->
+    <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-firestore.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyA9NgjaqaDAX8UIKVXTizis46MHdTqaoHo",
+            authDomain: "rondo-pwa.firebaseapp.com",
+            projectId: "rondo-pwa",
+            storageBucket: "rondo-pwa.firebasestorage.app",
+            messagingSenderId: "477745597074",
+            appId: "1:477745597074:web:92c10a4b4612976361744b",
+            measurementId: "G-M235R5L3YR"
+        };
+        firebase.initializeApp(config);
+        const rondoDb = firebase.firestore();
+    </script>
 
     <!-- Rondo JS -->
     <script src="../js/rondo-app.js"></script>
