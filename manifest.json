@@ -79,7 +79,7 @@
             ]
         },
         {
-            "name": "Build football profile",
+            "name": "Build a football profile",
             "short_name": "Football Profiler",
             "description": "Launch Football Profiler",
             "url": "./pages/football-profiler.html",
