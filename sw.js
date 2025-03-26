@@ -2,9 +2,9 @@
 // Variable declarations
 
 // Caches
-const staticCache = 'static-cache-v000001';
-const dynamicCache = 'dynamic-cache-v000001';
-const googleApiCache = 'googleApi-cache-v000001';
+const staticCache = 'static-cache-01';
+const dynamicCache = 'dynamic-cache-01';
+const googleApiCache = 'googleApi-cache-01';
 
 const staticCacheAssets = [
     './index.html',
