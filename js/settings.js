@@ -147,7 +147,8 @@ function updateSettingsInfo() {
                 const userSettings = {
                     theme: theme_value,
                     language: language_value,
-                    fontSize: fontSize_value
+                    fontSize: fontSize_value,
+                    source: "rondoApp"
                 };
 
                 rondoDb.collection(rondoUserSettingsCollection).doc(storedUsername).set(userSettings)

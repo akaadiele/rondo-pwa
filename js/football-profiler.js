@@ -350,14 +350,16 @@ function createUpdateInfo() {
                             weight: document.getElementById("profileWeightEdit").value,
                             password: document.getElementById("passwordEdit").value,
                             imageUrl: imageDownloadUrl,
-                            imageFile: imageFileName
+                            imageFile: imageFileName,
+                            source: "rondoApp"
                         };
 
                         let theme_value = "Default", language_value = "English", fontSize_value = "Normal";
                         const userSettings = {
                             theme: theme_value,
                             language: language_value,
-                            fontSize: fontSize_value
+                            fontSize: fontSize_value,
+                            source: "rondoApp"
                         };
 
                         rondoDb.collection(rondoUserSettingsCollection).doc(createUpdateUsername).set(userSettings)
@@ -414,6 +416,7 @@ function createUpdateInfo() {
 
                     if (document.getElementById("removeImage").checked == true) {
                         removeProfileImage();
+                        showSnackbar("Profile image removed");
                     }
 
                     if (imageUploadStatus != 2) {
@@ -445,7 +448,8 @@ function createUpdateInfo() {
                                 weight: document.getElementById("profileWeightEdit").value,
                                 password: rondoUserData.password,
                                 imageUrl: imageDownloadUrl,
-                                imageFile: imageFileName
+                                imageFile: imageFileName,
+                                source: "rondoApp"
                             };
 
                             // Proceed when no error encountered with image upload
@@ -500,6 +504,19 @@ function createUpdateInfo() {
 
 
 document.getElementById("uploadImage").addEventListener("change", function () {
+    // Deleting existing image from firebase storage
+    if (storedProfilePicName != "") {
+        // Create a reference to the file to delete
+        const rondoImageRef = rondoStorageRef.child('rondoUserImages/' + storedProfilePicName);    // Reference pointing to the image file
+
+        // Delete the file
+        rondoImageRef.delete().then(() => {
+            // console.log("File deleted successfully");
+        }).catch((error) => {
+            // console.log("Uh-oh, an error occurred!");
+        });
+    }
+
     const imageUpload = document.getElementById("uploadImage").files[0];
     uploadFile(imageUpload);
 });
